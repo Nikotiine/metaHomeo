@@ -1,18 +1,21 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+  <meta-homeo />
+  <labo-main />
+  <formation-view />
+  <about-us />
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+
+import laboMain from "@/components/labo.vue";
+import formationView from "@/components/formations.vue";
+import aboutUs from "@/components/aboutUs.vue";
+import metaHomeo from "@/components/metahomeopathie.vue";
 
 export default {
   name: "HomeView",
-  components: {
-    HelloWorld,
-  },
+  components: { laboMain, formationView, aboutUs, metaHomeo },
 };
 </script>
+<style lang="scss" scoped></style>
