@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import formationView from "../components/formations.vue";
+import formationView from "../components/homeView/formations.vue";
 export default {
   name: "formaView",
   components: {

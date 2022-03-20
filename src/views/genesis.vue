@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import aboutUs from "../components/aboutUs.vue";
+import aboutUs from "../components/homeView/aboutUs.vue";
 export default {
   name: "genesisTeam",
   components: {

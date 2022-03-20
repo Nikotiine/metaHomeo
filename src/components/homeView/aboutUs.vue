@@ -11,7 +11,7 @@
       </div>
       <div class="hero-body">
         <figure class="image">
-          <img src="../assets/about.jpeg" />
+          <img src="../../assets/about.jpeg" />
         </figure>
       </div>
     </section>
