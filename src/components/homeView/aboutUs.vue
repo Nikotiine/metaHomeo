@@ -3,24 +3,57 @@
     <section class="hero is-link is-fullheight">
       <div class="hero-head">
         <div class="">
-          <p class="title">Qui sommes nous ?</p>
+          <p class="title">Info et contact</p>
           <p class="subtitle mt-5">
-            Baaaa des gros tox qui degomme du ballon toute la journee :p
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt
+            optio quisquam reprehenderit repudiandae labore consequuntur vel
+            voluptatum. Explicabo sunt non tenetur omnis ipsum exercitationem!
+            Facere totam ab accusantium laborum aliquid!
           </p>
         </div>
       </div>
       <div class="hero-body">
-        <figure class="image">
-          <img src="../../assets/about.jpeg" />
-        </figure>
+        <div class="container has-text-centered">
+          <p class="title">ou nous trouver ?</p>
+          <p class="subtitle mt-5">
+            Cabinet Osteo rue salengro 38118 lans en vercors
+          </p>
+          <div class="mt-6">
+            <button
+              class="button is-danger is-outlined"
+              @click="openModal = !openModal"
+            >
+              afficher sur la carte
+            </button>
+          </div>
+        </div>
+        <div class="container has-text-centered">
+          <p class="title">Formulaire de contact</p>
+          <div class="mt-6">
+            <button class="button is-danger is-outlined">Nous contacter</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal is-active" v-if="openModal">
+        <div class="modal-background" @click="openModal = !openModal"></div>
+        <div class="modal-content">
+          <maps-leaflet />
+        </div>
       </div>
     </section>
   </div>
 </template>
 
 <script>
+import mapsLeaflet from "../genesis/maps.vue";
 export default {
   name: "aboutUs",
+  components: { mapsLeaflet },
+  data() {
+    return {
+      openModal: false,
+    };
+  },
 };
 </script>
 

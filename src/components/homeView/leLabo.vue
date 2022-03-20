@@ -14,27 +14,19 @@
             ici on parle de la technique Lorem ipsum dolor sit amet consectetur
             adipisicing elit. Incidunt, natus.
           </p>
-          <div class="mt-6">
-            <a class="button is-info is-outlined"
-              ><router-link to="/">Decouvrir: Le techinque</router-link>
-            </a>
-          </div>
+
           <p class="subtitle mt-6">
             ici on parle des diliutions Lorem ipsum dolor sit amet consectetur
             adipisicing elit. Incidunt, natus.
           </p>
-          <div class="mt-6">
-            <a class="button is-info is-outlined"
-              ><router-link to="/">Decouvrir: Les dilutions</router-link>
-            </a>
-          </div>
+
           <p class="subtitle mt-6">
             ici on parle du la labo associatif Lorem ipsum dolor sit amet
             consectetur adipisicing elit. Incidunt, natus.
           </p>
           <div class="mt-6">
             <a class="button is-info is-outlined"
-              ><router-link to="/">comprendre un labo associatif</router-link>
+              ><router-link to="/laboratoire">Decouvrir le labo</router-link>
             </a>
           </div>
         </div>

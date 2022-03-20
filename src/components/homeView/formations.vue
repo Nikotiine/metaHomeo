@@ -26,9 +26,6 @@
                 <a>details</a>
               </span>
             </p>
-            <p class="card-footer-item">
-              <span> S'incrire <a>inscription</a> </span>
-            </p>
           </footer>
         </div>
         <div class="card">
@@ -47,11 +44,13 @@
                 <a>Details</a>
               </span>
             </p>
-            <p class="card-footer-item">
-              <span> s'incrire <a>inscriuiopt</a> </span>
-            </p>
           </footer>
         </div>
+      </div>
+      <div class="mb-6">
+        <a class="button is-info is-outlined"
+          ><router-link to="/formations">Decouvrir les formations</router-link>
+        </a>
       </div>
     </section>
   </div>
