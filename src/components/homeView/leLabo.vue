@@ -26,7 +26,13 @@
           </p>
           <div class="mt-6">
             <a class="button is-info is-outlined"
-              ><router-link to="/laboratoire">Decouvrir le labo</router-link>
+              ><router-link
+                :to="{
+                  name: 'labo',
+                  params: { view: 'accueil', status: 4 },
+                }"
+                >Decouvrir le labo</router-link
+              >
             </a>
           </div>
         </div>

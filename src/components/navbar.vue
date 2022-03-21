@@ -29,14 +29,43 @@
           </a>
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link"
-              ><router-link to="/laboratoire">Le labo</router-link>
+              ><router-link
+                :to="{
+                  name: 'labo',
+                  params: { view: 'accueil', status: 4 },
+                }"
+                >Le labo</router-link
+              >
             </a>
 
             <div class="navbar-dropdown">
-              <a class="navbar-item"> Sauvegarde de la technique </a>
-              <a class="navbar-item"> Recherche et création de dilutions </a>
+              <a class="navbar-item">
+                <router-link
+                  :to="{
+                    name: 'labo',
+                    params: { view: 'technique', status: 0 },
+                  }"
+                  >Sauvegarde de la technique</router-link
+                >
+              </a>
+              <a class="navbar-item">
+                <router-link
+                  :to="{
+                    name: 'labo',
+                    params: { view: 'dilutions', status: 1 },
+                  }"
+                  >Recherche et création de dilutions</router-link
+                >
+              </a>
               <a class="navbar-item"
-                >Un laboratoire associatif à but non lucratif : quesaco ?
+                ><router-link
+                  :to="{
+                    name: 'labo',
+                    params: { view: 'quesaco', status: 2 },
+                  }"
+                  >Un laboratoire associatif à but non lucratif : quesaco
+                  ?</router-link
+                >
               </a>
             </div>
           </div>
