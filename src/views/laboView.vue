@@ -14,54 +14,60 @@
         </div>
       </div>
       <div class="hero-body is-justify-content-space-around">
-        <div class="card" :class="{ isLarge: status == 0 }">
+        <div class="card" :class="{ isLarge: view === 'technique' }">
           <div class="card-image">
             <figure class="image is-4by3">
               <img src="../assets/labo.jpeg" alt="Placeholder image" />
             </figure>
           </div>
-          <div class="card-content" :class="{ isSelected: status == 0 }">
+          <div
+            class="card-content"
+            :class="{ isSelected: view === 'technique' }"
+          >
             <div class="content">
               <router-link
                 :to="{
                   name: 'labo',
-                  params: { view: 'technique', status: 0 },
+                  params: { view: 'technique' },
                 }"
                 >Sauvegarde de la technique</router-link
               >
             </div>
           </div>
         </div>
-        <div class="card" :class="{ isLarge: status == 1 }">
+        <div class="card" :class="{ isLarge: view === 'dilutions' }">
           <div class="card-image">
             <figure class="image is-4by3">
               <img src="../assets/labo.jpeg" alt="Placeholder image" />
             </figure>
           </div>
-          <div class="card-content" :class="{ isSelected: status == 1 }">
+          <div
+            class="card-content"
+            :class="{ isSelected: view === 'dilutions' }"
+          >
             <div class="content">
               <router-link
                 :to="{
                   name: 'labo',
-                  params: { view: 'dilutions', status: 1 },
+                  params: { view: 'dilutions' },
                 }"
                 >Recherche et création de dilutions</router-link
               >
             </div>
           </div>
         </div>
-        <div class="card" :class="{ isLarge: status == 2 }">
+        <div class="card" :class="{ isLarge: view === 'quesaco' }">
           <div class="card-image">
             <figure class="image is-4by3">
               <img src="../assets/labo.jpeg" alt="Placeholder image" />
             </figure>
           </div>
-          <div class="card-content" :class="{ isSelected: status == 2 }">
+          <div class="card-content" :class="{ isSelected: view === 'quesaco' }">
             <div class="content">
               <router-link
                 :to="{
                   name: 'labo',
-                  params: { view: 'quesaco', status: 2 },
+                  params: { view: 'quesaco' },
                 }"
                 >Un laboratoire associatif : quesaco ?</router-link
               >
@@ -69,9 +75,9 @@
           </div>
         </div>
       </div>
-      <Transition> <tech-nique v-if="status == 0" /></Transition>
-      <Transition><dilu-tions v-if="status == 1" /></Transition>
-      <Transition> <quesa-co v-if="status == 2" /></Transition>
+      <Transition> <tech-nique v-if="view === 'technique'" /></Transition>
+      <Transition><dilu-tions v-if="view === 'dilutions'" /></Transition>
+      <Transition> <quesa-co v-if="view === 'quesaco'" /></Transition>
     </section>
   </div>
 </template>
@@ -83,7 +89,7 @@ import quesaCo from "../components/labo/quesaco.vue";
 export default {
   name: "laboView",
   components: { techNique, diluTions, quesaCo },
-  props: ["status"],
+  props: ["view"],
   data() {
     return {};
   },

@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 75vh; width: 45vw">
+  <div :style="{ height: heightMaps + 'vh', width: widthMaps + 'vw' }">
     <l-map v-model="zoom" v-model:zoom="zoom" :center="cabinet">
       <l-tile-layer :url="url"></l-tile-layer>
       <l-control-layers />
@@ -43,6 +43,7 @@ export default {
     // LRectangle,
   },
   name: "mapsLeaflet",
+  props: ["heightMaps", "widthMaps"],
   data() {
     return {
       zoom: 15,
@@ -51,9 +52,16 @@ export default {
       url: "https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png",
       cabinet: latLng(45.128078, 5.589974),
       hotel: latLng(45.127699, 5.589008),
+      height: "75",
+      width: "50",
     };
   },
   computed: {},
   methods: {},
 };
 </script>
+<style lang="scss" scoped>
+.isMaps {
+  height: 75;
+}
+</style>

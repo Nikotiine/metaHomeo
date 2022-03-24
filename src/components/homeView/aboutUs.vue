@@ -34,10 +34,21 @@
           </div>
         </div>
       </div>
+      <div class="mt-6">
+        <a class="button is-danger is-outlined"
+          ><router-link
+            :to="{
+              name: 'labo',
+              params: { view: 'accueil' },
+            }"
+            >En savoir plus
+          </router-link>
+        </a>
+      </div>
       <div class="modal is-active" v-if="openModal">
         <div class="modal-background" @click="openModal = !openModal"></div>
         <div class="modal-content">
-          <maps-leaflet />
+          <maps-leaflet :heightMaps="75" :widthMaps="50" />
         </div>
       </div>
     </section>

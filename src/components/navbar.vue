@@ -32,7 +32,7 @@
               ><router-link
                 :to="{
                   name: 'labo',
-                  params: { view: 'accueil', status: 4 },
+                  params: { view: 'accueil' },
                 }"
                 >Le labo</router-link
               >
@@ -43,7 +43,7 @@
                 <router-link
                   :to="{
                     name: 'labo',
-                    params: { view: 'technique', status: 0 },
+                    params: { view: 'technique' },
                   }"
                   >Sauvegarde de la technique</router-link
                 >
@@ -52,7 +52,7 @@
                 <router-link
                   :to="{
                     name: 'labo',
-                    params: { view: 'dilutions', status: 1 },
+                    params: { view: 'dilutions' },
                   }"
                   >Recherche et création de dilutions</router-link
                 >
@@ -61,7 +61,7 @@
                 ><router-link
                   :to="{
                     name: 'labo',
-                    params: { view: 'quesaco', status: 2 },
+                    params: { view: 'quesaco' },
                   }"
                   >Un laboratoire associatif à but non lucratif : quesaco
                   ?</router-link
@@ -71,15 +71,33 @@
           </div>
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link"
-              ><router-link to="/formations">Les formations</router-link>
+              ><router-link
+                :to="{
+                  name: 'formations',
+                  params: { view: 'accueil' },
+                }"
+                >Les formations</router-link
+              >
             </a>
 
             <div class="navbar-dropdown">
               <a class="navbar-item"
-                >Formation complète professionnalisante 1 an
+                ><router-link
+                  :to="{
+                    name: 'formations',
+                    params: { view: 'ouverte-a-tous' },
+                  }"
+                  >Formation sans pre-requis
+                </router-link>
               </a>
               <a class="navbar-item"
-                >Formation pour professionnels de santé et primo diplômés
+                ><router-link
+                  :to="{
+                    name: 'formations',
+                    params: { view: 'pro-sante' },
+                  }"
+                  >Fromations pour les professionels de la santé
+                </router-link>
               </a>
             </div>
           </div>

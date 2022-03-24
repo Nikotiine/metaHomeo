@@ -1,15 +1,59 @@
 <template>
-  <div><about-us /></div>
+  <div>
+    <div>
+      <section class="hero is-link is-fullheight">
+        <div class="hero-head">
+          <div class="">
+            <p class="title m-t-10">L'equipe genesis</p>
+            <div class="is-flex is-align-items-center">
+              <figure class="image">
+                <img src="../assets/staff.png" />
+              </figure>
+              <p class="subtitle mt-5">
+                Niko , osteo depuis 1000 ans et marbout guerisseur qui ramne ta
+                femme plus vite qu ela redoute
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="hero-body">
+          <div class="container has-text-centered">
+            <p class="title">ou nous trouver ?</p>
+            <p class="subtitle mt-5">
+              Cabinet Osteo rue salengro 38118 lans en vercors
+            </p>
+          </div>
+          <div class="maps">
+            <maps-leaflet :heightMaps="50" :widthMaps="45" />
+          </div>
+        </div>
+        <div class="hero-body">
+          <div class="container has-text-centered">
+            <p class="title">Liens Utiles et partenaires</p>
+            <p class="subtitle mt-5">
+              office de tourisme .... hotel .... rBnB .... blablabla
+            </p>
+            <p class="title mt-6">formulaire de contact</p>
+            <p class="subtitle mt-5">
+              office de tourisme .... hotel .... rBnB .... blablabla
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
 </template>
 
 <script>
-import aboutUs from "../components/homeView/aboutUs.vue";
+import mapsLeaflet from "../components/genesis/maps.vue";
 export default {
   name: "genesisTeam",
-  components: {
-    aboutUs,
-  },
+  components: { mapsLeaflet },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.image {
+  width: 256px;
+}
+</style>

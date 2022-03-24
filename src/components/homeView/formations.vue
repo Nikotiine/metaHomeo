@@ -1,56 +1,41 @@
 <template>
   <div>
-    <section class="hero is-succes is-fullheight">
+    <section class="hero is-primary is-fullheight">
       <div class="hero-head">
-        <div class="">
+        <div class="container has-text-centered">
           <p class="title">Les formations</p>
-          <p class="subtitle mt-5">
-            Ici nous proposons 2 types de formations differentes
+          <p class="subtitle mt-6">
+            Ici nous retrouverons tout ce qui concerne les froamtions , Lorem
+            ipsum dolor sit amet consectetur adipisicing elit. Sed molestias
+            ipsam consequatur minus ad at qui assumenda porro quaerat quasi..
           </p>
-        </div>
-      </div>
-      <div class="hero-body is-justify-content-space-around">
-        <div class="card">
-          <div class="card-content">
-            <p class="title">
-              Une formation d'un an sans pre-requis Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Est ducimus cum fugit accusantium
-              inventore! Eveniet. blabla
-            </p>
-            <p class="subtitle">Niko simon</p>
+
+          <p class="subtitle mt-6">
+            ici on parle de la technique Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Incidunt, natus.
+          </p>
+
+          <p class="subtitle mt-6">
+            ici on parle des diliutions Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Incidunt, natus.
+          </p>
+
+          <p class="subtitle mt-6">
+            ici on parle du la labo associatif Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. Incidunt, natus.
+          </p>
+          <div class="mt-6">
+            <a class="button is-link is-outlined"
+              ><router-link
+                :to="{
+                  name: 'formations',
+                  params: { view: 'accueil' },
+                }"
+                >Decouvrir les froamtions</router-link
+              >
+            </a>
           </div>
-          <footer class="card-footer">
-            <p class="card-footer-item">
-              <span>
-                Voir des details
-                <a>details</a>
-              </span>
-            </p>
-          </footer>
         </div>
-        <div class="card">
-          <div class="card-content">
-            <p class="title">
-              Une formation pour les proffessionelels de la sante Lorem ipsum
-              dolor sit amet consectetur adipisicing elit. Est ducimus cum fugit
-              accusantium inventore! Eveniet.
-            </p>
-            <p class="subtitle">Niko simon</p>
-          </div>
-          <footer class="card-footer">
-            <p class="card-footer-item">
-              <span>
-                Voir des les details
-                <a>Details</a>
-              </span>
-            </p>
-          </footer>
-        </div>
-      </div>
-      <div class="mb-6">
-        <a class="button is-info is-outlined"
-          ><router-link to="/formations">Decouvrir les formations</router-link>
-        </a>
       </div>
     </section>
   </div>

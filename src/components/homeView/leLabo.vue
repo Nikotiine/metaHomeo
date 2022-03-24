@@ -29,7 +29,7 @@
               ><router-link
                 :to="{
                   name: 'labo',
-                  params: { view: 'accueil', status: 4 },
+                  params: { view: 'accueil' },
                 }"
                 >Decouvrir le labo</router-link
               >
