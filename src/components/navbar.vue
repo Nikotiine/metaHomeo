@@ -104,13 +104,29 @@
 
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link"
-              ><router-link to="/aboutUs"> Qui sommes nous ?</router-link>
+              ><router-link
+                :to="{
+                  name: 'aboutUs',
+                  params: { view: 'accueil' },
+                }"
+              >
+                Qui sommes nous ?</router-link
+              >
             </a>
 
             <div class="navbar-dropdown">
               <a class="navbar-item"> Ou nous trouver </a>
               <a class="navbar-item"> Nos partenaires </a>
-              <a class="navbar-item"> Contact </a>
+              <a class="navbar-item">
+                <router-link
+                  :to="{
+                    name: 'aboutUs',
+                    params: { view: 'contactUs' },
+                  }"
+                >
+                  Nous contacter</router-link
+                >
+              </a>
             </div>
           </div>
         </div>

@@ -30,7 +30,16 @@
         <div class="container has-text-centered">
           <p class="title">Formulaire de contact</p>
           <div class="mt-6">
-            <button class="button is-danger is-outlined">Nous contacter</button>
+            <button class="button is-danger is-outlined">
+              <router-link
+                :to="{
+                  name: 'aboutUs',
+                  params: { view: 'contactUs' },
+                }"
+              >
+                Nous contacter</router-link
+              >
+            </button>
           </div>
         </div>
       </div>
@@ -38,7 +47,7 @@
         <a class="button is-danger is-outlined"
           ><router-link
             :to="{
-              name: 'labo',
+              name: 'aboutUs',
               params: { view: 'accueil' },
             }"
             >En savoir plus
