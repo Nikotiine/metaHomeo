@@ -18,20 +18,44 @@
         </div>
         <div class="hero-body">
           <div class="container has-text-centered">
-            <p class="title">ou nous trouver ?</p>
-            <p class="subtitle mt-5">
-              Cabinet Osteo rue salengro 38118 lans en vercors
-            </p>
+            <div class="is-flex-direction-column is-flex">
+              <p class="title">Ou trouver ...</p>
+
+              <label class="checkbox">
+                <input
+                  type="checkbox"
+                  v-model="cabinet.check"
+                  v-on:change="addmarker(cabinet)"
+                />
+                Le cabinet
+              </label>
+              <label class="checkbox">
+                <input
+                  type="checkbox"
+                  v-model="salleSeminaire.check"
+                  v-on:change="addmarker(salleSeminaire)"
+                />
+                La salle de seminaire
+              </label>
+              <label class="checkbox">
+                <input
+                  type="checkbox"
+                  v-model="officeTourisme.check"
+                  v-on:change="addmarker(officeTourisme)"
+                />
+                L'office du tourisme
+              </label>
+            </div>
           </div>
           <div class="maps">
-            <maps-leaflet :heightMaps="50" :widthMaps="45" />
+            <maps-leaflet :heightMaps="50" :widthMaps="45" :markers="markers" />
           </div>
         </div>
         <div class="hero-body">
           <div class="container has-text-centered">
-            <p class="title">Liens Utiles et partenaires</p>
+            <p class="title">Partenaires</p>
             <p class="subtitle mt-5">
-              office de tourisme .... hotel .... rBnB .... blablabla
+              a remplir si ya .. genre ma formation.fr ou autre
             </p>
             <p class="title mt-6">
               <button class="button is-danger is-outlined">
@@ -54,11 +78,43 @@
 </template>
 
 <script>
+import { latLng } from "leaflet";
 import contactUs from "../components/genesis/contact.vue";
 import mapsLeaflet from "../components/genesis/maps.vue";
 export default {
   name: "genesisTeam",
   components: { mapsLeaflet, contactUs },
+  data() {
+    return {
+      markers: [],
+      salleSeminaire: {
+        id: 1,
+        name: "Salle de Seminiare",
+        geoloc: latLng(45.127699, 5.589008),
+        check: false,
+      },
+      cabinet: {
+        id: 0,
+        name: "cabinet",
+        geoloc: latLng(45.128078, 5.589974),
+        check: false,
+      },
+      officeTourisme: {
+        id: 2,
+        name: "Office du tourisme",
+        geoloc: latLng(45.129298, 5.584312),
+        check: false,
+      },
+    };
+  },
+  methods: {
+    addmarker: function (mark) {
+      if (mark.check === true) {
+        this.markers.push(mark);
+      } else this.markers.pop(mark);
+    },
+  },
+  computed: {},
   props: ["view"],
 };
 </script>

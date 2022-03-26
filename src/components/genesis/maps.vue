@@ -3,12 +3,18 @@
     <l-map v-model="zoom" v-model:zoom="zoom" :center="cabinet">
       <l-tile-layer :url="url"></l-tile-layer>
       <l-control-layers />
-      <l-marker v-if="cabinet" :lat-lng="cabinet" draggable>
+      <!-- TODO v-for marker -->
+      <!-- <l-marker v-if="marker.cab" :lat-lng="marker.geoCab" draggable>
         <l-tooltip> Le cabinet </l-tooltip>
-      </l-marker>
+      </l-marker> -->
 
-      <l-marker v-if="hotel" :lat-lng="hotel" draggable>
-        <l-tooltip> Hotel et Salle de seminaire </l-tooltip>
+      <l-marker
+        v-for="marker in markers"
+        :lat-lng="marker.geoloc"
+        :key="marker.id"
+        draggable
+      >
+        <l-tooltip>{{ marker.name }} </l-tooltip>
       </l-marker>
     </l-map>
   </div>
@@ -43,7 +49,7 @@ export default {
     // LRectangle,
   },
   name: "mapsLeaflet",
-  props: ["heightMaps", "widthMaps"],
+  props: ["heightMaps", "widthMaps", "markers"],
   data() {
     return {
       zoom: 15,
@@ -52,16 +58,10 @@ export default {
       url: "https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png",
       cabinet: latLng(45.128078, 5.589974),
       hotel: latLng(45.127699, 5.589008),
-      height: "75",
-      width: "50",
     };
   },
   computed: {},
   methods: {},
 };
 </script>
-<style lang="scss" scoped>
-.isMaps {
-  height: 75;
-}
-</style>
+<style lang="scss" scoped></style>
