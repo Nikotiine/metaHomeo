@@ -8,11 +8,11 @@
   //   background-size: cover;
   //   background-repeat: no-repeat;
   //   background-attachment: fixed;
-  background: rgb(16, 80, 156);
+  background: rgb(209, 217, 227);
   background: linear-gradient(
     180deg,
-    rgba(16, 80, 156, 1) 0%,
-    rgba(30, 236, 244, 0.924829306722689) 52%,
+    rgba(209, 217, 227, 1) 0%,
+    rgba(30, 219, 244, 0.8954175420168067) 50%,
     rgba(255, 255, 255, 1) 100%
   );
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -35,4 +35,12 @@ nav {
 }
 .box-shadow {
   box-shadow: 2px 2px 16px 0 black;
+}
+.gradientBackGround {
+  background: rgb(63, 210, 251);
+  background: radial-gradient(
+    circle,
+    rgba(63, 210, 251, 1) 0%,
+    rgba(203, 255, 248, 1) 100%
+  );
 }

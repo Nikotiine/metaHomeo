@@ -1,9 +1,9 @@
 <template>
   <div>
-    <section class="hero is-danger is-fullheight">
+    <section class="hero is-fullheight gradientBackGround">
       <div class="hero-head">
         <div class="container has-text-centered">
-          <p class="title">Le labo</p>
+          <p class="title box box-shadow">Le labo</p>
           <p class="subtitle mt-6">
             Ici nous retrouverons tout ce qui concerne le labo , son utilisation
             et les techniques de dilution Lorem ipsum dolor sit amet consectetur

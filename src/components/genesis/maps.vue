@@ -14,7 +14,7 @@
         :key="marker.id"
         draggable
       >
-        <l-tooltip>{{ marker.name }} </l-tooltip>
+        <l-popup>{{ marker.name }} </l-popup>
       </l-marker>
     </l-map>
   </div>
@@ -28,8 +28,8 @@ import {
   LTileLayer,
   LMarker,
   LControlLayers,
-  LTooltip,
-  // LPopup,
+  //LTooltip,
+  LPopup,
   //   LPolyline,
   //   LPolygon,
   //   LRectangle,
@@ -42,8 +42,8 @@ export default {
     LTileLayer,
     LMarker,
     LControlLayers,
-    LTooltip,
-    // LPopup,
+    //LTooltip,
+    LPopup,
     // LPolyline,
     // LPolygon,
     // LRectangle,

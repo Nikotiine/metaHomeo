@@ -21,29 +21,17 @@
             <div class="is-flex-direction-column is-flex">
               <p class="title">Ou trouver ...</p>
 
-              <label class="checkbox">
+              <label
+                class="checkbox"
+                v-for="checkboxe in checkboxes"
+                :key="checkboxe.id"
+              >
                 <input
                   type="checkbox"
-                  v-model="cabinet.check"
-                  v-on:change="addmarker(cabinet)"
+                  v-model="checkboxe.check"
+                  v-on:change="addmarker(checkboxe)"
                 />
-                Le cabinet
-              </label>
-              <label class="checkbox">
-                <input
-                  type="checkbox"
-                  v-model="salleSeminaire.check"
-                  v-on:change="addmarker(salleSeminaire)"
-                />
-                La salle de seminaire
-              </label>
-              <label class="checkbox">
-                <input
-                  type="checkbox"
-                  v-model="officeTourisme.check"
-                  v-on:change="addmarker(officeTourisme)"
-                />
-                L'office du tourisme
+                {{ checkboxe.name }}
               </label>
             </div>
           </div>
@@ -87,24 +75,44 @@ export default {
   data() {
     return {
       markers: [],
-      salleSeminaire: {
-        id: 1,
-        name: "Salle de Seminiare",
-        geoloc: latLng(45.127699, 5.589008),
-        check: false,
-      },
-      cabinet: {
-        id: 0,
-        name: "cabinet",
-        geoloc: latLng(45.128078, 5.589974),
-        check: false,
-      },
-      officeTourisme: {
-        id: 2,
-        name: "Office du tourisme",
-        geoloc: latLng(45.129298, 5.584312),
-        check: false,
-      },
+      checkboxes: [
+        {
+          id: 0,
+          name: "Salle de Seminiare",
+          geoloc: latLng(45.127699, 5.589008),
+          check: false,
+        },
+        {
+          id: 1,
+          name: "cabinet",
+          geoloc: latLng(45.128078, 5.589974),
+          check: false,
+        },
+        {
+          id: 2,
+          name: "Office du tourisme",
+          geoloc: latLng(45.129298, 5.584312),
+          check: false,
+        },
+        {
+          id: 3,
+          name: "Hotel Val Fleuri",
+          geoloc: latLng(45.129312, 5.58436),
+          check: false,
+        },
+        {
+          id: 4,
+          name: "Hotel du col de l arc",
+          geoloc: latLng(45.129412, 5.58446),
+          check: false,
+        },
+        {
+          id: 5,
+          name: "Camping",
+          geoloc: latLng(45.139412, 5.58446),
+          check: false,
+        },
+      ],
     };
   },
   methods: {
