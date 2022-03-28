@@ -1,15 +1,10 @@
 <template>
   <div>
-    <section class="hero is-link is-fullheight">
+    <section class="hero toto is-fullheight">
       <div class="hero-head">
         <div class="">
-          <p class="title">Info et contact</p>
-          <p class="subtitle mt-5">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt
-            optio quisquam reprehenderit repudiandae labore consequuntur vel
-            voluptatum. Explicabo sunt non tenetur omnis ipsum exercitationem!
-            Facere totam ab accusantium laborum aliquid!
-          </p>
+          <p class="title is-1">Info et contact</p>
+          <p class="subtitle"></p>
         </div>
       </div>
       <div class="hero-body">
@@ -20,7 +15,7 @@
           </p>
           <div class="mt-6">
             <button
-              class="button is-danger is-outlined"
+              class="button is-link is-outlined"
               @click="openModal = !openModal"
             >
               afficher sur la carte
@@ -30,7 +25,7 @@
         <div class="container has-text-centered">
           <p class="title">Formulaire de contact</p>
           <div class="mt-6">
-            <button class="button is-danger is-outlined">
+            <button class="button is-link is-outlined">
               <router-link
                 :to="{
                   name: 'aboutUs',
@@ -43,8 +38,8 @@
           </div>
         </div>
       </div>
-      <div class="mt-6">
-        <a class="button is-danger is-outlined"
+      <div class="mb-6">
+        <a class="button is-link is-outlined"
           ><router-link
             :to="{
               name: 'aboutUs',
@@ -60,6 +55,7 @@
           <maps-leaflet :heightMaps="75" :widthMaps="50" />
         </div>
       </div>
+      <div class="hero-foot"><p>mentions legales</p></div>
     </section>
   </div>
 </template>
