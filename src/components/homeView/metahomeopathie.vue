@@ -9,26 +9,22 @@
               <img src="../../assets/meta.jpeg" />
             </figure>
 
-            <div
-              class="is-flex is-justify-content-space-between box gradientBackGround max50"
-            >
+            <div class="is-flex is-justify-content-space-between max50">
               <div class="mt-6">
-                <p class="subtitle">
-                  Depuis 10 ans j'utilise la methode Meta-Homeopathie Lorem
-                  ipsum dolor sit amet consectetur adipisicing elit. Totam
-                  cupiditate laboriosam at eum accusantium quia nobis architecto
-                  aperiam dolorum reiciendis porro et tempora voluptates,
-                  labore, atque ad libero ut consectetur.
-                </p>
-                <p class="subtitle">
-                  ainsi je vous explique la methode , suivez le guide ...
-                </p>
+                <div class="box box-shadow gradientBackGround">
+                  <p class="subtitle">
+                    Depuis 10 ans j'utilise la methode Meta-Homeopathie Lorem
+                    ipsum dolor sit amet consectetur adipisicing elit. Totam
+                    cupiditate laboriosam at eum accusantium quia nobis
+                    architecto aperiam dolorum reiciendis porro et tempora
+                    voluptates, labore, atque ad libero ut consectetur.
+                  </p>
+                  <p class="subtitle">
+                    ainsi je vous explique la methode , suivez le guide ...
+                  </p>
+                </div>
                 <div class="mt-6">
-                  <a class="button is-info is-outlined"
-                    ><router-link to="/metahomeopathie"
-                      >Decouvrir: La methode</router-link
-                    >
-                  </a>
+                  <button-neon :btnName="bouton" />
                 </div>
               </div>
             </div>
@@ -43,8 +39,17 @@
 </template>
 
 <script>
+import buttonNeon from "../button.vue";
+
 export default {
   name: "metaHomeo",
+  components: { buttonNeon },
+  data() {
+    return {
+      bouton: [{ id: 0, name: "la methode", router: "/metahomeopathie" }],
+    };
+  },
+  methods: {},
 };
 </script>
 
