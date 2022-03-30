@@ -5,30 +5,22 @@
       <div class="hero-body">
         <div class="container has-text-centered">
           <div class="is-flex mt-6 is-justify-content-space-between">
-            <div
-              class="is-flex is-justify-content-space-between box gradientBackGround max50"
-            >
+            <div class="is-flex is-justify-content-space-between max50">
               <div class="mt-6">
-                <p class="subtitle">
-                  descrpition du labo Meta-Homeopathie Lorem ipsum dolor sit
-                  amet consectetur adipisicing elit. Totam cupiditate laboriosam
-                  at eum accusantium quia nobis architecto aperiam dolorum
-                  reiciendis porro et tempora voluptates, labore, atque ad
-                  libero ut consectetur.
-                </p>
-                <p class="subtitle">
-                  ainsi je vous explique la methode , suivez le guide ...
-                </p>
+                <div class="box gradientBackGround box-shadow">
+                  <p class="subtitle">
+                    descrpition du labo Meta-Homeopathie Lorem ipsum dolor sit
+                    amet consectetur adipisicing elit. Totam cupiditate
+                    laboriosam at eum accusantium quia nobis architecto aperiam
+                    dolorum reiciendis porro et tempora voluptates, labore,
+                    atque ad libero ut consectetur.
+                  </p>
+                  <p class="subtitle">
+                    ainsi je vous explique la methode , suivez le guide ...
+                  </p>
+                </div>
                 <div class="mt-6">
-                  <a class="button is-info is-outlined"
-                    ><router-link
-                      :to="{
-                        name: 'labo',
-                        params: { view: 'accueil' },
-                      }"
-                      >Decouvrir: Le labo</router-link
-                    >
-                  </a>
+                  <button-neon :btnName="bouton" :width="320" />
                 </div>
               </div>
             </div>
@@ -46,8 +38,29 @@
 </template>
 
 <script>
+import buttonNeon from "../button.vue";
 export default {
   name: "homeLabo",
+  components: { buttonNeon },
+  data() {
+    return {
+      bouton: [
+        {
+          id: 0,
+          name: "le labo",
+          router: {
+            name: "labo",
+            params: { view: "accueil" },
+          },
+          width: "320px",
+          strokeDasharray1: 140,
+          strokeDasharray2: 540,
+          strokeDashoffset: -474,
+          dashHover: 760,
+        },
+      ],
+    };
+  },
 };
 </script>
 

@@ -8,51 +8,32 @@
         </div>
       </div>
       <div class="hero-body">
-        <div class="container has-text-centered">
-          <p class="title">ou nous trouver ?</p>
-          <p class="subtitle mt-5">
-            Cabinet Osteo rue salengro 38118 lans en vercors
+        <div class="container">
+          <button-neon
+            :btnName="maps"
+            :width="320"
+            @click="openModal = !openModal"
+          />
+        </div>
+        <div class="container blockInfo">
+          <button-neon :btnName="info" :width="320" />
+          <p class="subtitle box box-shadow gradientBackGround">
+            Toutes les info que vous avez besoin sont ici <br />
+            afficher directement la carte pour nous trouver <br />
+            nous envoyer une demande de contact <br />
+            enfin trouvez tous les praticiens qui ont suivi ma methode
           </p>
-          <div class="mt-6">
-            <button
-              class="button is-link is-outlined"
-              @click="openModal = !openModal"
-            >
-              afficher sur la carte
-            </button>
-          </div>
+          <button-neon :btnName="praticiens" :width="420" />
         </div>
-        <div class="container has-text-centered">
-          <p class="title">Formulaire de contact</p>
-          <div class="mt-6">
-            <button class="button is-link is-outlined">
-              <router-link
-                :to="{
-                  name: 'aboutUs',
-                  params: { view: 'contactUs' },
-                }"
-              >
-                Nous contacter</router-link
-              >
-            </button>
-          </div>
+        <div class="container">
+          <button-neon :btnName="contact" :width="320" />
         </div>
       </div>
-      <div class="mb-6">
-        <a class="button is-link is-outlined"
-          ><router-link
-            :to="{
-              name: 'aboutUs',
-              params: { view: 'accueil' },
-            }"
-            >En savoir plus
-          </router-link>
-        </a>
-      </div>
+
       <div class="modal is-active" v-if="openModal">
         <div class="modal-background" @click="openModal = !openModal"></div>
         <div class="modal-content">
-          <maps-leaflet :heightMaps="75" :widthMaps="50" />
+          <maps-leaflet :heightMaps="75" :widthMaps="50" :markers="markers" />
         </div>
       </div>
       <div class="hero-foot"><p>mentions legales</p></div>
@@ -61,13 +42,76 @@
 </template>
 
 <script>
+import { latLng } from "leaflet";
 import mapsLeaflet from "../genesis/maps.vue";
+import buttonNeon from "../button.vue";
 export default {
   name: "aboutUs",
-  components: { mapsLeaflet },
+  components: { mapsLeaflet, buttonNeon },
   data() {
     return {
+      markers: [
+        {
+          id: 0,
+          name: "cabinet",
+          geoloc: latLng(45.128078, 5.589974),
+        },
+      ],
       openModal: false,
+      maps: [
+        {
+          id: 0,
+          name: "Nous trouver",
+          router: "",
+          width: "320px",
+          strokeDasharray1: 140,
+          strokeDasharray2: 540,
+          strokeDashoffset: -474,
+          dashHover: 760,
+        },
+      ],
+      contact: [
+        {
+          id: 0,
+          name: "Nous Contacter",
+          router: {
+            name: "aboutUs",
+            params: { view: "contactUs" },
+          },
+          width: "320px",
+          strokeDasharray1: 140,
+          strokeDasharray2: 540,
+          strokeDashoffset: -474,
+          dashHover: 760,
+        },
+      ],
+      info: [
+        {
+          id: 0,
+          name: "toutes les info",
+          router: {
+            name: "aboutUs",
+            params: { view: "accueil" },
+          },
+          width: "320px",
+          strokeDasharray1: 140,
+          strokeDasharray2: 540,
+          strokeDashoffset: -474,
+          dashHover: 760,
+        },
+      ],
+      praticiens: [
+        {
+          id: 0,
+          name: "tous les praticiens",
+          router: "/metahomeopathie",
+          width: "420px",
+          strokeDasharray1: 140,
+          strokeDasharray2: 600,
+          strokeDashoffset: -600,
+          dashHover: 960,
+        },
+      ],
     };
   },
 };
@@ -76,5 +120,14 @@ export default {
 <style lang="scss" scoped>
 .title {
   margin-top: 7%;
+}
+.hero-body {
+  padding: 0;
+}
+.blockInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 80vh;
 }
 </style>

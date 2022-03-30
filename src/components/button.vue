@@ -1,29 +1,45 @@
 <template>
-  <main>
-    <div class="block">
-      <a href="#">
-        <svg height="60" width="320" xmlns="http://www.w3.org/2000/svg">
-          <rect class="block__element" height="60" width="320" />
-        </svg>
-        <router-link
-          class="block__element--modifier"
-          v-for="bouton in btnName"
-          :key="bouton.id"
-          :to="bouton.router"
-        >
-          {{ bouton.name }}
-        </router-link>
-      </a>
-    </div>
-  </main>
+  <!--<main>-->
+  <div class="block" :style="cssprops">
+    <svg
+      height="60"
+      :style="{ width: width + 'px' }"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect
+        class="block__element"
+        height="60"
+        :style="{ width: width + 'px' }"
+      />
+    </svg>
+    <router-link
+      class="block__element--modifier"
+      v-for="bouton in btnName"
+      :key="bouton.id"
+      :to="bouton.router"
+    >
+      {{ bouton.name }}
+    </router-link>
+  </div>
+
+  <!-- </main> -->
 </template>
 
 <script>
 export default {
   name: "buttonNeon",
-  props: ["btnName"],
-  data() {
-    return {};
+  props: ["btnName", "width"],
+  data() {},
+  computed: {
+    cssprops() {
+      return {
+        "--width": this.btnName[0].width,
+        "--strokeDashoffset": this.btnName[0].strokeDashoffset,
+        "--strokeDasharray1": this.btnName[0].strokeDasharray1,
+        "--strokeDasharray2": this.btnName[0].strokeDasharray2,
+        "--dashHover": this.btnName[0].dashHover,
+      };
+    },
   },
 };
 </script>
@@ -36,13 +52,13 @@ $neonblue: rgb(123, 185, 248);
   stroke-width: $width;
 }
 .block {
-  padding-top: 60px;
+  padding-top: 20px;
   position: relative;
   margin: 0 auto;
-  width: 320px;
+  width: var(--width);
 
   &:hover &__element {
-    @include dash(760, 0, 4px);
+    @include dash(var(--dashHover), 0, 4px);
   }
 
   &__element {
@@ -51,14 +67,18 @@ $neonblue: rgb(123, 185, 248);
     border-bottom: 5px solid $neonblue;
 
     transition: stroke-width 1s, stroke-dashoffset 1s, stroke-dasharray 1s;
-    @include dash(140 540, -474, 10px);
+    @include dash(
+      var(--strokeDasharray1) var(--strokeDasharray2),
+      var(--strokeDashoffset),
+      10px
+    );
 
     &--modifier {
       position: relative;
       text-align: center;
       font-size: 1.8rem;
       line-height: 32px;
-      letter-spacing: 8px;
+      letter-spacing: 6px;
       color: black;
       top: -48px;
     }

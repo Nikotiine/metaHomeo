@@ -1,10 +1,12 @@
 <template>
   <div>
-    <section class="hero is-danger is-fullheight">
+    <section class="hero is-fullheight">
       <div class="hero-head">
         <div class="">
-          <p class="title" id="title">labo associasitif</p>
-          <p class="subtitle">Fullheight subtitle</p>
+          <p class="title" id="title">
+            Un laboratoire associatif à but non lucratif
+          </p>
+          <p class="subtitle">QUASACO ?</p>
         </div>
       </div>
       <div class="hero-body">
@@ -42,10 +44,12 @@ export default {
       window.scrollTo(0, 0);
     },
   },
-  mounted() {
-    document.getElementById("title").scrollIntoView({ behavior: "smooth" });
-  },
+  mounted() {},
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.title {
+  margin-top: 7%;
+}
+</style>

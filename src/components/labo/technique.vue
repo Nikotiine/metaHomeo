@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section class="hero is-danger is-fullheight">
+    <section class="hero is-fullheight">
       <div class="hero-head">
         <div class="">
           <p class="title" id="title">Sauvergarde de la techinque</p>
@@ -41,9 +41,15 @@ export default {
     scrollToTop: function () {
       window.scrollTo(0, 0);
     },
+    // scrollInto: function () {
+    //   document.getElementById("title").scrollIntoView({ behavior: "smooth" });
+    // },
   },
   mounted() {
-    document.getElementById("title").scrollIntoView({ behavior: "smooth" });
+    // setTimeout(
+    //   this.scrollInto(),
+    //   20000
+    // );
   },
 };
 </script>

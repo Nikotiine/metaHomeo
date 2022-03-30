@@ -24,7 +24,7 @@
                   </p>
                 </div>
                 <div class="mt-6">
-                  <button-neon :btnName="bouton" />
+                  <button-neon :btnName="bouton" :width="320" />
                 </div>
               </div>
             </div>
@@ -46,7 +46,18 @@ export default {
   components: { buttonNeon },
   data() {
     return {
-      bouton: [{ id: 0, name: "la methode", router: "/metahomeopathie" }],
+      bouton: [
+        {
+          id: 0,
+          name: "la methode",
+          router: "/metahomeopathie",
+          width: "320px",
+          strokeDasharray1: 140,
+          strokeDasharray2: 540,
+          strokeDashoffset: -474,
+          dashHover: 760,
+        },
+      ],
     };
   },
   methods: {},

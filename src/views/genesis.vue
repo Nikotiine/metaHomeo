@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <section class="hero is-link is-fullheight">
+      <section class="hero is-fullheight">
         <div class="hero-head">
           <div class="">
             <p class="title m-t-10">L'equipe genesis</p>

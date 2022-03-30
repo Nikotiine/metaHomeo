@@ -52,7 +52,7 @@ export default {
   props: ["heightMaps", "widthMaps", "markers"],
   data() {
     return {
-      zoom: 15,
+      zoom: 13,
       center: latLng(47.41322, -1.219482),
 
       url: "https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png",

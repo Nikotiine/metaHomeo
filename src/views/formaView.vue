@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section class="hero is-danger is-fullheight">
+    <section class="hero is-fullheight">
       <div class="hero-head">
         <div class="container has-text-centered">
           <p class="title">Les formations</p>
