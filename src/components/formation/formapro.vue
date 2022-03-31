@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section class="hero is-danger is-fullheight">
+    <section class="hero is-fullheight">
       <div class="hero-head">
         <div class="">
           <p class="title" id="title">Reserve au pro</p>
@@ -42,10 +42,12 @@ export default {
       window.scrollTo(0, 0);
     },
   },
-  mounted() {
-    document.getElementById("title").scrollIntoView({ behavior: "smooth" });
-  },
+  mounted() {},
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.title {
+  margin-top: 10%;
+}
+</style>

@@ -15,7 +15,10 @@
         </div>
       </div>
       <div class="hero-body is-justify-content-space-around">
-        <div class="card" :class="{ isLarge: view === 'ouverte-a-tous' }">
+        <div
+          class="card box-shadow"
+          :class="{ isLarge: view === 'ouverte-a-tous' }"
+        >
           <div class="card-image">
             <figure class="image is-4by3">
               <img src="../assets/labo.jpeg" alt="Placeholder image" />
@@ -26,17 +29,19 @@
             :class="{ isSelected: view === 'ouverte-a-tous' }"
           >
             <div class="content">
-              <router-link
-                :to="{
-                  name: 'formations',
-                  params: { view: 'ouverte-a-tous' },
-                }"
-                >formations sans prerequis</router-link
-              >
+              <p class="subtitle" v-if="view === 'ouverte-a-tous'">
+                Formation sans pre-requis de diplome
+              </p>
+              <button-neon
+                :btnName="formationSans"
+                :width="320"
+                @click="scrollInView"
+                v-else
+              />
             </div>
           </div>
         </div>
-        <div class="card" :class="{ isLarge: view === 'pro-sante' }">
+        <div class="card box-shadow" :class="{ isLarge: view === 'pro-sante' }">
           <div class="card-image">
             <figure class="image is-4by3">
               <img src="../assets/labo.jpeg" alt="Placeholder image" />
@@ -47,13 +52,15 @@
             :class="{ isSelected: view === 'pro-sante' }"
           >
             <div class="content">
-              <router-link
-                :to="{
-                  name: 'formations',
-                  params: { view: 'pro-sante' },
-                }"
-                >formation pour les pro</router-link
-              >
+              <p class="subtitle" v-if="view === 'pro-sante'">
+                Formation Pour les professionels de sante
+              </p>
+              <button-neon
+                :btnName="formationPro"
+                :width="320"
+                @click="scrollInView"
+                v-else
+              />
             </div>
           </div>
         </div>
@@ -65,12 +72,54 @@
 </template>
 
 <script>
+import buttonNeon from "../components/button.vue";
 import formaPro from "../components/formation/formapro.vue";
 import formaSans from "../components/formation/formasans.vue";
 export default {
   name: "formaView",
-  components: { formaPro, formaSans },
+  components: { formaPro, formaSans, buttonNeon },
   props: ["view"],
+  data() {
+    return {
+      formationSans: [
+        {
+          id: 0,
+          name: "Sans pre-requis",
+          router: {
+            name: "formations",
+            params: { view: "ouverte-a-tous" },
+          },
+          width: "320px",
+          strokeDasharray1: 140,
+          strokeDasharray2: 540,
+          strokeDashoffset: -474,
+          dashHover: 760,
+        },
+      ],
+      formationPro: [
+        {
+          id: 0,
+          name: "Avec Pre-requis",
+          router: {
+            name: "formations",
+            params: { view: "pro-sante" },
+          },
+          width: "320px",
+          strokeDasharray1: 140,
+          strokeDasharray2: 540,
+          strokeDashoffset: -474,
+          dashHover: 760,
+        },
+      ],
+    };
+  },
+  methods: {
+    scrollInView: function () {
+      setTimeout(() => {
+        document.getElementById("title").scrollIntoView({ behavior: "smooth" });
+      }, 800);
+    },
+  },
 };
 </script>
 
@@ -88,10 +137,7 @@ export default {
 .isSelected {
   background-color: aqua;
 }
-.card-content:hover {
-  background-color: aqua;
-  cursor: pointer;
-}
+
 .v-enter-active {
   transition: opacity 0.8s ease;
 }

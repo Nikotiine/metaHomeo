@@ -7,15 +7,15 @@
       <!-- <l-marker v-if="marker.cab" :lat-lng="marker.geoCab" draggable>
         <l-tooltip> Le cabinet </l-tooltip>
       </l-marker> -->
-
-      <l-marker
-        v-for="marker in markers"
-        :lat-lng="marker.geoloc"
-        :key="marker.id"
-        draggable
-      >
-        <l-popup>{{ marker.name }} </l-popup>
-      </l-marker>
+      <div v-for="marker in markers" :key="marker.name">
+        <l-marker v-if="marker.check" :lat-lng="marker.geoloc" draggable>
+          <l-popup
+            >{{ marker.name }}
+            <p>{{ marker.adresse }}</p>
+            <p>{{ marker.telephone }}</p>
+          </l-popup>
+        </l-marker>
+      </div>
     </l-map>
   </div>
 </template>

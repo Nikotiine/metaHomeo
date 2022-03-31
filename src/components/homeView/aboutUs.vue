@@ -55,6 +55,7 @@ export default {
           id: 0,
           name: "cabinet",
           geoloc: latLng(45.128078, 5.589974),
+          check: true,
         },
       ],
       openModal: false,

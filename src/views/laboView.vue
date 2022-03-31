@@ -32,7 +32,7 @@
                 :btnName="technique"
                 :width="320"
                 v-else
-                @click="scroo"
+                @click="scrollInView"
               />
             </div>
           </div>
@@ -55,7 +55,7 @@
                 :btnName="dilutions"
                 :width="320"
                 v-else
-                @click="scroo"
+                @click="scrollInView"
               />
             </div>
           </div>
@@ -75,7 +75,7 @@
                 :btnName="quesaco"
                 :width="320"
                 v-else
-                @click="scroo"
+                @click="scrollInView"
               />
             </div>
           </div>
@@ -147,7 +147,7 @@ export default {
     };
   },
   methods: {
-    scroo: function () {
+    scrollInView: function () {
       setTimeout(() => {
         document.getElementById("title").scrollIntoView({ behavior: "smooth" });
       }, 800);
