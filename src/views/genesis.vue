@@ -60,7 +60,9 @@
             </p>
           </div>
         </div>
-        <contact-us v-if="view === 'contactUs'" />
+        <Transition>
+          <contact-us v-if="view === 'contactUs'" />
+        </Transition>
       </section>
     </div>
   </div>
@@ -127,12 +129,6 @@ export default {
           geoloc: latLng(45.129412, 5.58446),
           check: false,
         },
-        {
-          id: 5,
-          name: "Camping",
-          geoloc: latLng(45.139412, 5.58446),
-          check: false,
-        },
       ],
     };
   },
@@ -141,11 +137,15 @@ export default {
     //   if (mark.check === true) {
     //     this.markers.push(mark);
     //   } else {
-    //     this.markers.pop(mark);
+    //    const index= this.markers.findIndex((x)=>x.id===mark.id);
+    // if(index === -1){return}this.markers.splice(index,1)
     //   }
     // },
   },
   computed: {},
+  mounted() {
+    scrollTo(0, 0);
+  },
   props: ["view"],
 };
 </script>
@@ -164,5 +164,15 @@ export default {
 }
 label {
   font-size: 1.5em;
+}
+.v-enter-active {
+  transition: opacity 0.8s ease;
+}
+.v-leave-active {
+  transition: opacity 0.2s ease;
+}
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>

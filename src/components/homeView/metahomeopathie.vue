@@ -32,7 +32,12 @@
         </div>
       </div>
       <div class="is-flex is-justify-content-center mb-6">
-        <img class="image is-96x96" src="../../assets/images.png" alt="" />
+        <img
+          class="image is-96x96 cursor"
+          src="../../assets/images.png"
+          alt=""
+          @click="scrollDown"
+        />
       </div>
     </section>
   </div>
@@ -60,7 +65,11 @@ export default {
       ],
     };
   },
-  methods: {},
+  methods: {
+    scrollDown: function () {
+      this.$emit("nextView", "labo");
+    },
+  },
 };
 </script>
 

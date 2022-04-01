@@ -23,8 +23,8 @@
         <nav class="tabs is-boxed is-fullwidth">
           <div class="container">
             <ul>
-              <li @click="scrollToTop">
-                <a>Acceuil du Labo </a>
+              <li>
+                <a>footer ??? </a>
               </li>
             </ul>
           </div>
@@ -37,11 +37,7 @@
 <script>
 export default {
   name: "diluTions",
-  methods: {
-    scrollToTop: function () {
-      window.scrollTo(0, 0);
-    },
-  },
+  methods: {},
   mounted() {},
 };
 </script>

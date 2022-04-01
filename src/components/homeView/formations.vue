@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="hero is-fullheight">
-      <div class="hero-head">
+      <div class="hero-head" id="formation">
         <p class="title is-1">Genesis Les formations</p>
         <div class="is-flex is-justify-content-space-around">
           <img class="image is-128x128" src="../../assets/ccurve.png" alt="" />
@@ -49,7 +49,12 @@
         </div>
       </div>
       <div class="is-flex is-justify-content-center mb-6 mt-6">
-        <img class="image is-96x96" src="../../assets/images.png" alt="" />
+        <img
+          class="image is-96x96 cursor"
+          src="../../assets/images.png"
+          alt=""
+          @click="scrollDown"
+        />
       </div>
     </section>
   </div>
@@ -60,6 +65,12 @@ import buttonNeon from "../button.vue";
 export default {
   name: "formationView",
   components: { buttonNeon },
+  props: ["next"],
+  methods: {
+    scrollDown: function () {
+      this.$emit("nextView", "aboutUs");
+    },
+  },
   data() {
     return {
       bouton: [

@@ -34,11 +34,8 @@ nav {
 .gradientBackGround {
   background: rgb(80 200 239 / 50%);
 }
-.invertgradientBackGround {
-  background: rgb(11, 71, 150);
-  background: linear-gradient(
-    0deg,
-    rgba(11, 71, 150, 1) 0%,
-    rgba(107, 245, 210, 1) 100%
-  );
+.upBtn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
 }

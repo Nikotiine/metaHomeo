@@ -1,8 +1,16 @@
 <template>
-  <meta-homeo />
-  <le-labo />
-  <formation-view />
+  <meta-homeo @nextView="next" />
+
+  <le-labo @nextView="next" id="lab" />
+  <formation-view @nextView="next" />
   <about-us />
+  <button
+    class="button is-medium is-primary is-rounded"
+    :class="{ upBtn: showBtn }"
+    @click="scrollToTop"
+  >
+    <i class="fas fa-angle-double-up"></i>
+  </button>
 </template>
 
 <script>
@@ -16,6 +24,34 @@ import metaHomeo from "@/components/homeView/metahomeopathie.vue";
 export default {
   name: "HomeView",
   components: { leLabo, formationView, aboutUs, metaHomeo },
+  data() {
+    return {
+      showBtn: false,
+    };
+  },
+  methods: {
+    next: function (id) {
+      document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+      console.log(id);
+    },
+    scrollToTop: function () {
+      scrollTo(0, 0);
+    },
+    getScrollY: function () {
+      const pos = window.scrollY;
+
+      if (pos > 637) {
+        this.showBtn = true;
+      } else this.showBtn = false;
+    },
+  },
+  mounted() {
+    scrollTo(0, 0);
+  },
+  created() {
+    window.addEventListener("scroll", this.getScrollY);
+  },
+  computed: {},
 };
 </script>
 <style lang="scss" scoped></style>

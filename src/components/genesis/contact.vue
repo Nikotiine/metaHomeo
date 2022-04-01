@@ -15,9 +15,9 @@
               <input
                 class="input"
                 type="text"
-                placeholder="Text input"
+                placeholder="Indiquez votre nom"
                 v-model="name"
-                :class="{ 'is-success': this.name }"
+                :class="{ isValidField: this.name }"
               />
               <span
                 class="icon is-small is-left"
@@ -40,8 +40,8 @@
               <input
                 class="input"
                 type="text"
-                placeholder="Text input"
-                :class="{ 'is-link': this.firstName }"
+                placeholder="Indiquez votre prenom"
+                :class="{ isValidField: this.firstName }"
                 v-model="firstName"
               />
               <span
@@ -65,9 +65,9 @@
               <input
                 class="input"
                 type="email"
-                placeholder="Email input"
+                placeholder="Indiquez votre Email"
                 v-model="email"
-                :class="{ 'is-success': validEmail }"
+                :class="{ isValidField: validEmail }"
               />
               <span
                 class="icon is-small is-left"
@@ -85,41 +85,65 @@
           </div>
 
           <div class="field">
-            <label class="label">Sujet</label>
-            <div class="control">
-              <div class="select">
-                <select>
-                  <option>votre demande concerne</option>
-                  <option>Une formation</option>
-                  <option>des renseignements sur le labo</option>
-                  <option>des renseignements sur l'equipe</option>
-                </select>
-              </div>
+            <label class="label">Votre demande concerne</label>
+
+            <div class="control blockRadio">
+              <label class="radio py-1">
+                <input
+                  type="radio"
+                  name="demande"
+                  v-model="sujet"
+                  value="formation"
+                />
+                Une formation
+              </label>
+              <label class="radio py-1 ml-0">
+                <input
+                  type="radio"
+                  name="demande"
+                  v-model="sujet"
+                  value="infoLabo"
+                />
+                Des infos sur le labo </label
+              ><label class="radio py-1 ml-0">
+                <input
+                  type="radio"
+                  name="demande"
+                  v-model="sujet"
+                  value="autre"
+                />
+                autre
+              </label>
             </div>
           </div>
 
           <div class="field">
             <label class="label">Message</label>
             <div class="control">
-              <textarea class="textarea" placeholder="Textarea"></textarea>
+              <textarea class="textarea" placeholder="Message"></textarea>
             </div>
           </div>
 
           <div class="field">
             <div class="control">
               <label class="checkbox">
-                <input type="checkbox" />
-                I agree to the <a href="#">terms and conditions</a>
+                <input type="checkbox" v-model="cgu" />
+                Je suis d'accord avec
+                <a href="#">les CGU</a>
               </label>
             </div>
           </div>
 
-          <div class="field is-grouped">
+          <div class="field is-grouped is-justify-content-center">
             <div class="control">
-              <button class="button is-link">Submit</button>
+              <button class="button is-link is-outlined" @click="cancel">
+                Annuler
+              </button>
             </div>
             <div class="control">
-              <button class="button is-link is-light">Cancel</button>
+              <button class="button is-link" :disabled="!fieldIsValid">
+                Valider
+              </button>
             </div>
           </div>
         </div>
@@ -132,7 +156,22 @@
 export default {
   name: "contactUs",
   data() {
-    return { name: null, firstName: null, email: null };
+    return {
+      name: null,
+      firstName: null,
+      email: null,
+      cgu: false,
+      sujet: false,
+    };
+  },
+  methods: {
+    cancel: function () {
+      scrollTo(0, 0);
+      this.$router.push({
+        name: "aboutUs",
+        params: { view: "accueil" },
+      });
+    },
   },
   computed: {
     validEmail() {
@@ -140,9 +179,22 @@ export default {
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(this.email);
     },
+    fieldIsValid: function () {
+      if (
+        !this.name ||
+        !this.firstName ||
+        !this.validEmail ||
+        !this.cgu ||
+        !this.sujet
+      ) {
+        return false;
+      } else return true;
+    },
   },
   mounted() {
-    document.getElementById("title").scrollIntoView({ behavior: "smooth" });
+    setTimeout(() => {
+      document.getElementById("title").scrollIntoView({ behavior: "smooth" });
+    }, 500);
   },
 };
 </script>
@@ -152,6 +204,16 @@ export default {
   margin-top: 10%;
 }
 .box {
-  width: 30%;
+  width: 35%;
+}
+.isValidField {
+  border: 2px groove #68e6f6ab;
+}
+.blockRadio {
+  display: flex;
+  align-items: flex-start;
+  margin-left: 40%;
+
+  flex-direction: column;
 }
 </style>

@@ -25,8 +25,8 @@
         <nav class="tabs is-boxed is-fullwidth">
           <div class="container">
             <ul>
-              <li @click="scrollToTop">
-                <a>Acceuil du Labo </a>
+              <li>
+                <a>footer ? </a>
               </li>
             </ul>
           </div>

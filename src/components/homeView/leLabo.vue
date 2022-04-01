@@ -1,7 +1,9 @@
 <template>
   <div>
     <section class="hero is-fullheight">
-      <div class="hero-head"><p class="title is-1">Genesis Le labo</p></div>
+      <div class="hero-head">
+        <p class="title is-1" id="labo">Genesis Le labo</p>
+      </div>
       <div class="hero-body">
         <div class="container has-text-centered">
           <div class="is-flex mt-6 is-justify-content-space-between">
@@ -31,7 +33,12 @@
         </div>
       </div>
       <div class="is-flex is-justify-content-center">
-        <img class="image is-96x96" src="../../assets/images.png" alt="" />
+        <img
+          class="image is-96x96 cursor"
+          src="../../assets/images.png"
+          alt=""
+          @click="scrollDown"
+        />
       </div>
     </section>
   </div>
@@ -42,6 +49,7 @@ import buttonNeon from "../button.vue";
 export default {
   name: "homeLabo",
   components: { buttonNeon },
+  props: ["next"],
   data() {
     return {
       bouton: [
@@ -60,6 +68,11 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    scrollDown: function () {
+      this.$emit("nextView", "formation");
+    },
   },
 };
 </script>

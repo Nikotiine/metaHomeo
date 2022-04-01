@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="hero toto is-fullheight">
-      <div class="hero-head">
+      <div class="hero-head" id="aboutUs">
         <div class="">
           <p class="title is-1">Info et contact</p>
           <p class="subtitle"></p>
@@ -48,6 +48,7 @@ import buttonNeon from "../button.vue";
 export default {
   name: "aboutUs",
   components: { mapsLeaflet, buttonNeon },
+  props: ["next"],
   data() {
     return {
       markers: [

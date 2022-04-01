@@ -24,7 +24,7 @@
           <div class="container">
             <ul>
               <li @click="scrollToTop">
-                <a>Acceuil du Labo </a>
+                <a>footer? </a>
               </li>
             </ul>
           </div>
