@@ -134,9 +134,15 @@
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
-              <a class="button is-info is-outlined">
+              <router-link
+                class="button is-info is-outlined"
+                :to="{
+                  name: 'espace-praticien',
+                  params: { view: 'loggin' },
+                }"
+              >
                 <strong>Espace praticien</strong>
-              </a>
+              </router-link>
             </div>
           </div>
         </div>

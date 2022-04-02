@@ -4,18 +4,11 @@
   <le-labo @nextView="next" id="lab" />
   <formation-view @nextView="next" />
   <about-us />
-  <button
-    class="button is-medium is-primary is-rounded"
-    :class="{ upBtn: showBtn }"
-    @click="scrollToTop"
-  >
-    <i class="fas fa-angle-double-up"></i>
-  </button>
 </template>
 
 <script>
 // @ is an alias to /src
-
+//import sitckyBtn from "@/components/sitckyBtn.vue";
 import leLabo from "@/components/homeView/leLabo.vue";
 import formationView from "@/components/homeView/formations.vue";
 import aboutUs from "@/components/homeView/aboutUs.vue";
@@ -34,22 +27,22 @@ export default {
       document.getElementById(id).scrollIntoView({ behavior: "smooth" });
       console.log(id);
     },
-    scrollToTop: function () {
-      scrollTo(0, 0);
-    },
-    getScrollY: function () {
-      const pos = window.scrollY;
+    // scrollToTop: function () {
+    //   scrollTo(0, 0);
+    // },
+    // getScrollY: function () {
+    //   const pos = window.scrollY;
 
-      if (pos > 637) {
-        this.showBtn = true;
-      } else this.showBtn = false;
-    },
+    //   if (pos > 637) {
+    //     this.showBtn = true;
+    //   } else this.showBtn = false;
+    // },
   },
   mounted() {
     scrollTo(0, 0);
   },
   created() {
-    window.addEventListener("scroll", this.getScrollY);
+    // window.addEventListener("scroll", this.getScrollY);
   },
   computed: {},
 };

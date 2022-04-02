@@ -22,11 +22,14 @@
       <div class="hero-foot">
         <nav class="tabs is-boxed is-fullwidth">
           <div class="container">
-            <ul>
-              <li @click="scrollToTop">
-                <a>Acceuil des formations </a>
-              </li>
-            </ul>
+            <router-link
+              :to="{
+                name: 'aboutUs',
+                params: { view: 'contactUs' },
+              }"
+            >
+              S'incrire a cette formation
+            </router-link>
           </div>
         </nav>
       </div>

@@ -34,8 +34,13 @@ nav {
 .gradientBackGround {
   background: rgb(80 200 239 / 50%);
 }
-.upBtn {
+.button.is-rounded.upBtn {
   position: fixed;
   bottom: 30px;
   right: 30px;
+  z-index: 30;
+  display: block;
+}
+.isValidField {
+  border: 2px groove #68e6f6ab;
 }

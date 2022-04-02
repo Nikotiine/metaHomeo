@@ -206,9 +206,7 @@ export default {
 .box {
   width: 35%;
 }
-.isValidField {
-  border: 2px groove #68e6f6ab;
-}
+
 .blockRadio {
   display: flex;
   align-items: flex-start;

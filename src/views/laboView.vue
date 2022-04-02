@@ -84,13 +84,6 @@
       <Transition> <tech-nique v-if="view === 'technique'" /></Transition>
       <Transition><dilu-tions v-if="view === 'dilutions'" /></Transition>
       <Transition> <quesa-co v-if="view === 'quesaco'" /></Transition>
-      <button
-        class="button is-medium is-primary is-rounded"
-        :class="{ upBtn: showBtn }"
-        @click="scrollToTop"
-      >
-        <i class="fas fa-angle-double-up"></i>
-      </button>
     </section>
   </div>
 </template>
@@ -160,17 +153,8 @@ export default {
         document.getElementById("title").scrollIntoView({ behavior: "smooth" });
       }, 800);
     },
-    getScrollY: function () {
-      const pos = window.scrollY;
-
-      if (pos > 637) {
-        this.showBtn = true;
-      } else this.showBtn = false;
-    },
   },
-  created() {
-    window.addEventListener("scroll", this.getScrollY);
-  },
+  created() {},
 };
 </script>
 

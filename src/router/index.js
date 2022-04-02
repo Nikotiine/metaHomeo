@@ -47,6 +47,16 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/formaView.vue"),
     props: true,
   },
+  {
+    path: "/espace-praticien/:view",
+    name: "espace-praticien",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/praticiensView.vue"),
+    props: true,
+  },
 ];
 
 const router = createRouter({
