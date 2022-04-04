@@ -1,5 +1,8 @@
 <template>
-  <form class="box box-shadow m-t-10 max-width-35 mx-auto">
+  <form
+    class="box box-shadow m-t-10 max-width-35 mx-auto"
+    v-on:submit.prevent="onSubmit"
+  >
     <div class="field">
       <label class="label">Email</label>
       <div class="control has-icons-left has-icons-right">
@@ -45,12 +48,14 @@
     </div>
     <div class="buttons">
       <router-link class="button" to="/">Annuler</router-link
-      ><router-link class="button is-primary" to="/">Connection</router-link>
+      ><button class="button is-primary" @click="loggin">Se connecter</button>
     </div>
   </form>
 </template>
 
 <script>
+import Cookies from "js-cookie";
+import axios from "axios";
 export default {
   name: "authPraticiens",
   data() {
@@ -58,6 +63,40 @@ export default {
       email: null,
       password: null,
     };
+  },
+  methods: {
+    getUserAccount: function () {
+      console.log("get test");
+      axios.get("user").then((res) => {
+        const admin = res.data.admin;
+        if (!admin) {
+          this.$router.push({
+            name: "espace-praticien",
+            params: { view: "espace-perso" },
+          });
+        } else {
+          this.$router.push({
+            name: "espace-admin",
+            params: { view: "accueil" },
+          });
+        }
+      });
+    },
+    loggin: function () {
+      axios
+        .post("user/loggin", {
+          email: this.email,
+          password: this.password,
+        })
+        //if false do something
+        .then((res) => {
+          Cookies.set("accessToken", res.data.accessToken);
+          Cookies.set("refreshToken", res.data.refreshToken);
+          // localStorage.setItem("accessToken", res.data.accessToken);
+          // localStorage.setItem("refreshToken", res.data.refreshToken);
+          this.getUserAccount();
+        });
+    },
   },
   computed: {
     validEmail() {

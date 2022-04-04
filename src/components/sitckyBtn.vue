@@ -1,4 +1,5 @@
 <template>
+  <!-- transtion vue a tester-->
   <button
     class="button is-medium is-primary is-rounded"
     :class="{ upBtn: showBtn }"
