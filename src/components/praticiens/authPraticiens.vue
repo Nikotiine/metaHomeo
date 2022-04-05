@@ -69,12 +69,17 @@ export default {
       console.log("get test");
       axios.get("user").then((res) => {
         const admin = res.data.admin;
+        const user = res.data.firstName;
         if (!admin) {
+          Cookies.set("userName", user);
+          Cookies.set("isAdmin", admin);
           this.$router.push({
             name: "espace-praticien",
             params: { view: "espace-perso" },
           });
         } else {
+          Cookies.set("userName", user);
+          Cookies.set("isAdmin", admin);
           this.$router.push({
             name: "espace-admin",
             params: { view: "accueil" },
@@ -92,6 +97,7 @@ export default {
         .then((res) => {
           Cookies.set("accessToken", res.data.accessToken);
           Cookies.set("refreshToken", res.data.refreshToken);
+
           // localStorage.setItem("accessToken", res.data.accessToken);
           // localStorage.setItem("refreshToken", res.data.refreshToken);
           this.getUserAccount();

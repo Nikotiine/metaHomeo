@@ -10,8 +10,15 @@
 </template>
 
 <script>
+import Cookies from "js-cookie";
 export default {
   name: "espacePerso",
+  created() {
+    const admin = Cookies.get("isAdmin");
+    const user = Cookies.get("userName");
+    this.$store.commit("newUser", user);
+    this.$store.commit("isAdmin", admin);
+  },
 };
 </script>
 

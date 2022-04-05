@@ -5,9 +5,13 @@
     </div>
     <div class="hero-body is-justify-content-space-around">
       <div>
-        <p class="subtitle">tu as ... de membre enregisté</p>
+        <p class="subtitle">tu as {{ totalParticiens }} membres enregistés</p>
         <button class="button is-primary is-light">voir les profils</button>
         <button-neon :btnName="ajoutPraticien" :width="320" />
+      </div>
+      <div class="">
+        <p class="subtitle">tu as eu ... de commandes pasées</p>
+        <button class="button is-primary is-light">voir la liste</button>
       </div>
       <div class="">
         <p class="subtitle">tu as ... de produits enregisté</p>
@@ -19,6 +23,8 @@
 </template>
 
 <script>
+// import Cookies from "js-cookie";
+import axios from "axios";
 import buttonNeon from "../button.vue";
 export default {
   name: "espaceAdmin",
@@ -27,6 +33,7 @@ export default {
   },
   data() {
     return {
+      totalParticiens: null,
       ajoutPraticien: [
         {
           id: 0,
@@ -48,7 +55,7 @@ export default {
           name: "Ajouter produit ",
           router: {
             name: "espace-admin",
-            params: { view: "nouveau-produit" },
+            params: { view: "new-product" },
           },
           width: "320px",
           strokeDasharray1: 140,
@@ -58,6 +65,11 @@ export default {
         },
       ],
     };
+  },
+  mounted() {
+    axios
+      .get("user/count")
+      .then((res) => (this.totalParticiens = res.data.count));
   },
 };
 </script>

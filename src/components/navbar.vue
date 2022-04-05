@@ -133,7 +133,7 @@
 
         <div class="navbar-end">
           <div class="navbar-item">
-            <div class="buttons">
+            <div class="buttons" v-if="status === 'visiteur' && admin === null">
               <router-link
                 class="button is-info is-outlined"
                 :to="{
@@ -144,6 +144,34 @@
                 <strong>Espace praticien</strong>
               </router-link>
             </div>
+            <div class="buttons" v-else-if="admin === 'true'">
+              <router-link
+                class="button is-danger"
+                :to="{
+                  name: 'espace-admin',
+                  params: { view: 'accueil' },
+                }"
+              >
+                <strong>dashboard de : {{ status }}</strong>
+              </router-link>
+              <router-link class="button is-link" to="/" @click="deconnexion">
+                <strong>Deconnexion</strong>
+              </router-link>
+            </div>
+            <div class="buttons" v-if="admin === 'false'">
+              <router-link
+                class="button is-danger"
+                :to="{
+                  name: 'espace-praticien',
+                  params: { view: 'espace-perso' },
+                }"
+              >
+                <strong>Espace perso</strong>
+              </router-link>
+              <router-link class="button is-link" to="/" @click="deconnexion">
+                <strong>Deconnexion</strong>
+              </router-link>
+            </div>
           </div>
         </div>
       </div>
@@ -152,10 +180,22 @@
 </template>
 
 <script>
+import Cookies from "js-cookie";
 export default {
   name: "navBar",
+  props: ["status", "admin"],
   data() {
     return { showNav: false };
+  },
+  methods: {
+    deconnexion: function () {
+      Cookies.remove("accessToken");
+      Cookies.remove("refreshToken");
+      Cookies.remove("userName");
+      Cookies.remove("isAdmin");
+      this.$store.commit("newUser", "visiteur");
+      this.$store.commit("isAdmin", null);
+    },
   },
 };
 </script>

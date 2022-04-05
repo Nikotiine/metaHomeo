@@ -1,9 +1,19 @@
 import { createStore } from "vuex";
-
+//import Cookies from "js-cookie";
 export default createStore({
-  state: {},
+  state: {
+    user: "visiteur",
+    admin: null,
+  },
   getters: {},
-  mutations: {},
+  mutations: {
+    newUser(state, newStatus) {
+      state.user = newStatus;
+    },
+    isAdmin(state, newStatus) {
+      state.admin = newStatus;
+    },
+  },
   actions: {},
   modules: {},
 });
