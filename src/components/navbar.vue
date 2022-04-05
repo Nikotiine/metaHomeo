@@ -146,30 +146,38 @@
             </div>
             <div class="buttons" v-else-if="admin === 'true'">
               <router-link
-                class="button is-danger"
+                class="button is-rounded is-info is-outlined"
                 :to="{
                   name: 'espace-admin',
                   params: { view: 'accueil' },
                 }"
               >
-                <strong>dashboard de : {{ status }}</strong>
+                <strong>Panneau de controle : {{ status }}</strong>
               </router-link>
-              <router-link class="button is-link" to="/" @click="deconnexion">
-                <strong>Deconnexion</strong>
+              <router-link
+                class="button is-rounded"
+                to="/"
+                @click="deconnexion"
+              >
+                <i class="fas fa-power-off"></i>
               </router-link>
             </div>
             <div class="buttons" v-if="admin === 'false'">
               <router-link
-                class="button is-danger"
+                class="button is-rounded is-info is-outlined"
                 :to="{
                   name: 'espace-praticien',
                   params: { view: 'espace-perso' },
                 }"
               >
-                <strong>Espace perso</strong>
+                <strong>Espace perso : {{ status }}</strong>
               </router-link>
-              <router-link class="button is-link" to="/" @click="deconnexion">
-                <strong>Deconnexion</strong>
+              <router-link
+                class="button is-rounded"
+                to="/"
+                @click="deconnexion"
+              >
+                <i class="fas fa-power-off"></i>
               </router-link>
             </div>
           </div>

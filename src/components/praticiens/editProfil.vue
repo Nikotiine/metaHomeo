@@ -10,16 +10,16 @@
           class="input"
           type="text"
           placeholder="Nom"
-          v-model="lastName"
+          v-model="profil.lastName"
         /><span
           class="icon is-small is-left"
-          :class="{ 'has-text-info': this.lastName }"
+          :class="{ 'has-text-info': this.profil.lastName }"
         >
           <i class="fas fa-lock"></i>
         </span>
         <span
           class="icon is-small is-right has-text-success"
-          v-if="this.lastName"
+          v-if="this.profil.lastName"
         >
           <i class="fas fa-check"></i>
         </span>
@@ -32,16 +32,16 @@
           class="input"
           type="text"
           placeholder="Prenom"
-          v-model="firstName"
+          v-model="profil.firstName"
         /><span
           class="icon is-small is-left"
-          :class="{ 'has-text-info': this.firstName }"
+          :class="{ 'has-text-info': this.profil.firstName }"
         >
           <i class="fas fa-lock"></i>
         </span>
         <span
           class="icon is-small is-right has-text-success"
-          v-if="this.firstName"
+          v-if="this.profil.firstName"
         >
           <i class="fas fa-check"></i>
         </span>
@@ -54,7 +54,7 @@
           class="input"
           type="email"
           placeholder="e.g. alex@example.com"
-          v-model="email"
+          v-model="profil.email"
           :class="{ isValidField: validEmail }"
         /><span
           class="icon is-small is-left"
@@ -75,16 +75,16 @@
           class="input"
           type="password"
           placeholder="********"
-          v-model="password"
+          v-model="profil.newpassword"
         /><span
           class="icon is-small is-left"
-          :class="{ 'has-text-info': this.password }"
+          :class="{ 'has-text-info': this.profil.newpassword }"
         >
           <i class="fas fa-lock"></i>
         </span>
         <span
           class="icon is-small is-right has-text-success"
-          v-if="this.password"
+          v-if="this.profil.newpassword"
         >
           <i class="fas fa-check"></i>
         </span>
@@ -97,16 +97,16 @@
           class="input"
           type="text"
           placeholder="Nom"
-          v-model="adresse"
+          v-model="profil.adresse"
         /><span
           class="icon is-small is-left"
-          :class="{ 'has-text-info': this.adresse }"
+          :class="{ 'has-text-info': this.profil.adresse }"
         >
           <i class="fas fa-lock"></i>
         </span>
         <span
           class="icon is-small is-right has-text-success"
-          v-if="this.adresse"
+          v-if="this.profil.adresse"
         >
           <i class="fas fa-check"></i>
         </span>
@@ -119,16 +119,16 @@
           class="input"
           type="number"
           placeholder="Nom"
-          v-model="zipCode"
+          v-model="profil.zipCode"
         /><span
           class="icon is-small is-left"
-          :class="{ 'has-text-info': this.zipCode }"
+          :class="{ 'has-text-info': this.profil.zipCode }"
         >
           <i class="fas fa-lock"></i>
         </span>
         <span
           class="icon is-small is-right has-text-success"
-          v-if="this.zipCode"
+          v-if="this.profil.zipCode"
         >
           <i class="fas fa-check"></i>
         </span>
@@ -141,33 +141,31 @@
           class="input"
           type="text"
           placeholder="Nom"
-          v-model="city"
+          v-model="profil.city"
         /><span
           class="icon is-small is-left"
-          :class="{ 'has-text-info': this.city }"
+          :class="{ 'has-text-info': this.profil.city }"
         >
           <i class="fas fa-lock"></i>
         </span>
-        <span class="icon is-small is-right has-text-success" v-if="this.city">
+        <span
+          class="icon is-small is-right has-text-success"
+          v-if="this.profil.city"
+        >
           <i class="fas fa-check"></i>
         </span>
       </div>
     </div>
-    <div class="field mt-4">
-      <label class="checkbox">
-        <input type="checkbox" v-model="admin" />
-        Admin ??
-      </label>
-    </div>
+
     <div class="buttons">
       <router-link
         class="button"
         :to="{
-          name: 'espace-admin',
-          params: { view: 'accueil' },
+          name: 'espace-praticien',
+          params: { view: 'espace-perso' },
         }"
         >Annuler</router-link
-      ><button class="button is-primary" @click="send">send</button>
+      ><button class="button is-primary" @click="edit">Modifier</button>
     </div>
   </form>
 </template>
@@ -175,41 +173,35 @@
 <script>
 import axios from "axios";
 export default {
-  name: "formNewUser",
+  name: "editProfil",
   data() {
     return {
-      firstname: null,
-      lastName: null,
-      zipCode: null,
-      adresse: null,
-      city: null,
-      email: null,
-      password: null,
-      admin: false,
+      profil: {
+        newpassword: null,
+        firstName: null,
+        lastName: null,
+        email: null,
+        zipCode: null,
+        city: null,
+        adresse: null,
+      },
     };
   },
   methods: {
-    send: function () {
-      axios
-        .post("http://localhost:3000/user/new", {
-          firstName: this.firstName,
-          lastName: this.lastName,
-          adresse: this.adresse,
-          zipCode: this.zipCode,
-          city: this.city,
-          email: this.email,
-          password: this.password,
-          admin: this.admin,
-        })
-        .then((res) => console.log(res));
+    edit: function () {
+      axios.put("user/edit", {
+        firstName: this.profil.firstName,
+        lastName: this.profil.lastName,
+        city: this.profil.city,
+        zipCode: this.profil.zipCode,
+        email: this.profil.email,
+        adresse: this.profil.adresse,
+        password: this.profil.newpassword,
+      });
     },
   },
-  computed: {
-    validEmail() {
-      const re =
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(this.email);
-    },
+  mounted() {
+    axios.get("user").then((res) => (this.profil = res.data));
   },
 };
 </script>
