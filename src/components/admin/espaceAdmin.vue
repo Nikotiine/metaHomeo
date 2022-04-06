@@ -6,7 +6,15 @@
     <div class="hero-body is-justify-content-space-around">
       <div>
         <p class="subtitle">tu as {{ totalParticiens }} membres enregistés</p>
-        <button class="button is-primary is-light">voir les profils</button>
+        <router-link
+          class="button is-info is-outlined"
+          :to="{
+            name: 'espace-admin',
+            params: { view: 'tous-les-praticiens' },
+          }"
+        >
+          Voir les profils
+        </router-link>
         <button-neon :btnName="ajoutPraticien" :width="320" />
       </div>
       <div class="">

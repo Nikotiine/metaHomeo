@@ -4,11 +4,13 @@
   <product-list v-if="view === 'catalague-produit'" />
   <historique-commandes v-if="view === 'historique-commandes'" />
   <edit-profil v-if="view === 'edition-profil'" />
+
   <div></div>
 </template>
 
 <script>
 //import Cookies from "js-cookie";
+
 import editProfil from "../components/praticiens/editProfil.vue";
 import productList from "../components/praticiens/productList.vue";
 import historiqueCommandes from "../components/praticiens/historiqueCommandes.vue";
