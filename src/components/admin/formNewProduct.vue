@@ -10,17 +10,14 @@
           class="input"
           type="text"
           placeholder="Nom"
-          v-model="lastName"
+          v-model="name"
         /><span
           class="icon is-small is-left"
-          :class="{ 'has-text-info': this.lastName }"
+          :class="{ 'has-text-info': this.name }"
         >
           <i class="fas fa-lock"></i>
         </span>
-        <span
-          class="icon is-small is-right has-text-success"
-          v-if="this.lastName"
-        >
+        <span class="icon is-small is-right has-text-success" v-if="this.name">
           <i class="fas fa-check"></i>
         </span>
       </div>
@@ -43,10 +40,12 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "formNewProduct",
   data() {
     return {
+      name: null,
       categorie: null,
       categories: [
         { id: 0, nom: "categorie 1" },
@@ -56,6 +55,18 @@ export default {
         { id: 4, nom: "categorie 5" },
       ],
     };
+  },
+  methods: {
+    send: function () {
+      axios
+        .post("product/new", {
+          name: this.name,
+          categorie: this.categorie,
+        })
+        .then((res) => {
+          console.log(res.data);
+        });
+    },
   },
 };
 </script>

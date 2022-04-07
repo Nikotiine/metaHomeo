@@ -165,17 +165,40 @@
           params: { view: 'espace-perso' },
         }"
         >Annuler</router-link
-      ><button class="button is-primary" @click="edit">Modifier</button>
+      ><button class="button is-primary" @click="confirm = !confirm">
+        Modifier
+      </button>
     </div>
+    <Transition>
+      <toast-confirm
+        v-if="confirm"
+        :message="messageConfirm"
+        @callBack="callBackToast"
+      />
+    </Transition>
+    <toast-validate
+      :message="messageValid"
+      :config="updateUser"
+      v-if="update"
+    />
   </form>
 </template>
 
 <script>
+import Cookies from "js-cookie";
+import toastValidate from "../tools/toastValidate.vue";
+import toastConfirm from "../tools/toastConfirm.vue";
 import axios from "axios";
 export default {
   name: "editProfil",
+  components: { toastConfirm, toastValidate },
   data() {
     return {
+      messageConfirm: "Enregister les modifications ?",
+      messageValid: "Profil mis a jour",
+      update: false,
+      confirm: false,
+      updateUser: {},
       profil: {
         newpassword: null,
         firstName: null,
@@ -188,16 +211,42 @@ export default {
     };
   },
   methods: {
+    callBackToast: function (res) {
+      if (!res) {
+        this.confirm = !this.confirm;
+      } else {
+        this.confirm = !this.confirm;
+        this.edit();
+      }
+    },
     edit: function () {
-      axios.put("user/edit", {
-        firstName: this.profil.firstName,
-        lastName: this.profil.lastName,
-        city: this.profil.city,
-        zipCode: this.profil.zipCode,
-        email: this.profil.email,
-        adresse: this.profil.adresse,
-        password: this.profil.newpassword,
-      });
+      axios
+        .put("user/edit", {
+          firstName: this.profil.firstName,
+          lastName: this.profil.lastName,
+          city: this.profil.city,
+          zipCode: this.profil.zipCode,
+          email: this.profil.email,
+          adresse: this.profil.adresse,
+          // password: this.profil.newpassword,
+        })
+        .then((res) => {
+          console.log(res.data);
+          this.updateUser = {
+            firstName: res.data.firstName,
+            lastName: res.data.lastName,
+          };
+          this.update = true;
+          Cookies.set("userName", res.data.firstName);
+
+          setTimeout(() => {
+            this.$store.commit("newUser", res.data.firstName);
+            this.$router.push({
+              name: "espace-praticien",
+              params: { view: "espace-perso" },
+            });
+          }, 2000);
+        });
     },
   },
   mounted() {
@@ -206,4 +255,15 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.v-enter-active {
+  transition: opacity 0.8s ease;
+}
+.v-leave-active {
+  transition: opacity 0.2s ease;
+}
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+</style>

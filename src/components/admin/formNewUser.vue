@@ -167,15 +167,24 @@
           params: { view: 'accueil' },
         }"
         >Annuler</router-link
-      ><button class="button is-primary" @click="send">send</button>
+      ><button class="button is-primary" @click="send">Enregistrer</button>
     </div>
+    <Transition>
+      <toast-validate
+        v-if="userIsSave"
+        :config="dataNewUser"
+        :message="messageToast"
+    /></Transition>
   </form>
 </template>
 
 <script>
+import toastValidate from "../tools/toastValidate.vue";
 import axios from "axios";
+
 export default {
   name: "formNewUser",
+  components: { toastValidate },
   data() {
     return {
       firstname: null,
@@ -186,6 +195,9 @@ export default {
       email: null,
       password: null,
       admin: false,
+      dataNewUser: {},
+      userIsSave: false,
+      messageToast: "ajouter a la base de donnée utilisateur",
     };
   },
   methods: {
@@ -201,7 +213,17 @@ export default {
           password: this.password,
           admin: this.admin,
         })
-        .then((res) => console.log(res));
+        .then((res) => {
+          this.dataNewUser = {
+            firstName: res.data.firstName,
+            lastName: res.data.lastName,
+          };
+          this.userIsSave = !this.userIsSave;
+          setTimeout(() => {
+            this.userIsSave = !this.userIsSave;
+            location.reload();
+          }, 3000);
+        });
     },
   },
   computed: {
@@ -214,4 +236,15 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.v-enter-active {
+  transition: opacity 0.8s ease;
+}
+.v-leave-active {
+  transition: opacity 0.2s ease;
+}
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+</style>
