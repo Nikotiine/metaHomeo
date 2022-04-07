@@ -23,7 +23,15 @@
       </div>
       <div class="">
         <p class="subtitle">tu as ... de produits enregisté</p>
-        <button class="button is-primary is-light">voir la liste</button>
+        <router-link
+          class="button is-info is-outlined"
+          :to="{
+            name: 'espace-admin',
+            params: { view: 'tous-les-produits' },
+          }"
+        >
+          Voir les tous produits
+        </router-link>
         <button-neon :btnName="ajoutProduit" :width="320" />
       </div>
     </div>

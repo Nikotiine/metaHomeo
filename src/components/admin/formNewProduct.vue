@@ -23,11 +23,13 @@
       </div>
     </div>
     <div class="field">
-      <label class="label">categorie</label>
+      <label class="label">Categorie</label>
       <div class="select">
         <select v-model="categorie">
-          <option v-bind:value="null">Sélectionnez le niveau</option>
-          <option v-for="cat in categories" :key="cat.id">{{ cat.nom }}</option>
+          <option v-bind:value="null">Sélectionnez la categorie</option>
+          <option v-for="cat in categories" :key="cat.id">
+            {{ cat.name }}
+          </option>
         </select>
       </div>
     </div>
@@ -47,13 +49,7 @@ export default {
     return {
       name: null,
       categorie: null,
-      categories: [
-        { id: 0, nom: "categorie 1" },
-        { id: 1, nom: "categorie 2" },
-        { id: 2, nom: "categorie 3" },
-        { id: 3, nom: "categorie 4" },
-        { id: 4, nom: "categorie 5" },
-      ],
+      categories: this.$store.state.productsCategories,
     };
   },
   methods: {
@@ -67,6 +63,11 @@ export default {
           console.log(res.data);
         });
     },
+  },
+  computed: {
+    // categories() {
+    //   return this.$store.state.productsCategories;
+    // },
   },
 };
 </script>
