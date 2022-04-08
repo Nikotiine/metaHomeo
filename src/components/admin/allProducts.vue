@@ -20,8 +20,8 @@
             <th>Modifier</th>
           </tr>
         </thead>
-        <tbody v-for="product in products" :key="product.id">
-          <tr>
+        <tbody>
+          <tr v-for="product in products" :key="product.id">
             <td>{{ product.id }}</td>
             <td>{{ product.name }}</td>
             <td>modfier</td>
@@ -38,14 +38,23 @@ export default {
   name: "allProducts",
   data() {
     return {
-      categories: this.$store.state.productsCategories,
       products: [],
+      filtered: {},
     };
   },
+  methods: {
+    filteredProducts: function () {},
+  },
   created() {
-    axios.get("product/all").then((res) => {
+    axios.get("products/all").then((res) => {
       this.products = res.data;
     });
+    this.$store.dispatch("loadCategory");
+  },
+  computed: {
+    categories() {
+      return this.$store.state.productsCategories;
+    },
   },
 };
 </script>

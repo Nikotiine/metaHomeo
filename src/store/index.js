@@ -1,19 +1,17 @@
 import { createStore } from "vuex";
+import axios from "axios";
 //import Cookies from "js-cookie";
 export default createStore({
   state: {
     user: "visiteur",
     admin: null,
-    productsCategories: [
-      { id: 0, name: "hormones" },
-      { id: 1, name: "virus et bactéries " },
-      { id: 2, name: "environnement" },
-      { id: 3, name: "complexes de remèdes" },
-      { id: 4, name: "allopathie" },
-      { id: 5, name: "organothérapie" },
-    ],
+    productsCategories: [],
   },
-  getters: {},
+  getters: {
+    productsCategories: (state) => {
+      return state.productsCategories;
+    },
+  },
   mutations: {
     newUser(state, newStatus) {
       state.user = newStatus;
@@ -21,7 +19,18 @@ export default createStore({
     isAdmin(state, newStatus) {
       state.admin = newStatus;
     },
+    setCategory(state, laodCat) {
+      state.productsCategories = laodCat;
+    },
   },
-  actions: {},
+  actions: {
+    loadCategory({ commit }) {
+      if (this.state.productsCategories.length === 0) {
+        axios.get("products/category").then((res) => {
+          commit("setCategory", res.data);
+        });
+      }
+    },
+  },
   modules: {},
 });

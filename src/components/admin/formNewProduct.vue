@@ -27,7 +27,7 @@
       <div class="select">
         <select v-model="categorie">
           <option v-bind:value="null">Sélectionnez la categorie</option>
-          <option v-for="cat in categories" :key="cat.id">
+          <option v-for="cat in categories" :key="cat.id" :value="cat.code">
             {{ cat.name }}
           </option>
         </select>
@@ -43,31 +43,36 @@
 
 <script>
 import axios from "axios";
+//import { mapState } from "vuex";
 export default {
   name: "formNewProduct",
   data() {
     return {
       name: null,
       categorie: null,
-      categories: this.$store.state.productsCategories,
+      // categories: this.$store.state.productsCategories,
     };
   },
   methods: {
     send: function () {
       axios
-        .post("product/new", {
+        .post("products/new", {
           name: this.name,
-          categorie: this.categorie,
+          code: this.categorie,
         })
         .then((res) => {
           console.log(res.data);
         });
     },
   },
+  //computed: mapState(["productsCategories"]),
   computed: {
-    // categories() {
-    //   return this.$store.state.productsCategories;
-    // },
+    categories() {
+      return this.$store.state.productsCategories;
+    },
+  },
+  created() {
+    this.$store.dispatch("loadCategory");
   },
 };
 </script>

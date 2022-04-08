@@ -67,7 +67,7 @@ export default {
   methods: {
     getUserAccount: function () {
       console.log("get test");
-      axios.get("user").then((res) => {
+      axios.get("user/me").then((res) => {
         const admin = res.data.admin;
         const user = res.data.firstName;
         if (!admin) {
