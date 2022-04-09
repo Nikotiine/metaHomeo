@@ -156,6 +156,19 @@
         </span>
       </div>
     </div>
+    <div class="field">
+      <div class="control">
+        <label class="label">Newletter</label>
+        <label class="radio">
+          <input type="radio" name="answer" checked />
+          Oui
+        </label>
+        <label class="radio">
+          <input type="radio" name="answer" />
+          Non
+        </label>
+      </div>
+    </div>
 
     <div class="buttons">
       <router-link

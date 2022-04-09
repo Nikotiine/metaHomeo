@@ -22,7 +22,7 @@
         <button class="button is-primary is-light">voir la liste</button>
       </div>
       <div class="">
-        <p class="subtitle">tu as ... de produits enregisté</p>
+        <p class="subtitle">tu as {{ totalProducts }} de produits enregisté</p>
         <router-link
           class="button is-info is-outlined"
           :to="{
@@ -50,6 +50,7 @@ export default {
   data() {
     return {
       totalParticiens: null,
+      totalProducts: null,
       ajoutPraticien: [
         {
           id: 0,
@@ -86,6 +87,9 @@ export default {
     axios
       .get("user/count")
       .then((res) => (this.totalParticiens = res.data.count));
+    axios
+      .get("products/count")
+      .then((res) => (this.totalProducts = res.data.count));
   },
 };
 </script>

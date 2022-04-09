@@ -1,7 +1,19 @@
 <template>
   <section class="hero is-fullheight">
     <div class="hero-head">
-      <p class="title m-t-10">Bonjour {{ praticienFirstname }}</p>
+      <p class="title m-t-10">
+        Bonjour {{ loadUserInfo.firstName }} {{ loadUserInfo.lastName }}
+      </p>
+      <p class="subtitle">
+        Adresse actuelle :{{ loadUserInfo.adresse }} <br />{{
+          loadUserInfo.zipCode
+        }}
+        {{ loadUserInfo.city }}
+      </p>
+      <p class="subtitle">mail de contact : {{ loadUserInfo.email }}</p>
+      <p class="subtitle">
+        inscrit a la newsletter: {{ loadUserInfo.newletter }}
+      </p>
     </div>
     <div class="hero-body is-justify-content-space-around">
       <div class="box box-shadow">
@@ -81,6 +93,11 @@ export default {
     const user = Cookies.get("userName");
     this.$store.commit("newUser", user);
     this.$store.commit("isAdmin", admin);
+  },
+  computed: {
+    loadUserInfo() {
+      return this.$store.state.userData;
+    },
   },
 };
 </script>

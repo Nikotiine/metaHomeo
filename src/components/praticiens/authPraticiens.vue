@@ -73,6 +73,7 @@ export default {
         if (!admin) {
           Cookies.set("userName", user);
           Cookies.set("isAdmin", admin);
+          this.$store.commit("setUserData", res.data);
           this.$router.push({
             name: "espace-praticien",
             params: { view: "espace-perso" },

@@ -4,7 +4,7 @@
     <espace-admin v-if="view === 'accueil'" />
     <form-new-product v-if="view === 'new-product'" />
     <all-users-tools v-if="view === 'tous-les-praticiens'" />
-    <all-products v-if="view === 'tous-les-produits'" />
+    <all-products v-if="view === 'tous-les-produits'" :user="user" />
   </div>
 </template>
 
@@ -18,6 +18,11 @@ import espaceAdmin from "../components/admin/espaceAdmin.vue";
 export default {
   name: "adminView",
   props: ["view"],
+  data() {
+    return {
+      user: "admin",
+    };
+  },
   components: {
     formNewUser,
     espaceAdmin,

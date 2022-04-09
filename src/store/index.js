@@ -6,10 +6,15 @@ export default createStore({
     user: "visiteur",
     admin: null,
     productsCategories: [],
+    prod: null,
+    userData: null,
   },
   getters: {
     productsCategories: (state) => {
       return state.productsCategories;
+    },
+    userData: (state) => {
+      return state.userData;
     },
   },
   mutations: {
@@ -22,12 +27,25 @@ export default createStore({
     setCategory(state, laodCat) {
       state.productsCategories = laodCat;
     },
+    setCommande(state, newCommande) {
+      state.prod = newCommande;
+    },
+    setUserData(state, data) {
+      state.userData = data;
+    },
   },
   actions: {
     loadCategory({ commit }) {
       if (this.state.productsCategories.length === 0) {
         axios.get("products/category").then((res) => {
           commit("setCategory", res.data);
+        });
+      }
+    },
+    loadUserData({ commit }) {
+      if (!this.state.userData) {
+        axios.get("user/me").then((res) => {
+          commit("setUserData", res.data);
         });
       }
     },
