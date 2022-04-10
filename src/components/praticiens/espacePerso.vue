@@ -4,29 +4,31 @@
       <p class="title m-t-10">
         Bonjour {{ loadUserInfo.firstName }} {{ loadUserInfo.lastName }}
       </p>
-      <p class="subtitle">
-        Adresse actuelle :{{ loadUserInfo.adresse }} <br />{{
-          loadUserInfo.zipCode
-        }}
-        {{ loadUserInfo.city }}
-      </p>
-      <p class="subtitle">mail de contact : {{ loadUserInfo.email }}</p>
-      <p class="subtitle">
-        inscrit a la newsletter: {{ loadUserInfo.newletter }}
-      </p>
     </div>
-    <div class="hero-body is-justify-content-space-around">
+    <div class="hero-body is-flex-direction-column">
       <div class="box box-shadow">
         <p class="subtitle">Acces au catalogue des produits</p>
         <button-neon :btnName="catalogue" :width="320" />
       </div>
-      <div class="box box-shadow">
-        <p class="subtitle">Historique des commandes</p>
-        <button-neon :btnName="historique" :width="320" />
-      </div>
-      <div class="box box-shadow">
-        <p class="subtitle">Modifier ton profil</p>
-        <button-neon :btnName="profil" :width="320" />
+      <div class="is-flex mt-6 bottomContainer">
+        <div class="box box-shadow">
+          <p class="subtitle">Historique des commandes</p>
+          <button-neon :btnName="historique" :width="320" />
+        </div>
+        <div class="box box-shadow">
+          <p class="title">Profil</p>
+          <p class="subtitle">
+            Adresse actuelle : <br />
+            {{ loadUserInfo.adresse }} <br />
+            {{ loadUserInfo.zipCode }}
+            {{ loadUserInfo.city }}
+          </p>
+          <p class="subtitle">mail de contact : {{ loadUserInfo.email }}</p>
+          <p class="subtitle">
+            inscrit a la newsletter: {{ loadUserInfo.newletter }}
+          </p>
+          <button-neon :btnName="profil" :width="320" />
+        </div>
       </div>
     </div>
   </section>
@@ -106,5 +108,9 @@ export default {
 .box {
   min-width: 25%;
   margin: 0 auto;
+}
+.bottomContainer {
+  justify-content: space-between;
+  min-width: 100%;
 }
 </style>

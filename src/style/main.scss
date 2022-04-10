@@ -1,6 +1,6 @@
 @import "./theme.scss";
 @import "./helpers.scss";
-
+@import "../../node_modules/vue-multiselect/dist/vue-multiselect.css";
 @import "../../node_modules/bulma/bulma.sass";
 @import "../../node_modules/leaflet/dist/leaflet.css";
 #app {

@@ -8,7 +8,9 @@
         <ul>
           <li
             class="button is-outlined is-flex"
-            :class="{ 'is-active': activeList === categorie.code }"
+            :class="{
+              'is-focused is-primary is-light': activeList === categorie.code,
+            }"
             v-for="categorie in categories"
             :key="categorie.id"
           >
@@ -16,7 +18,7 @@
           </li>
         </ul>
       </div>
-      <table class="table is-fullwidth is-striped" v-if="user === 'admin'">
+      <table class="table max-width-80 is-striped" v-if="user === 'admin'">
         <thead>
           <tr>
             <th>n°</th>
