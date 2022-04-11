@@ -18,7 +18,7 @@
           </li>
         </ul>
       </div>
-      <table class="table max-width-80 is-striped" v-if="user === 'admin'">
+      <table class="table is-fullwidth is-striped" v-if="user === 'admin'">
         <thead>
           <tr>
             <th>n°</th>

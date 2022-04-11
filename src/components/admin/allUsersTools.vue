@@ -12,12 +12,13 @@
             <th>Prenom</th>
             <th>Adresse</th>
             <th>Email de contact</th>
+            <th>newletter</th>
             <th>Nombre de Commndes</th>
             <th>Supprimer le compte</th>
           </tr>
         </thead>
-        <tbody v-for="users in allUsers" :key="users.id">
-          <tr>
+        <tbody>
+          <tr v-for="users in allUsers" :key="users.id">
             <td>{{ users.id }}</td>
             <td>{{ users.lastName }}</td>
             <td>{{ users.firstName }}</td>
@@ -25,6 +26,8 @@
             <td>
               <a :href="'mailto:' + users.email">{{ users.email }}</a>
             </td>
+
+            <td>{{ users.newsletter?.registered ? "oui" : "non" }}</td>
             <td>commandes ...</td>
             <td @click="delUser(users.id, users.lastName, users.firstName)">
               <i class="fas fa-user-minus"></i>
@@ -62,8 +65,10 @@ export default {
       userDelete: false,
       message: "Supprimer cet utilisateur ?",
       allUsers: [],
+      registereds: [],
       confirmDel: false,
       deletingId: null,
+      newsletter: null,
     };
   },
   methods: {
@@ -107,7 +112,10 @@ export default {
     },
   },
   created() {
-    axios.get("user/all").then((res) => (this.allUsers = res.data));
+    axios.get("user/all").then((res) => {
+      console.log(res.data.newsletter);
+      this.allUsers = res.data;
+    });
   },
 };
 </script>

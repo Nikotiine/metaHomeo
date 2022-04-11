@@ -92,70 +92,9 @@
     </div>
     <div class="field">
       <label class="label">adresse</label>
-      <div class="control has-icons-left has-icons-right">
-        <input
-          class="input"
-          type="text"
-          placeholder="Nom"
-          v-model="profil.adresse"
-        /><span
-          class="icon is-small is-left"
-          :class="{ 'has-text-info': this.profil.adresse }"
-        >
-          <i class="fas fa-lock"></i>
-        </span>
-        <span
-          class="icon is-small is-right has-text-success"
-          v-if="this.profil.adresse"
-        >
-          <i class="fas fa-check"></i>
-        </span>
-      </div>
+      <find-adresse @getSelected="getAdresse" />
     </div>
-    <div class="field">
-      <label class="label">code postal</label>
-      <div class="control has-icons-left has-icons-right">
-        <input
-          class="input"
-          type="number"
-          placeholder="Nom"
-          v-model="profil.zipCode"
-        /><span
-          class="icon is-small is-left"
-          :class="{ 'has-text-info': this.profil.zipCode }"
-        >
-          <i class="fas fa-lock"></i>
-        </span>
-        <span
-          class="icon is-small is-right has-text-success"
-          v-if="this.profil.zipCode"
-        >
-          <i class="fas fa-check"></i>
-        </span>
-      </div>
-    </div>
-    <div class="field">
-      <label class="label">Ville</label>
-      <div class="control has-icons-left has-icons-right">
-        <input
-          class="input"
-          type="text"
-          placeholder="Nom"
-          v-model="profil.city"
-        /><span
-          class="icon is-small is-left"
-          :class="{ 'has-text-info': this.profil.city }"
-        >
-          <i class="fas fa-lock"></i>
-        </span>
-        <span
-          class="icon is-small is-right has-text-success"
-          v-if="this.profil.city"
-        >
-          <i class="fas fa-check"></i>
-        </span>
-      </div>
-    </div>
+
     <div class="field">
       <div class="control">
         <label class="label">Newletter</label>
@@ -198,13 +137,14 @@
 </template>
 
 <script>
+import findAdresse from "../tools/findAdresse.vue";
 import Cookies from "js-cookie";
 import toastValidate from "../tools/toastValidate.vue";
 import toastConfirm from "../tools/toastConfirm.vue";
 import axios from "axios";
 export default {
   name: "editProfil",
-  components: { toastConfirm, toastValidate },
+  components: { toastConfirm, toastValidate, findAdresse },
   data() {
     return {
       messageConfirm: "Enregister les modifications ?",
@@ -217,8 +157,7 @@ export default {
         firstName: null,
         lastName: null,
         email: null,
-        zipCode: null,
-        city: null,
+        geoLoc: [],
         adresse: null,
       },
     };
@@ -237,8 +176,8 @@ export default {
         .put("user/edit", {
           firstName: this.profil.firstName,
           lastName: this.profil.lastName,
-          city: this.profil.city,
-          zipCode: this.profil.zipCode,
+
+          geoloc: this.profil.geoLoc,
           email: this.profil.email,
           adresse: this.profil.adresse,
           // password: this.profil.newpassword,
@@ -260,6 +199,10 @@ export default {
             });
           }, 2000);
         });
+    },
+    getAdresse: function (adresseData) {
+      this.profil.adresse = adresseData.label;
+      this.profil.geoLoc = adresseData.gps;
     },
   },
   mounted() {

@@ -91,68 +91,15 @@
       </div>
     </div>
     <div class="field">
-      <label class="label">adresse</label>
-      <div class="control has-icons-left has-icons-right">
-        <input
-          class="input"
-          type="text"
-          placeholder="Nom"
-          v-model="adresse"
-        /><span
-          class="icon is-small is-left"
-          :class="{ 'has-text-info': this.adresse }"
-        >
-          <i class="fas fa-lock"></i>
-        </span>
-        <span
-          class="icon is-small is-right has-text-success"
-          v-if="this.adresse"
-        >
-          <i class="fas fa-check"></i>
-        </span>
-      </div>
+      <label class="label">Adresse Professionelle </label>
+      <find-adresse @getSelected="getAdressePro" />
     </div>
     <div class="field">
-      <label class="label">code postal</label>
-      <div class="control has-icons-left has-icons-right">
-        <input
-          class="input"
-          type="number"
-          placeholder="Nom"
-          v-model="zipCode"
-        /><span
-          class="icon is-small is-left"
-          :class="{ 'has-text-info': this.zipCode }"
-        >
-          <i class="fas fa-lock"></i>
-        </span>
-        <span
-          class="icon is-small is-right has-text-success"
-          v-if="this.zipCode"
-        >
-          <i class="fas fa-check"></i>
-        </span>
-      </div>
+      <label class="label">Adresse Personelle (optionelle) </label>
+
+      <find-adresse @getSelected="getAdressePerso" />
     </div>
-    <div class="field">
-      <label class="label">Ville</label>
-      <div class="control has-icons-left has-icons-right">
-        <input
-          class="input"
-          type="text"
-          placeholder="Nom"
-          v-model="city"
-        /><span
-          class="icon is-small is-left"
-          :class="{ 'has-text-info': this.city }"
-        >
-          <i class="fas fa-lock"></i>
-        </span>
-        <span class="icon is-small is-right has-text-success" v-if="this.city">
-          <i class="fas fa-check"></i>
-        </span>
-      </div>
-    </div>
+
     <div class="field mt-4">
       <label class="checkbox">
         <input type="checkbox" v-model="admin" />
@@ -167,7 +114,13 @@
           params: { view: 'accueil' },
         }"
         >Annuler</router-link
-      ><button class="button is-primary" @click="send">Enregistrer</button>
+      ><button
+        class="button is-primary"
+        @click="send"
+        :disabled="!validedField"
+      >
+        Enregistrer
+      </button>
     </div>
     <Transition>
       <toast-validate
@@ -179,19 +132,22 @@
 </template>
 
 <script>
+import findAdresse from "../tools/findAdresse.vue";
 import toastValidate from "../tools/toastValidate.vue";
 import axios from "axios";
 
 export default {
   name: "formNewUser",
-  components: { toastValidate },
+  components: { toastValidate, findAdresse },
   data() {
     return {
-      firstname: null,
+      sameAdresse: true,
+      firstName: null,
       lastName: null,
-      zipCode: null,
-      adresse: null,
-      city: null,
+      adressePerso: null,
+      geoLocPerso: [],
+      adressePro: null,
+      geoLocPro: [],
       email: null,
       password: null,
       admin: false,
@@ -206,12 +162,14 @@ export default {
         .post("http://localhost:3000/user/new", {
           firstName: this.firstName,
           lastName: this.lastName,
-          adresse: this.adresse,
-          zipCode: this.zipCode,
-          city: this.city,
+          adressePerso: this.adressePerso,
+          geoLocPerso: this.geoLocPerso,
+          adressePro: this.adressePro,
+          geoLocPro: this.geoLocPro,
           email: this.email,
           password: this.password,
           admin: this.admin,
+          newsletter: true,
         })
         .then((res) => {
           this.dataNewUser = {
@@ -225,12 +183,31 @@ export default {
           }, 3000);
         });
     },
+    getAdressePro: function (adresseData) {
+      this.adressePro = adresseData.label;
+      this.geoLocPro = adresseData.gps;
+    },
+    getAdressePerso: function (adresseData) {
+      this.adressePerso = adresseData.label;
+      this.geoLocPerso = adresseData.gps;
+    },
   },
   computed: {
     validEmail() {
       const re =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(this.email);
+    },
+    validedField() {
+      if (
+        this.firstName &&
+        this.lastName &&
+        this.validEmail &&
+        this.password &&
+        this.adressePro
+      ) {
+        return true;
+      } else return false;
     },
   },
 };

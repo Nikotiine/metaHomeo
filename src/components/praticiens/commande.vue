@@ -59,13 +59,17 @@ export default {
   },
   methods: {
     getadress: function (adresse) {
-      const noInterceptorAxios = axios.create();
-      noInterceptorAxios
-        .get("https://api-adresse.data.gouv.fr/search/?q=" + adresse)
-        .then((res) => {
-          console.log(res.data.features);
-          this.add = res.data.features;
-        });
+      if (adresse.length > 5) {
+        const noInterceptorAxios = axios.create();
+        noInterceptorAxios
+          .get(
+            "https://api-adresse.data.gouv.fr/search/?q=" + adresse + "&limit=3"
+          )
+          .then((res) => {
+            this.add = res.data.features.map((r) => r.properties);
+            console.log(this.add);
+          });
+      }
     },
   },
   watch: {},
