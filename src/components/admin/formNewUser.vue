@@ -105,6 +105,10 @@
         <input type="checkbox" v-model="admin" />
         Admin ??
       </label>
+      <label class="checkbox ml-4">
+        <input type="checkbox" v-model="publicAuthorisation" />
+        diffusition publique
+      </label>
     </div>
     <div class="buttons">
       <router-link
@@ -141,13 +145,13 @@ export default {
   components: { toastValidate, findAdresse },
   data() {
     return {
-      sameAdresse: true,
+      publicAuthorisation: true,
       firstName: null,
       lastName: null,
       adressePerso: null,
-      geoLocPerso: [],
+      geoLocPerso: null,
       adressePro: null,
-      geoLocPro: [],
+      geoLocPro: null,
       email: null,
       password: null,
       admin: false,
@@ -170,6 +174,7 @@ export default {
           password: this.password,
           admin: this.admin,
           newsletter: true,
+          publicAuthorisation: true,
         })
         .then((res) => {
           this.dataNewUser = {
@@ -185,11 +190,15 @@ export default {
     },
     getAdressePro: function (adresseData) {
       this.adressePro = adresseData.label;
-      this.geoLocPro = adresseData.gps;
+      const lat = adresseData.gps[1];
+      const long = adresseData.gps[0];
+      this.geoLocPro = { type: "Point", coordinates: [lat, long] };
     },
     getAdressePerso: function (adresseData) {
       this.adressePerso = adresseData.label;
-      this.geoLocPerso = adresseData.gps;
+      const lat = adresseData.gps[1];
+      const long = adresseData.gps[0];
+      this.geoLocPerso = { type: "Point", coordinates: [lat, long] };
     },
   },
   computed: {

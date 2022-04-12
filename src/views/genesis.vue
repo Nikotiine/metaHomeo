@@ -58,24 +58,29 @@
             <p class="title mt-6">
               <button-neon :btnName="contact" :width="320" />
             </p>
+            <p class="title mt-6">
+              <button-neon :btnName="praticiens" :width="420" />
+            </p>
           </div>
         </div>
         <Transition>
           <contact-us v-if="view === 'contactUs'" />
         </Transition>
+        <all-praticiens v-if="view === 'tous-les-praticiens'" />
       </section>
     </div>
   </div>
 </template>
 
 <script>
+import allPraticiens from "../components/genesis/allPraticiens.vue";
 import buttonNeon from "../components/button.vue";
 import { latLng } from "leaflet";
 import contactUs from "../components/genesis/contact.vue";
 import mapsLeaflet from "../components/genesis/maps.vue";
 export default {
   name: "genesisTeam",
-  components: { mapsLeaflet, contactUs, buttonNeon },
+  components: { mapsLeaflet, contactUs, buttonNeon, allPraticiens },
   data() {
     return {
       contact: [
@@ -91,6 +96,21 @@ export default {
           strokeDasharray2: 540,
           strokeDashoffset: -474,
           dashHover: 760,
+        },
+      ],
+      praticiens: [
+        {
+          id: 0,
+          name: "tous les praticiens",
+          router: {
+            name: "aboutUs",
+            params: { view: "tous-les-praticiens" },
+          },
+          width: "420px",
+          strokeDasharray1: 140,
+          strokeDasharray2: 600,
+          strokeDashoffset: -600,
+          dashHover: 960,
         },
       ],
 

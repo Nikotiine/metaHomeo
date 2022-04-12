@@ -42,7 +42,7 @@ export default {
     scrollTo(0, 0);
   },
   created() {
-    // window.addEventListener("scroll", this.getScrollY);
+    this.$store.dispatch("loadTotalPraticien");
   },
   computed: {},
 };

@@ -21,7 +21,8 @@
             Toutes les info que vous avez besoin sont ici <br />
             afficher directement la carte pour nous trouver <br />
             nous envoyer une demande de contact <br />
-            enfin trouvez tous les praticiens qui ont suivi ma methode
+            enfin trouvez les {{ totalPraticien }} praticiens qui ont suivi ma
+            methode
           </p>
           <button-neon :btnName="praticiens" :width="420" />
         </div>
@@ -106,7 +107,10 @@ export default {
         {
           id: 0,
           name: "tous les praticiens",
-          router: "/metahomeopathie",
+          router: {
+            name: "aboutUs",
+            params: { view: "tous-les-praticiens" },
+          },
           width: "420px",
           strokeDasharray1: 140,
           strokeDasharray2: 600,
@@ -116,6 +120,13 @@ export default {
       ],
     };
   },
+  methods: {},
+  computed: {
+    totalPraticien() {
+      return this.$store.state.totalPraticien;
+    },
+  },
+  mounted() {},
 };
 </script>
 

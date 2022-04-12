@@ -10,9 +10,12 @@
             <th>Identifiant</th>
             <th>Nom</th>
             <th>Prenom</th>
-            <th>Adresse</th>
+            <th>Adresse pro</th>
+            <th>Adresse perso</th>
             <th>Email de contact</th>
             <th>newletter</th>
+            <th>profil publique</th>
+            <th>admin ?</th>
             <th>Nombre de Commndes</th>
             <th>Supprimer le compte</th>
           </tr>
@@ -22,13 +25,17 @@
             <td>{{ users.id }}</td>
             <td>{{ users.lastName }}</td>
             <td>{{ users.firstName }}</td>
-            <td>{{ users.adresse }} {{ users.zipCode }} {{ users.city }}</td>
+            <td>{{ users.userAdress?.adressePro }}</td>
+            <td>{{ users.userAdress?.adressePerso }}</td>
+
             <td>
               <a :href="'mailto:' + users.email">{{ users.email }}</a>
             </td>
 
             <td>{{ users.newsletter?.registered ? "oui" : "non" }}</td>
-            <td>commandes ...</td>
+            <td>{{ users.publicAuthorisation ? "oui" : "non" }}</td>
+            <td>{{ users.admin ? "oui" : "non" }}</td>
+            <td>commandes</td>
             <td @click="delUser(users.id, users.lastName, users.firstName)">
               <i class="fas fa-user-minus"></i>
             </td>
@@ -113,7 +120,7 @@ export default {
   },
   created() {
     axios.get("user/all").then((res) => {
-      console.log(res.data.newsletter);
+      console.log(res.data);
       this.allUsers = res.data;
     });
   },

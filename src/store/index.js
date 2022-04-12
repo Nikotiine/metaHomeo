@@ -8,6 +8,7 @@ export default createStore({
     productsCategories: [],
     prod: null,
     userData: null,
+    totalPraticien: null,
   },
   getters: {
     productsCategories: (state) => {
@@ -15,6 +16,9 @@ export default createStore({
     },
     userData: (state) => {
       return state.userData;
+    },
+    totalPraticien: (state) => {
+      return state.totalPraticien;
     },
   },
   mutations: {
@@ -33,6 +37,9 @@ export default createStore({
     setUserData(state, data) {
       state.userData = data;
     },
+    setTotalPraticien(state, total) {
+      state.totalPraticien = total;
+    },
   },
   actions: {
     loadCategory({ commit }) {
@@ -46,6 +53,14 @@ export default createStore({
       if (!this.state.userData) {
         axios.get("user/me").then((res) => {
           commit("setUserData", res.data);
+        });
+      }
+    },
+    loadTotalPraticien({ commit }) {
+      if (!this.state.totalPraticien) {
+        console.log("store");
+        axios.get("public/count").then((res) => {
+          commit("setTotalPraticien", res.data.count);
         });
       }
     },
