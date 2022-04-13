@@ -22,7 +22,9 @@
           {{ praticien.firstName }} {{ praticien.lastName }}
         </label>
       </div>
-      <mapsLeaflet :heightMaps="50" :widthMaps="45" :markers="markers" />
+      <div class="maps">
+        <mapsLeaflet :heightMaps="50" :widthMaps="45" :markers="markers" />
+      </div>
     </div>
   </section>
 </template>

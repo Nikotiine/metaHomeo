@@ -21,112 +21,115 @@
 
       <div class="navbar-menu" :class="{ 'is-active': showNav }">
         <div class="navbar-start">
-          <a class="navbar-item"><router-link to="/">Accueil</router-link> </a>
-          <a class="navbar-item"
-            ><router-link to="/metahomeopathie"
-              >MetaHomeopathie: La methode</router-link
-            >
-          </a>
+          <router-link to="/" class="navbar-item">Accueil</router-link>
+          <router-link to="/metahomeopathie" class="navbar-item"
+            >MetaHomeopathie: La methode</router-link
+          >
+
           <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link"
-              ><router-link
+            <router-link
+              :to="{
+                name: 'labo',
+                params: { view: 'accueil' },
+              }"
+              class="navbar-item"
+              >Le labo</router-link
+            >
+
+            <div class="navbar-dropdown">
+              <router-link
                 :to="{
                   name: 'labo',
-                  params: { view: 'accueil' },
+                  params: { view: 'technique' },
                 }"
-                >Le labo</router-link
+                class="navbar-item"
+                >Sauvegarde de la technique</router-link
               >
-            </a>
 
-            <div class="navbar-dropdown">
-              <a class="navbar-item">
-                <router-link
-                  :to="{
-                    name: 'labo',
-                    params: { view: 'technique' },
-                  }"
-                  >Sauvegarde de la technique</router-link
-                >
-              </a>
-              <a class="navbar-item">
-                <router-link
-                  :to="{
-                    name: 'labo',
-                    params: { view: 'dilutions' },
-                  }"
-                  >Recherche et création de dilutions</router-link
-                >
-              </a>
-              <a class="navbar-item"
-                ><router-link
-                  :to="{
-                    name: 'labo',
-                    params: { view: 'quesaco' },
-                  }"
-                  >Un laboratoire associatif à but non lucratif : quesaco
-                  ?</router-link
-                >
-              </a>
+              <router-link
+                :to="{
+                  name: 'labo',
+                  params: { view: 'dilutions' },
+                }"
+                class="navbar-item"
+                >Recherche et création de dilutions</router-link
+              >
+
+              <router-link
+                :to="{
+                  name: 'labo',
+                  params: { view: 'quesaco' },
+                }"
+                class="navbar-item"
+                >Un laboratoire associatif à but non lucratif : quesaco
+                ?</router-link
+              >
             </div>
           </div>
           <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link"
-              ><router-link
+            <router-link
+              :to="{
+                name: 'formations',
+                params: { view: 'accueil' },
+              }"
+              class="navbar-item"
+              >Les formations</router-link
+            >
+
+            <div class="navbar-dropdown">
+              <router-link
                 :to="{
                   name: 'formations',
-                  params: { view: 'accueil' },
+                  params: { view: 'ouverte-a-tous' },
                 }"
-                >Les formations</router-link
-              >
-            </a>
+                class="navbar-item"
+                >Formation sans pre-requis
+              </router-link>
 
-            <div class="navbar-dropdown">
-              <a class="navbar-item"
-                ><router-link
-                  :to="{
-                    name: 'formations',
-                    params: { view: 'ouverte-a-tous' },
-                  }"
-                  >Formation sans pre-requis
-                </router-link>
-              </a>
-              <a class="navbar-item"
-                ><router-link
-                  :to="{
-                    name: 'formations',
-                    params: { view: 'pro-sante' },
-                  }"
-                  >Fromations pour les professionels de la santé
-                </router-link>
-              </a>
+              <router-link
+                :to="{
+                  name: 'formations',
+                  params: { view: 'pro-sante' },
+                }"
+                class="navbar-item"
+                >Fromations pour les professionels de la santé
+              </router-link>
             </div>
           </div>
 
           <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link"
-              ><router-link
-                :to="{
-                  name: 'aboutUs',
-                  params: { view: 'accueil' },
-                }"
-              >
-                Qui sommes nous ?</router-link
-              >
-            </a>
+            <router-link
+              :to="{
+                name: 'aboutUs',
+                params: { view: 'accueil' },
+              }"
+              class="navbar-item"
+            >
+              Qui sommes nous ?</router-link
+            >
 
             <div class="navbar-dropdown">
               <a class="navbar-item"> Ou nous trouver </a>
               <a class="navbar-item"> Nos partenaires </a>
-              <a class="navbar-item">
-                <router-link
-                  :to="{
-                    name: 'aboutUs',
-                    params: { view: 'contactUs' },
-                  }"
-                >
-                  Nous contacter</router-link
-                >
-              </a>
+
+              <router-link
+                :to="{
+                  name: 'aboutUs',
+                  params: { view: 'contactUs' },
+                }"
+                class="navbar-item"
+              >
+                Nous contacter</router-link
+              >
+              <router-link
+                :to="{
+                  name: 'aboutUs',
+                  params: { view: 'tous-les-praticiens' },
+                }"
+                class="navbar-item"
+              >
+                trouver un praticien</router-link
+              >
             </div>
           </div>
         </div>

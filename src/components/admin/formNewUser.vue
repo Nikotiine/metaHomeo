@@ -1,6 +1,6 @@
 <template>
   <form
-    class="box box-shadow m-t-10 max-width-35 mx-auto"
+    class="box box-shadow m-t-10 max-width-45 mx-auto"
     v-on:submit.prevent="onSubmit"
   >
     <div class="field">
@@ -100,17 +100,21 @@
       <find-adresse @getSelected="getAdressePerso" />
     </div>
 
-    <div class="field mt-4">
+    <div class="field mt-5">
       <label class="checkbox">
         <input type="checkbox" v-model="admin" />
         Admin ??
       </label>
       <label class="checkbox ml-4">
         <input type="checkbox" v-model="publicAuthorisation" />
-        diffusition publique
+        Profil publique
+      </label>
+      <label class="checkbox ml-4">
+        <input type="checkbox" v-model="newsletter" />
+        News-letter
       </label>
     </div>
-    <div class="buttons">
+    <div class="buttons is-justify-content-flex-end mt-6">
       <router-link
         class="button"
         :to="{
@@ -132,19 +136,26 @@
         :config="dataNewUser"
         :message="messageToast"
     /></Transition>
+    <Transition
+      ><toast-erreur v-if="erreur" :message="messageErreur"
+    /></Transition>
   </form>
 </template>
 
 <script>
 import findAdresse from "../tools/findAdresse.vue";
 import toastValidate from "../tools/toastValidate.vue";
+import toastErreur from "../tools/toastErreur.vue";
 import axios from "axios";
 
 export default {
   name: "formNewUser",
-  components: { toastValidate, findAdresse },
+  components: { toastValidate, findAdresse, toastErreur },
   data() {
     return {
+      erreur: false,
+      messageErreur: "",
+      newsletter: true,
       publicAuthorisation: true,
       firstName: null,
       lastName: null,
@@ -173,19 +184,27 @@ export default {
           email: this.email,
           password: this.password,
           admin: this.admin,
-          newsletter: true,
-          publicAuthorisation: true,
+          newsletter: this.newsletter,
+          publicAuthorisation: this.publicAuthorisation,
         })
         .then((res) => {
-          this.dataNewUser = {
-            firstName: res.data.firstName,
-            lastName: res.data.lastName,
-          };
-          this.userIsSave = !this.userIsSave;
-          setTimeout(() => {
+          if (res.data.message) {
+            this.messageErreur = res.data.message;
+            this.erreur = !this.erreur;
+            setTimeout(() => {
+              this.erreur = !this.erreur;
+            }, 3000);
+          } else {
+            this.dataNewUser = {
+              firstName: res.data.firstName,
+              lastName: res.data.lastName,
+            };
             this.userIsSave = !this.userIsSave;
-            location.reload();
-          }, 3000);
+            setTimeout(() => {
+              this.userIsSave = !this.userIsSave;
+              location.reload();
+            }, 3000);
+          }
         });
     },
     getAdressePro: function (adresseData) {
@@ -222,15 +241,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.v-enter-active {
-  transition: opacity 0.8s ease;
-}
-.v-leave-active {
-  transition: opacity 0.2s ease;
-}
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-}
-</style>
+<style lang="scss" scoped></style>

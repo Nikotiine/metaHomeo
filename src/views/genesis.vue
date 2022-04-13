@@ -178,10 +178,6 @@ export default {
   padding: 5rem;
 }
 
-.maps {
-  z-index: 3;
-  border: 2px groove black;
-}
 label {
   font-size: 1.5em;
 }

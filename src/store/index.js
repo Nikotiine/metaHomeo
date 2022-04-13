@@ -9,6 +9,9 @@ export default createStore({
     prod: null,
     userData: null,
     totalPraticien: null,
+    totalMembre: null,
+    totalProduts: null,
+    productsName: [],
   },
   getters: {
     productsCategories: (state) => {
@@ -19,6 +22,15 @@ export default createStore({
     },
     totalPraticien: (state) => {
       return state.totalPraticien;
+    },
+    totalMembre: (state) => {
+      return state.totalMembre;
+    },
+    totalProducts: (state) => {
+      return state.totalProduts;
+    },
+    productsName: (state) => {
+      return state.productsName;
     },
   },
   mutations: {
@@ -40,6 +52,15 @@ export default createStore({
     setTotalPraticien(state, total) {
       state.totalPraticien = total;
     },
+    setTotalMembre(state, total) {
+      state.totalMembre = total;
+    },
+    setTotalProducts(state, total) {
+      state.totalProduts = total;
+    },
+    getProductsName(state, names) {
+      state.productsName = names;
+    },
   },
   actions: {
     loadCategory({ commit }) {
@@ -47,6 +68,13 @@ export default createStore({
         axios.get("products/category").then((res) => {
           commit("setCategory", res.data);
         });
+      }
+    },
+    loadTotalProducts({ commit }) {
+      if (!this.state.totalProduts) {
+        axios
+          .get("products/count")
+          .then((res) => commit("setTotalProducts", res.data.count));
       }
     },
     loadUserData({ commit }) {
@@ -61,6 +89,23 @@ export default createStore({
         console.log("store");
         axios.get("public/count").then((res) => {
           commit("setTotalPraticien", res.data.count);
+        });
+      }
+    },
+    loadTotalMembre({ commit }) {
+      if (!this.state.totalMembre) {
+        axios
+          .get("user/count")
+          .then((res) => commit("setTotalMembre", res.data.count));
+      }
+    },
+    loadProductsName({ commit }) {
+      if (this.state.productsName.length === 0) {
+        axios.get("products/all").then((res) => {
+          commit(
+            "getProductsName",
+            res.data.filter((x) => x.name)
+          );
         });
       }
     },

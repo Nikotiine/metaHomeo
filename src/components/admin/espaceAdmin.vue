@@ -5,7 +5,7 @@
     </div>
     <div class="hero-body is-justify-content-space-around">
       <div>
-        <p class="subtitle">tu as {{ totalParticiens }} membres enregistés</p>
+        <p class="subtitle">tu as {{ totalMembre }} membres enregistés</p>
         <router-link
           class="button is-info is-outlined"
           :to="{
@@ -40,7 +40,7 @@
 
 <script>
 // import Cookies from "js-cookie";
-import axios from "axios";
+//import axios from "axios";
 import buttonNeon from "../button.vue";
 export default {
   name: "espaceAdmin",
@@ -49,8 +49,6 @@ export default {
   },
   data() {
     return {
-      totalParticiens: null,
-      totalProducts: null,
       ajoutPraticien: [
         {
           id: 0,
@@ -84,12 +82,16 @@ export default {
     };
   },
   mounted() {
-    axios
-      .get("user/count")
-      .then((res) => (this.totalParticiens = res.data.count));
-    axios
-      .get("products/count")
-      .then((res) => (this.totalProducts = res.data.count));
+    this.$store.dispatch("loadTotalMembre");
+    this.$store.dispatch("loadTotalProducts");
+  },
+  computed: {
+    totalMembre() {
+      return this.$store.state.totalMembre;
+    },
+    totalProducts() {
+      return this.$store.state.totalProduts;
+    },
   },
 };
 </script>

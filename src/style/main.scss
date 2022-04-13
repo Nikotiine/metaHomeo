@@ -44,3 +44,19 @@ nav {
 .isValidField {
   border: 2px groove #68e6f6ab;
 }
+.maps {
+  z-index: 3;
+  border: 2px groove black;
+}
+// -------------------------transitions-----------------------------------
+.v-enter-active {
+  transition: opacity 0.8s ease;
+}
+.v-leave-active {
+  transition: opacity 0.2s ease;
+}
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+// -------------------------transitions-----------------------------------
