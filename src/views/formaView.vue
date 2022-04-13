@@ -137,15 +137,4 @@ export default {
 .isSelected {
   background-color: aqua;
 }
-
-.v-enter-active {
-  transition: opacity 0.8s ease;
-}
-.v-leave-active {
-  transition: opacity 0.2s ease;
-}
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-}
 </style>

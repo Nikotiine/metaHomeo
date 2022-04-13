@@ -172,15 +172,4 @@ export default {
 .isSelected {
   background-color: rgb(55 210 244 / 50%);
 }
-
-.v-enter-active {
-  transition: opacity 0.8s ease;
-}
-.v-leave-active {
-  transition: opacity 0.2s ease;
-}
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-}
 </style>

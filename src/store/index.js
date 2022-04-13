@@ -6,7 +6,8 @@ export default createStore({
     user: "visiteur",
     admin: null,
     productsCategories: [],
-    prod: null,
+    totalCommande: null,
+    panier: [],
     userData: null,
     totalPraticien: null,
     totalMembre: null,
@@ -44,7 +45,10 @@ export default createStore({
       state.productsCategories = laodCat;
     },
     setCommande(state, newCommande) {
-      state.prod = newCommande;
+      state.panier = newCommande;
+    },
+    setTotalCommande(state, total) {
+      state.totalCommande = total;
     },
     setUserData(state, data) {
       state.userData = data;
