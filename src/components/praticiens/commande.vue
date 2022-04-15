@@ -24,12 +24,37 @@
           <th>{{ totalCommande }} €</th>
         </tfoot>
       </table>
+      <div class="control">
+        <label class="label">Mode de reglement </label>
+        <label class="radio">
+          <input type="radio" name="payement" />
+          Virement banquaire
+        </label>
+        <label class="radio">
+          <input type="radio" name="payement" />
+          Cheque
+        </label>
+      </div>
+      <div class="mt-4">
+        <label class="label">Commande expedie a :</label>
+        <p class="subtitle mt-3">
+          {{ userData.firstName }} {{ userData.lastName }} <br />
+          {{ userData.userAdress?.adressePro }}
+        </p>
+      </div>
+    </div>
+    <div
+      class="is-flex mx-auto max-width-50 buttons is-justify-content-space-around mt-6"
+    >
+      <button class="button is-primary is-outlined">Annuler</button>
+      <button class="button is-link is-outlined">Valider</button>
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+//import axios from "axios";
+//import buttonNeon from "../button.vue";
 export default {
   name: "commandeProduits",
   components: {},
@@ -37,6 +62,38 @@ export default {
     return {
       searchAdresse: "",
       add: [],
+      valideCommande: [
+        {
+          id: 0,
+          name: "Validez",
+          router: {
+            name: "espace-praticien",
+            params: {
+              view: "commande-valide",
+            },
+          },
+          width: "320px",
+          strokeDasharray1: 140,
+          strokeDasharray2: 540,
+          strokeDashoffset: -474,
+          dashHover: 760,
+        },
+      ],
+      retourPanier: [
+        {
+          id: 0,
+          name: "Annuler",
+          router: {
+            name: "espace-praticien",
+            params: { view: "catalague-produit" },
+          },
+          width: "320px",
+          strokeDasharray1: 140,
+          strokeDasharray2: 540,
+          strokeDashoffset: -474,
+          dashHover: 760,
+        },
+      ],
     };
   },
   computed: {
@@ -46,23 +103,15 @@ export default {
     totalCommande() {
       return this.$store.state.totalCommande;
     },
-  },
-  methods: {
-    getadress: function (adresse) {
-      if (adresse.length > 5) {
-        const noInterceptorAxios = axios.create();
-        noInterceptorAxios
-          .get(
-            "https://api-adresse.data.gouv.fr/search/?q=" + adresse + "&limit=3"
-          )
-          .then((res) => {
-            this.add = res.data.features.map((r) => r.properties);
-            console.log(this.add);
-          });
-      }
+    userData() {
+      return this.$store.state.userData;
     },
   },
+  methods: {},
   watch: {},
+  created() {
+    this.$store.dispatch("loadUserData");
+  },
 };
 </script>
 
