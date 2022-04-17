@@ -32,6 +32,7 @@
         >
           Voir les tous produits
         </router-link>
+
         <button-neon :btnName="ajoutProduit" :width="320" />
       </div>
     </div>

@@ -64,6 +64,7 @@
       :config="dataProduct"
       :message="messageConfirm"
       v-if="productIssave"
+      :css="cssProps"
   /></Transition>
 </template>
 
@@ -77,7 +78,9 @@ export default {
   data() {
     return {
       name: null,
-
+      cssProps: {
+        width: "80%",
+      },
       categorie: null,
       productIssave: false,
       dataProduct: {},

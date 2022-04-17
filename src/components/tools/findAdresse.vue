@@ -3,7 +3,7 @@
     <VueMultiselect
       v-model="adresseSelected"
       :options="resultList"
-      placeholder="Chercher une cote"
+      placeholder="Chercher une adresse"
       @search-change="getadress"
       track-by="label"
       label="label"
@@ -19,6 +19,7 @@ import axios from "axios";
 export default {
   name: "findAdresse",
   components: { VueMultiselect },
+
   data() {
     return {
       adresseSelected: "",

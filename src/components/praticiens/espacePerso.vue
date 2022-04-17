@@ -5,29 +5,36 @@
         Bonjour {{ loadUserInfo.firstName }} {{ loadUserInfo.lastName }}
       </p>
     </div>
-    <div class="hero-body is-flex-direction-column">
+    <div class="hero-body is-justify-content-space-around">
       <div class="box box-shadow">
-        <p class="subtitle">Acces au catalogue des produits</p>
-        <button-neon :btnName="catalogue" :width="320" />
+        <p class="title">Profil</p>
+        <p class="subtitle is-4 mt-2">
+          {{ loadUserInfo.lastName }} {{ loadUserInfo.firstName }}
+        </p>
+        <p class="subtitle">
+          Adresse : <br />
+          {{ loadUserInfo.userAdress?.adressePro }}
+        </p>
+        <p class="subtitle">mail de contact : {{ loadUserInfo.email }}</p>
+        <p class="subtitle">
+          inscrit a la newsletter:
+          {{ loadUserInfo.newletter?.registered ? "oui" : "non" }}
+        </p>
+        <p class="subtitle">
+          Diffusion publique:
+          {{ loadUserInfo.publicAuthorisation ? "oui" : "non" }}
+        </p>
+        <button-neon :btnName="profil" :width="320" />
       </div>
-      <div class="is-flex mt-6 bottomContainer">
+
+      <div class="is-flex bottomContainer is-flex-direction-column">
+        <div class="box box-shadow">
+          <p class="subtitle">Acces au catalogue des produits</p>
+          <button-neon :btnName="catalogue" :width="320" />
+        </div>
         <div class="box box-shadow">
           <p class="subtitle">Historique des commandes</p>
           <button-neon :btnName="historique" :width="320" />
-        </div>
-        <div class="box box-shadow">
-          <p class="title">Profil</p>
-          <p class="subtitle">
-            Adresse actuelle : <br />
-            {{ loadUserInfo.adresse }} <br />
-            {{ loadUserInfo.zipCode }}
-            {{ loadUserInfo.city }}
-          </p>
-          <p class="subtitle">mail de contact : {{ loadUserInfo.email }}</p>
-          <p class="subtitle">
-            inscrit a la newsletter: {{ loadUserInfo.newletter }}
-          </p>
-          <button-neon :btnName="profil" :width="320" />
         </div>
       </div>
     </div>
@@ -76,7 +83,7 @@ export default {
       profil: [
         {
           id: 0,
-          name: "Acces profil",
+          name: "Modifier",
           router: {
             name: "espace-praticien",
             params: { view: "edition-profil" },
@@ -106,11 +113,11 @@ export default {
 
 <style lang="scss" scoped>
 .box {
-  min-width: 25%;
-  margin: 0 auto;
+  min-width: 35%;
+  // margin: 0 auto;
 }
 .bottomContainer {
-  justify-content: space-between;
-  min-width: 100%;
+  // justify-content: space-between;
+  //min-width: 100%;
 }
 </style>

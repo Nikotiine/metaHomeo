@@ -10,16 +10,16 @@
           class="input"
           type="text"
           placeholder="Nom"
-          v-model="profil.lastName"
+          v-model="userData.lastName"
         /><span
           class="icon is-small is-left"
-          :class="{ 'has-text-info': this.profil.lastName }"
+          :class="{ 'has-text-info': this.userData.lastName }"
         >
           <i class="fas fa-lock"></i>
         </span>
         <span
           class="icon is-small is-right has-text-success"
-          v-if="this.profil.lastName"
+          v-if="this.userData.lastName"
         >
           <i class="fas fa-check"></i>
         </span>
@@ -32,16 +32,16 @@
           class="input"
           type="text"
           placeholder="Prenom"
-          v-model="profil.firstName"
+          v-model="userData.firstName"
         /><span
           class="icon is-small is-left"
-          :class="{ 'has-text-info': this.profil.firstName }"
+          :class="{ 'has-text-info': this.userData.firstName }"
         >
           <i class="fas fa-lock"></i>
         </span>
         <span
           class="icon is-small is-right has-text-success"
-          v-if="this.profil.firstName"
+          v-if="this.userData.firstName"
         >
           <i class="fas fa-check"></i>
         </span>
@@ -54,7 +54,7 @@
           class="input"
           type="email"
           placeholder="e.g. alex@example.com"
-          v-model="profil.email"
+          v-model="userData.email"
           :class="{ isValidField: validEmail }"
         /><span
           class="icon is-small is-left"
@@ -75,36 +75,57 @@
           class="input"
           type="password"
           placeholder="********"
-          v-model="profil.newpassword"
-        /><span
-          class="icon is-small is-left"
-          :class="{ 'has-text-info': this.profil.newpassword }"
-        >
+          v-model="newpassword"
+        /><span class="icon is-small is-left">
           <i class="fas fa-lock"></i>
         </span>
-        <span
-          class="icon is-small is-right has-text-success"
-          v-if="this.profil.newpassword"
-        >
+        <span class="icon is-small is-right has-text-success">
           <i class="fas fa-check"></i>
         </span>
       </div>
     </div>
     <div class="field">
-      <label class="label">adresse</label>
-      <find-adresse @getSelected="getAdresse" />
+      <label class="label"
+        >Adresse Pro
+        <span class="ml-5"
+          ><a @click="majPro = !majPro">(Mettre a jour)</a></span
+        >
+      </label>
+      <p class="subtitle" v-if="!majPro">
+        {{ userData.userAdress?.adressePro }}
+      </p>
+      <find-adresse @getSelected="getAdressePro" v-if="majPro" />
+    </div>
+    <div class="field">
+      <label class="label"
+        >Adresse Perso
+        <span class="ml-5"
+          ><a @click="majPerso = !majPerso">(Mettre a jour)</a></span
+        >
+      </label>
+      <p class="subtitle" v-if="!majPerso">
+        {{
+          userData.userAdress?.adressePerso
+            ? userData.userAdress?.adressePerso
+            : userData.userAdress?.adressePro
+        }}
+      </p>
+      <find-adresse @getSelected="getAdressePerso" v-if="majPerso" />
     </div>
 
     <div class="field">
       <div class="control">
-        <label class="label">Newletter</label>
-        <label class="radio">
-          <input type="radio" name="answer" checked />
-          Oui
+        <label class="checkbox">
+          <input type="checkbox" v-model="registered" />
+          newsletter
         </label>
-        <label class="radio">
-          <input type="radio" name="answer" />
-          Non
+        <label class="checkbox">
+          <input
+            type="checkbox"
+            class="ml-4"
+            v-model="userData.publicAuthorisation"
+          />
+          donees publiques
         </label>
       </div>
     </div>
@@ -132,6 +153,7 @@
       :message="messageValid"
       :config="updateUser"
       v-if="update"
+      :css="css"
     />
   </form>
 </template>
@@ -152,17 +174,27 @@ export default {
       update: false,
       confirm: false,
       updateUser: {},
-      profil: {
-        newpassword: null,
-        firstName: null,
-        lastName: null,
-        email: null,
-        geoLoc: [],
-        adresse: null,
+      userData: {},
+      newpassword: null,
+      majPro: false,
+      majPerso: false,
+      adressePerso: null,
+      geoLocPerso: null,
+      adressePro: null,
+      geoLocPro: null,
+      registered: false,
+      css: {
+        width: "50%",
       },
     };
   },
   methods: {
+    getUserData: function () {
+      console.log("getuser");
+      this.userData = this.$store.state.userData;
+      this.registered = this.$store.state.userData?.newsletter?.registered;
+    },
+
     callBackToast: function (res) {
       if (!res) {
         this.confirm = !this.confirm;
@@ -174,13 +206,22 @@ export default {
     edit: function () {
       axios
         .put("user/edit", {
-          firstName: this.profil.firstName,
-          lastName: this.profil.lastName,
-
-          geoloc: this.profil.geoLoc,
-          email: this.profil.email,
-          adresse: this.profil.adresse,
-          // password: this.profil.newpassword,
+          firstName: this.userData.firstName,
+          lastName: this.userData.lastName,
+          email: this.userData.email,
+          adressePerso: this.adressePerso
+            ? this.adressePerso
+            : this.userData.adressePerso,
+          geoLocPerso: this.geoLocPerso
+            ? this.geoLocPerso
+            : this.userData.geoLocPerso,
+          adressePro: this.adressePro
+            ? this.adressePro
+            : this.userData.adressePro,
+          geoLocPro: this.geoLocPro ? this.geoLocPro : this.userData.geoLocPro,
+          password: this.newpassword,
+          newsletter: this.registered,
+          publicAuthorisation: this.userData.publicAuthorisation,
         })
         .then((res) => {
           console.log(res.data);
@@ -191,8 +232,11 @@ export default {
           this.update = true;
           Cookies.set("userName", res.data.firstName);
 
+          this.$store.commit("setUserData", res.data);
+
           setTimeout(() => {
             this.$store.commit("newUser", res.data.firstName);
+
             this.$router.push({
               name: "espace-praticien",
               params: { view: "espace-perso" },
@@ -200,13 +244,33 @@ export default {
           }, 2000);
         });
     },
-    getAdresse: function (adresseData) {
-      this.profil.adresse = adresseData.label;
-      this.profil.geoLoc = adresseData.gps;
+    getAdressePro: function (adresseData) {
+      this.adressePro = adresseData.label;
+      const lat = adresseData.gps[1];
+      const long = adresseData.gps[0];
+      this.geoLocPro = { type: "Point", coordinates: [lat, long] };
+    },
+    getAdressePerso: function (adresseData) {
+      this.adressePerso = adresseData.label;
+      const lat = adresseData.gps[1];
+      const long = adresseData.gps[0];
+      this.geoLocPerso = { type: "Point", coordinates: [lat, long] };
     },
   },
   mounted() {
-    axios.get("user").then((res) => (this.profil = res.data));
+    console.log("mouted");
+  },
+  computed: {
+    validEmail() {
+      const re =
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(this.userData.email);
+    },
+  },
+  created() {
+    console.log("created");
+    this.$store.dispatch("loadUserData");
+    this.getUserData();
   },
 };
 </script>

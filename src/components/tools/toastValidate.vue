@@ -1,7 +1,10 @@
 <template>
-  <div class="notification is-primary">
+  <div class="notification is-primary" :style="cssprops">
     <p>
-      <strong>{{ config.lastName }} {{ config.firstName }}</strong>
+      <strong
+        >{{ config.lastName ? config.lastName : "" }}
+        {{ config.firstName ? config.firstName : "" }}</strong
+      >
     </p>
     <p class="subtitle">{{ message }}</p>
   </div>
@@ -10,7 +13,14 @@
 <script>
 export default {
   name: "toastValidate",
-  props: ["config", "message"],
+  props: ["config", "message", "css"],
+  computed: {
+    cssprops() {
+      return {
+        "--width": this.css.width,
+      };
+    },
+  },
 };
 </script>
 
@@ -20,6 +30,6 @@ export default {
   top: 80%;
   left: 50%;
   transform: translateX(-50%);
-  width: 30%;
+  width: var(--width);
 }
 </style>

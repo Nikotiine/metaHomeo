@@ -3,6 +3,9 @@
     <div class="hero-head">
       <h1 class="title is-1 m-t-8">Catalogue Genesis</h1>
       <div class="box box-shadow max-width-50 mx-auto">
+        <p class="title" v-if="user === 'admin'">
+          Prix Unitaire: {{ prixUnitaire }} €
+        </p>
         <p class="title">
           Taille S = {{ tailleS }} Produits Conditioné =>
           {{ tailleS * prixUnitaire }} €
@@ -11,6 +14,13 @@
           Taille L = {{ tailleL }} Produits Conditioné =>
           {{ tailleL * prixUnitaire }} €
         </p>
+        <button
+          v-if="user === 'admin'"
+          class="button is-primary is-outlined"
+          @click="editPrices"
+        >
+          Modifier
+        </button>
       </div>
     </div>
     <div class="hero-body is-justify-content-center is-flex-direction-column">
@@ -128,7 +138,18 @@
     <div class="modal" :class="{ 'is-active': editModal }">
       <div class="modal-background" @click="editModal = !editModal"></div>
       <div class="modal-content no-overFLow">
-        <edit-product :productId="productId" @cancel="editModal = !editModal" />
+        <edit-product
+          :productId="productId"
+          @cancel="cancelEditProduct"
+          v-if="editProd"
+        />
+        <edit-price-and-quantity
+          @cancel="cancelEditPrice"
+          v-if="editPrice"
+          :price="prixUnitaire"
+          :small="tailleS"
+          :big="tailleL"
+        />
       </div>
     </div>
   </section>
@@ -136,16 +157,17 @@
 
 <script>
 import editProduct from "./editProduct.vue";
+import editPriceAndQuantity from "./editPriceAndProduct.vue";
 import axios from "axios";
 export default {
   name: "allProducts",
   props: ["user"],
-  components: { editProduct },
+  components: { editProduct, editPriceAndQuantity },
   data() {
     return {
-      prixUnitaire: 1,
-      tailleS: 5,
-      tailleL: 25,
+      prixUnitaire: null,
+      tailleS: null,
+      tailleL: null,
       editModal: false,
       products: [],
       activeList: 0,
@@ -153,12 +175,27 @@ export default {
       smallBox: 0,
       bigBox: 0,
       selectedProduct: [],
+      editProd: false,
+      editPrice: false,
     };
   },
   methods: {
     editProduct: function (productId) {
       this.productId = productId;
       this.editModal = !this.editModal;
+      this.editProd = !this.editProd;
+    },
+    cancelEditProduct: function () {
+      this.editProd = !this.editProd;
+      this.editModal = !this.editModal;
+    },
+    cancelEditPrice: function () {
+      this.editPrice = !this.editPrice;
+      this.editModal = !this.editModal;
+    },
+    editPrices: function () {
+      this.editModal = !this.editModal;
+      this.editPrice = !this.editPrice;
     },
     selectCategory: function (code) {
       this.activeList = code;
@@ -211,6 +248,11 @@ export default {
       this.selectCategory(0);
     });
     this.$store.dispatch("loadCategory");
+    axios.get("products/price").then((res) => {
+      this.prixUnitaire = res.data.prixUnitaire;
+      this.tailleS = res.data.quantitySmall;
+      this.tailleL = res.data.quantityBig;
+    });
   },
   computed: {
     categories() {
