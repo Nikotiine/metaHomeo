@@ -3,7 +3,7 @@
     <section class="hero is-fullheight">
       <div class="hero-head">
         <div class="">
-          <p class="title" id="title">Formulaire de contact</p>
+          <p class="title m-t-10" id="title">Formulaire de contact</p>
           <p class="subtitle"></p>
         </div>
       </div>
@@ -16,18 +16,18 @@
                 class="input"
                 type="text"
                 placeholder="Indiquez votre nom"
-                v-model="name"
-                :class="{ isValidField: this.name }"
+                v-model="lastName"
+                :class="{ isValidField: this.lastName }"
               />
               <span
                 class="icon is-small is-left"
-                :class="{ 'has-text-info': this.name }"
+                :class="{ 'has-text-info': this.lastName }"
               >
                 <i class="fas fa-user"></i>
               </span>
               <span
                 class="icon is-small is-right has-text-success"
-                v-if="this.name"
+                v-if="this.lastName"
               >
                 <i class="fas fa-check"></i>
               </span>
@@ -93,7 +93,7 @@
                   type="radio"
                   name="demande"
                   v-model="sujet"
-                  value="formation"
+                  value="Une formation"
                 />
                 Une formation
               </label>
@@ -102,7 +102,7 @@
                   type="radio"
                   name="demande"
                   v-model="sujet"
-                  value="infoLabo"
+                  value="Des Infos sur le labo"
                 />
                 Des infos sur le labo </label
               ><label class="radio py-1 ml-0">
@@ -110,7 +110,7 @@
                   type="radio"
                   name="demande"
                   v-model="sujet"
-                  value="autre"
+                  value="Un autre Sujet"
                 />
                 autre
               </label>
@@ -120,7 +120,11 @@
           <div class="field">
             <label class="label">Message</label>
             <div class="control">
-              <textarea class="textarea" placeholder="Message"></textarea>
+              <textarea
+                class="textarea"
+                placeholder="Message"
+                v-model="message"
+              ></textarea>
             </div>
           </div>
 
@@ -134,18 +138,30 @@
             </div>
           </div>
 
-          <div class="field is-grouped is-justify-content-center">
+          <div
+            class="field is-grouped is-justify-content-center"
+            v-if="!formIsSend"
+          >
             <div class="control">
               <button class="button is-link is-outlined" @click="cancel">
                 Annuler
               </button>
             </div>
             <div class="control">
-              <button class="button is-link" :disabled="!fieldIsValid">
+              <button
+                class="button is-link"
+                :disabled="!fieldIsValid"
+                @click="send"
+              >
                 Valider
               </button>
             </div>
           </div>
+          <toast-validate
+            v-if="formIsSend"
+            :message="toastMessage"
+            :css="cssProps"
+          />
         </div>
       </div>
     </section>
@@ -153,15 +169,26 @@
 </template>
 
 <script>
+import toastValidate from "../tools/toastValidate.vue";
+import axios from "axios";
 export default {
   name: "contactUs",
+  components: { toastValidate },
   data() {
     return {
-      name: null,
+      formIsSend: false,
+      lastName: null,
+      message: "",
       firstName: null,
       email: null,
       cgu: false,
       sujet: false,
+      toastMessage: "Formulaire envoyé",
+      cssProps: {
+        width: "80%",
+        top: "20%",
+        position: "relative",
+      },
     };
   },
   methods: {
@@ -172,6 +199,32 @@ export default {
         params: { view: "accueil" },
       });
     },
+    send: function () {
+      const noInterceptorAxios = axios.create();
+      noInterceptorAxios
+        .post("public/contact", {
+          firstName: this.firstName,
+          lastName: this.lastName,
+          email: this.email,
+          sujet: this.sujet,
+          message: this.message,
+        })
+        .then((res) => {
+          console.log(res.status);
+          if (res.status === 200) {
+            this.formIsSend = !this.formIsSend;
+            setTimeout(() => {
+              this.formIsSend = !this.formIsSend;
+              this.$router.push({
+                name: "aboutUs",
+                params: { view: "accueil" },
+              });
+            }, 2000);
+          } else {
+            alert("pas ok");
+          }
+        });
+    },
   },
   computed: {
     validEmail() {
@@ -181,7 +234,7 @@ export default {
     },
     fieldIsValid: function () {
       if (
-        !this.name ||
+        !this.lastName ||
         !this.firstName ||
         !this.validEmail ||
         !this.cgu ||
@@ -200,11 +253,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.title {
-  margin-top: 10%;
-}
 .box {
-  width: 35%;
+  width: 50%;
 }
 
 .blockRadio {

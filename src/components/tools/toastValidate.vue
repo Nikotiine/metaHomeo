@@ -1,12 +1,8 @@
 <template>
   <div class="notification is-primary" :style="cssprops">
     <p>
-      <strong
-        >{{ config.lastName ? config.lastName : "" }}
-        {{ config.firstName ? config.firstName : "" }}</strong
-      >
+      <strong>{{ message }}</strong>
     </p>
-    <p class="subtitle">{{ message }}</p>
   </div>
 </template>
 
@@ -18,6 +14,8 @@ export default {
     cssprops() {
       return {
         "--width": this.css.width,
+        "--top": this.css.top,
+        "--position": this.css.position,
       };
     },
   },
@@ -26,8 +24,8 @@ export default {
 
 <style lang="scss" scoped>
 .notification {
-  position: absolute;
-  top: 80%;
+  position: var(--position);
+  top: var(--top);
   left: 50%;
   transform: translateX(-50%);
   width: var(--width);

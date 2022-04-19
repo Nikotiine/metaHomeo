@@ -38,9 +38,15 @@
       <div class="mt-4">
         <label class="label">Commande expedie a :</label>
         <p class="subtitle mt-3">
-          {{ userData.firstName }} {{ userData.lastName }} <br />
-          {{ userData.userAdress?.adressePro }}
+          {{ userData.firstName }} {{ userData.lastName }}
         </p>
+        <div>
+          <input type="radio" id="pro" value="pro" v-model="choose" />
+          <label for="pro">{{ userData.userAdress?.adressePro }}</label>
+          <br />
+          <input type="radio" id="perso" value="perso" v-model="choose" />
+          <label for="perso"> {{ userData.userAdress?.adressePerso }}</label>
+        </div>
       </div>
     </div>
     <div
@@ -62,6 +68,7 @@ export default {
   components: {},
   data() {
     return {
+      choose: "pro",
       searchAdresse: "",
       add: [],
       valideCommande: [
