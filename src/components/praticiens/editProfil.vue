@@ -174,7 +174,7 @@ export default {
       update: false,
       confirm: false,
       updateUser: {},
-      userData: {},
+      userData: null,
       newpassword: null,
       majPro: false,
       majPerso: false,
@@ -190,7 +190,6 @@ export default {
   },
   methods: {
     getUserData: function () {
-      console.log("getuser");
       this.userData = this.$store.state.userData;
       this.registered = this.$store.state.userData?.newsletter?.registered;
     },
@@ -224,7 +223,6 @@ export default {
           publicAuthorisation: this.userData.publicAuthorisation,
         })
         .then((res) => {
-          console.log(res.data);
           this.updateUser = {
             firstName: res.data.firstName,
             lastName: res.data.lastName,
@@ -257,9 +255,7 @@ export default {
       this.geoLocPerso = { type: "Point", coordinates: [lat, long] };
     },
   },
-  mounted() {
-    console.log("mouted");
-  },
+  mounted() {},
   computed: {
     validEmail() {
       const re =
@@ -268,7 +264,6 @@ export default {
     },
   },
   created() {
-    console.log("created");
     this.$store.dispatch("loadUserData");
     this.getUserData();
   },

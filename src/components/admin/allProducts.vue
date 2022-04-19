@@ -58,82 +58,6 @@
           </tr>
         </tbody>
       </table>
-      <table class="table is-fullwidth is-striped" v-if="user === 'praticiens'">
-        <thead>
-          <tr>
-            <th>n°</th>
-            <th>nom</th>
-
-            <th>Ajouter au panier</th>
-            <th>Mis dans le panier</th>
-            <th>Total en €</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="product in filteredProd" :key="product.id">
-            <td>{{ product.id }}</td>
-            <td>{{ product.name }}</td>
-
-            <td>
-              <button
-                @click="addSmallBox(product.id, 1)"
-                class="button is-primary is-outlined"
-              >
-                <i class="fas fa-flask"></i> Taille S
-              </button>
-
-              <button
-                @click="addBigBox(product.id, 1)"
-                class="ml-3 button is-link is-outlined"
-              >
-                <i class="fas fa-flask"></i> Taille L
-              </button>
-            </td>
-            <td>
-              {{ product.smallBox }} Taille S
-              <span
-                class="icon has-text-info cursor"
-                @click="removeSmallBox(product.id)"
-                ><i class="fas fa-times"></i></span
-              ><br />
-              {{ product.bigBox }} Taille L
-              <span
-                class="icon has-text-info cursor"
-                @click="removeBigBox(product.id)"
-                ><i class="fas fa-times"></i
-              ></span>
-            </td>
-            <td>
-              {{
-                product.smallBox * tailleS * prixUnitaire +
-                product.bigBox * prixUnitaire * tailleL
-              }}
-            </td>
-          </tr>
-        </tbody>
-        <tfoot v-if="user === 'praticiens'">
-          <tr>
-            <th></th>
-            <th></th>
-
-            <th>total de produit</th>
-            <th>Petite box:{{ smallBox }} <br />Grande Box:{{ bigBox }}</th>
-            <th></th>
-          </tr>
-          <tr>
-            <th></th>
-            <th></th>
-
-            <th>total de la commande</th>
-            <th>
-              {{ totalCommande }}
-            </th>
-            <th>
-              <button class="button" @click="commander">commander</button>
-            </th>
-          </tr>
-        </tfoot>
-      </table>
     </div>
     <div class="modal" :class="{ 'is-active': editModal }">
       <div class="modal-background" @click="editModal = !editModal"></div>
@@ -203,39 +127,6 @@ export default {
         return item.categoryCode === code;
       });
     },
-    addSmallBox: function (id, quantity) {
-      const prod = this.products.find((product) => product.id === id);
-      prod.smallBox += quantity;
-      this.smallBox += quantity;
-    },
-    addBigBox: function (id, quantity) {
-      const prod = this.products.find((product) => product.id === id);
-      prod.bigBox += quantity;
-      this.bigBox += quantity;
-    },
-    removeSmallBox: function (id) {
-      const prod = this.products.find((product) => product.id === id);
-      prod.smallBox -= 1;
-      this.smallBox -= 1;
-    },
-    removeBigBox: function (id) {
-      const prod = this.products.find((product) => product.id === id);
-      prod.bigBox -= 1;
-      this.bigBox -= 1;
-    },
-    commander: function () {
-      this.selectedProduct = this.products.filter((p) => {
-        return p.bigBox > 0 || p.smallBox > 0;
-      });
-      this.$store.commit("setCommande", this.selectedProduct);
-      this.$store.commit("setTotalCommande", this.totalCommande);
-      this.$router.push({
-        name: "espace-praticien",
-        params: {
-          view: "commande",
-        },
-      });
-    },
   },
   created() {
     axios.get("products/all").then((res) => {
@@ -257,12 +148,6 @@ export default {
   computed: {
     categories() {
       return this.$store.state.productsCategories;
-    },
-    totalCommande() {
-      return (
-        this.smallBox * this.prixUnitaire * this.tailleS +
-        this.bigBox * this.prixUnitaire * this.tailleL
-      );
     },
   },
   mounted() {},

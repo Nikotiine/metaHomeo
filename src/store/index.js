@@ -82,11 +82,9 @@ export default createStore({
       }
     },
     loadUserData({ commit }) {
-      if (!this.state.userData) {
-        axios.get("user/me").then((res) => {
-          commit("setUserData", res.data);
-        });
-      }
+      axios.get("user/me").then((res) => {
+        commit("setUserData", res.data);
+      });
     },
     loadTotalPraticien({ commit }) {
       if (!this.state.totalPraticien) {

@@ -102,6 +102,7 @@ export default {
     const user = Cookies.get("userName");
     this.$store.commit("newUser", user);
     this.$store.commit("isAdmin", admin);
+    this.$store.dispatch("loadUserData");
   },
   computed: {
     loadUserInfo() {
@@ -115,9 +116,5 @@ export default {
 .box {
   min-width: 35%;
   // margin: 0 auto;
-}
-.bottomContainer {
-  // justify-content: space-between;
-  //min-width: 100%;
 }
 </style>

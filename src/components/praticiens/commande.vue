@@ -46,7 +46,9 @@
     <div
       class="is-flex mx-auto max-width-50 buttons is-justify-content-space-around mt-6"
     >
-      <button class="button is-primary is-outlined">Annuler</button>
+      <button class="button is-primary is-outlined" @click="cancel">
+        Modifier
+      </button>
       <button class="button is-link is-outlined">Valider</button>
     </div>
   </div>
@@ -107,7 +109,11 @@ export default {
       return this.$store.state.userData;
     },
   },
-  methods: {},
+  methods: {
+    cancel: function () {
+      this.$emit("cancel");
+    },
+  },
   watch: {},
   created() {
     this.$store.dispatch("loadUserData");
