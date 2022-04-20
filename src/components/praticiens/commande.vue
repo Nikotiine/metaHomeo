@@ -27,11 +27,11 @@
       <div class="control">
         <label class="label">Mode de reglement </label>
         <label class="radio">
-          <input type="radio" name="payement" />
+          <input type="radio" v-model="payement" value="virement" />
           Virement banquaire
         </label>
         <label class="radio">
-          <input type="radio" name="payement" />
+          <input type="radio" v-model="payement" value="cheque" />
           Cheque
         </label>
       </div>
@@ -41,10 +41,21 @@
           {{ userData.firstName }} {{ userData.lastName }}
         </p>
         <div>
-          <input type="radio" id="pro" value="pro" v-model="choose" />
+          <input
+            type="radio"
+            id="pro"
+            :value="userData.userAdress?.adressePro"
+            v-model="shipTo"
+            :checked="true"
+          />
           <label for="pro">{{ userData.userAdress?.adressePro }}</label>
           <br />
-          <input type="radio" id="perso" value="perso" v-model="choose" />
+          <input
+            type="radio"
+            id="perso"
+            :value="userData.userAdress?.adressePerso"
+            v-model="shipTo"
+          />
           <label for="perso"> {{ userData.userAdress?.adressePerso }}</label>
         </div>
       </div>
@@ -55,54 +66,23 @@
       <button class="button is-primary is-outlined" @click="cancel">
         Modifier
       </button>
-      <button class="button is-link is-outlined">Valider</button>
+      <button class="button is-link is-outlined" @click="valideBasket">
+        Valider
+      </button>
     </div>
   </div>
 </template>
 
 <script>
-//import axios from "axios";
+import axios from "axios";
 //import buttonNeon from "../button.vue";
 export default {
   name: "commandeProduits",
   components: {},
   data() {
     return {
-      choose: "pro",
-      searchAdresse: "",
-      add: [],
-      valideCommande: [
-        {
-          id: 0,
-          name: "Validez",
-          router: {
-            name: "espace-praticien",
-            params: {
-              view: "commande-valide",
-            },
-          },
-          width: "320px",
-          strokeDasharray1: 140,
-          strokeDasharray2: 540,
-          strokeDashoffset: -474,
-          dashHover: 760,
-        },
-      ],
-      retourPanier: [
-        {
-          id: 0,
-          name: "Annuler",
-          router: {
-            name: "espace-praticien",
-            params: { view: "catalague-produit" },
-          },
-          width: "320px",
-          strokeDasharray1: 140,
-          strokeDasharray2: 540,
-          strokeDashoffset: -474,
-          dashHover: 760,
-        },
-      ],
+      shipTo: this.$store.state.userData.userAdress?.adressePro,
+      payement: "cheque",
     };
   },
   computed: {
@@ -119,6 +99,15 @@ export default {
   methods: {
     cancel: function () {
       this.$emit("cancel");
+    },
+    valideBasket: function () {
+      console.log(this.productsInBasket);
+      axios.post("user/commande", {
+        products: this.productsInBasket,
+        userId: this.userData.id,
+        payment: this.payement,
+        shipTo: this.shipTo,
+      });
     },
   },
   watch: {},

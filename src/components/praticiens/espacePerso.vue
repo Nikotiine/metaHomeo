@@ -49,7 +49,6 @@ export default {
   components: { buttonNeon },
   data() {
     return {
-      praticienFirstname: Cookies.get("userName"),
       catalogue: [
         {
           id: 0,
@@ -99,8 +98,8 @@ export default {
   },
   created() {
     const admin = Cookies.get("isAdmin");
-    const user = Cookies.get("userName");
-    this.$store.commit("newUser", user);
+    // const user = Cookies.get("userName");
+    // this.$store.commit("newUser", user);
     this.$store.commit("isAdmin", admin);
     this.$store.dispatch("loadUserData");
   },

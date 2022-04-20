@@ -168,6 +168,7 @@ export default {
       this.selectedProduct = this.products.filter((p) => {
         return p.bigBox > 0 || p.smallBox > 0;
       });
+
       this.$store.commit("setCommande", this.selectedProduct);
       this.$store.commit("setTotalCommande", this.totalCommande);
       this.validePanier = !this.validePanier;

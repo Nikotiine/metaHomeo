@@ -173,7 +173,7 @@
                   params: { view: 'espace-perso' },
                 }"
               >
-                <strong>Espace perso : {{ status }}</strong>
+                <strong>Espace perso : {{ userFirstName }}</strong>
               </router-link>
               <router-link
                 class="button is-rounded"
@@ -206,6 +206,11 @@ export default {
       Cookies.remove("isAdmin");
       this.$store.commit("newUser", "visiteur");
       this.$store.commit("isAdmin", null);
+    },
+  },
+  computed: {
+    userFirstName() {
+      return this.$store.state.userData.firstName;
     },
   },
 };

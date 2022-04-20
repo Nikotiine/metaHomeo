@@ -1,5 +1,5 @@
 <template>
-  <div class="notification is-danger">
+  <div class="notification is-danger" :style="cssProps">
     <p class="title">
       <strong>{{ message }}</strong>
     </p>
@@ -9,16 +9,25 @@
 <script>
 export default {
   name: "toastErreur",
-  props: ["message"],
+  props: ["message", "css"],
+  computed: {
+    cssProps() {
+      return {
+        "--width": this.css.width,
+        "--top": this.css.top,
+        "--position": this.css.position,
+      };
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .notification {
-  position: absolute;
-  top: 75%;
+  position: var(--position);
+  top: var(--top);
   left: 50%;
   transform: translateX(-50%);
-  width: 45%;
+  width: var(--width);
 }
 </style>

@@ -150,26 +150,36 @@
         :css="cssConfirm"
       />
     </Transition>
-    <toast-validate :message="messageValid" v-if="update" :css="cssValidate" />
+    <Transition>
+      <toast-validate
+        :message="messageValid"
+        v-if="update"
+        :css="cssValidate"
+      />
+    </Transition>
+    <Transition>
+      <toast-erreur :message="messageErreur" v-if="updateFail" :css="cssErreur"
+    /></Transition>
   </form>
 </template>
 
 <script>
 import findAdresse from "../tools/findAdresse.vue";
-import Cookies from "js-cookie";
+import toastErreur from "../tools/toastErreur.vue";
 import toastValidate from "../tools/toastValidate.vue";
 import toastConfirm from "../tools/toastConfirm.vue";
 import axios from "axios";
 export default {
   name: "editProfil",
-  components: { toastConfirm, toastValidate, findAdresse },
+  components: { toastConfirm, toastValidate, findAdresse, toastErreur },
   data() {
     return {
       messageConfirm: "Enregister les modifications ?",
       messageValid: "Profil mis a jour",
+      messageErreur: "Echec de la mise a jour",
       update: false,
       confirm: false,
-
+      updateFail: false,
       userData: null,
       newpassword: null,
       majPro: false,
@@ -188,6 +198,11 @@ export default {
         width: "35%",
         position: "absolute",
         top: "10%",
+      },
+      cssErreur: {
+        width: "55%",
+        position: "absolute",
+        top: "82%",
       },
     };
   },
@@ -226,20 +241,21 @@ export default {
           publicAuthorisation: this.userData.publicAuthorisation,
         })
         .then((res) => {
-          console.log(res.data);
-          this.update = true;
-          Cookies.set("userName", res.data.firstName);
+          if (res.data === "update sucess") {
+            this.update = true;
 
-          this.$store.commit("setUserData", res.data);
-
-          setTimeout(() => {
-            this.$store.commit("newUser", res.data.firstName);
-
-            this.$router.push({
-              name: "espace-praticien",
-              params: { view: "espace-perso" },
-            });
-          }, 2000);
+            setTimeout(() => {
+              this.$router.push({
+                name: "espace-praticien",
+                params: { view: "espace-perso" },
+              });
+            }, 2000);
+          } else {
+            setTimeout(() => {
+              this.updateFail = !this.updateFail;
+              window.location.reload();
+            }, 200);
+          }
         });
     },
     getAdressePro: function (adresseData) {
