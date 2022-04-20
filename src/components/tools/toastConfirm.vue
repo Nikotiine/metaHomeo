@@ -1,5 +1,5 @@
 <template>
-  <div class="notification box-shadow is-primary">
+  <div class="notification box-shadow is-primary" :style="cssProps">
     <p>
       <strong>{{ message }}</strong>
     </p>
@@ -13,7 +13,7 @@
 <script>
 export default {
   name: "toastConfirm",
-  props: ["config", "message"],
+  props: ["config", "message", "css"],
   methods: {
     confirm: function () {
       this.$emit("callBack", true);
@@ -22,15 +22,24 @@ export default {
       this.$emit("callBack", false);
     },
   },
+  computed: {
+    cssProps() {
+      return {
+        "--width": this.css.width,
+        "--top": this.css.top,
+        "--position": this.css.position,
+      };
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .notification {
-  position: absolute;
-  top: 84%;
+  position: var(--position);
+  top: var(--top);
   left: 50%;
   transform: translateX(-50%);
-  width: 30%;
+  width: var(--width);
 }
 </style>

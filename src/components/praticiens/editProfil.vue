@@ -147,14 +147,10 @@
         v-if="confirm"
         :message="messageConfirm"
         @callBack="callBackToast"
+        :css="cssConfirm"
       />
     </Transition>
-    <toast-validate
-      :message="messageValid"
-      :config="updateUser"
-      v-if="update"
-      :css="css"
-    />
+    <toast-validate :message="messageValid" v-if="update" :css="cssValidate" />
   </form>
 </template>
 
@@ -173,7 +169,7 @@ export default {
       messageValid: "Profil mis a jour",
       update: false,
       confirm: false,
-      updateUser: {},
+
       userData: null,
       newpassword: null,
       majPro: false,
@@ -183,8 +179,15 @@ export default {
       adressePro: null,
       geoLocPro: null,
       registered: false,
-      css: {
-        width: "50%",
+      cssConfirm: {
+        width: "35%",
+        position: "absolute",
+        top: "80%",
+      },
+      cssValidate: {
+        width: "35%",
+        position: "absolute",
+        top: "10%",
       },
     };
   },
@@ -223,10 +226,7 @@ export default {
           publicAuthorisation: this.userData.publicAuthorisation,
         })
         .then((res) => {
-          this.updateUser = {
-            firstName: res.data.firstName,
-            lastName: res.data.lastName,
-          };
+          console.log(res.data);
           this.update = true;
           Cookies.set("userName", res.data.firstName);
 

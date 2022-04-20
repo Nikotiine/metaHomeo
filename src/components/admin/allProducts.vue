@@ -2,25 +2,30 @@
   <section class="hero is-fullheight">
     <div class="hero-head">
       <h1 class="title is-1 m-t-8">Catalogue Genesis</h1>
-      <div class="box box-shadow max-width-50 mx-auto">
-        <p class="title" v-if="user === 'admin'">
-          Prix Unitaire: {{ prixUnitaire }} €
-        </p>
-        <p class="title">
-          Taille S = {{ tailleS }} Produits Conditioné =>
-          {{ tailleS * prixUnitaire }} €
-        </p>
-        <p class="title">
-          Taille L = {{ tailleL }} Produits Conditioné =>
-          {{ tailleL * prixUnitaire }} €
-        </p>
-        <button
-          v-if="user === 'admin'"
-          class="button is-primary is-outlined"
-          @click="editPrices"
-        >
-          Modifier
-        </button>
+      <div
+        class="is-flex is-justify-content-space-around is-align-items-center"
+      >
+        <div class="box box-shadow min-width-35">
+          <p class="title is-4">Parametres de vente</p>
+          <p class="subtitle mt-3">Prix Unitaire: {{ prixUnitaire }} €</p>
+          <p class="subtitle">
+            Taille S = {{ tailleS }} Produits conditionnés =>
+            {{ tailleS * prixUnitaire }} €
+          </p>
+          <p class="subtitle">
+            Taille L = {{ tailleL }} Produits conditionnés =>
+            {{ tailleL * prixUnitaire }} €
+          </p>
+          <button
+            class="button is-primary is-outlined mt-4"
+            @click="editPrices"
+          >
+            Modifier
+          </button>
+        </div>
+        <div class="min-width-35">
+          <form-new-product />
+        </div>
       </div>
     </div>
     <div class="hero-body is-justify-content-center is-flex-direction-column">
@@ -38,7 +43,7 @@
           </li>
         </ul>
       </div>
-      <table class="table is-striped min-width-60" v-if="user === 'admin'">
+      <table class="table is-striped min-width-60">
         <thead>
           <tr>
             <th>n°</th>
@@ -80,13 +85,14 @@
 </template>
 
 <script>
+import formNewProduct from "./formNewProduct.vue";
 import editProduct from "./editProduct.vue";
 import editPriceAndQuantity from "./editPriceAndProduct.vue";
 import axios from "axios";
 export default {
   name: "allProducts",
   props: ["user"],
-  components: { editProduct, editPriceAndQuantity },
+  components: { editProduct, editPriceAndQuantity, formNewProduct },
   data() {
     return {
       prixUnitaire: null,

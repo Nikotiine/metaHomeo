@@ -23,15 +23,6 @@
       </div>
       <div class="">
         <p class="subtitle">tu as {{ totalProducts }} de produits enregisté</p>
-        <router-link
-          class="button is-info is-outlined"
-          :to="{
-            name: 'espace-admin',
-            params: { view: 'tous-les-produits' },
-          }"
-        >
-          Voir les tous produits
-        </router-link>
 
         <button-neon :btnName="ajoutProduit" :width="320" />
       </div>
@@ -68,10 +59,10 @@ export default {
       ajoutProduit: [
         {
           id: 0,
-          name: "Ajouter produit ",
+          name: "Tous les produits ",
           router: {
             name: "espace-admin",
-            params: { view: "new-product" },
+            params: { view: "tous-les-produits" },
           },
           width: "320px",
           strokeDasharray1: 140,

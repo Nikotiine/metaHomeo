@@ -121,21 +121,24 @@
           name: 'espace-admin',
           params: { view: 'accueil' },
         }"
+        v-if="!userIsSave"
         >Annuler</router-link
       ><button
         class="button is-primary"
         @click="send"
         :disabled="!validedField"
+        v-if="!userIsSave"
       >
         Enregistrer
       </button>
+      <Transition>
+        <toast-validate
+          v-if="userIsSave"
+          :message="messageToast"
+          :css="cssProps"
+      /></Transition>
     </div>
-    <Transition>
-      <toast-validate
-        v-if="userIsSave"
-        :config="dataNewUser"
-        :message="messageToast"
-    /></Transition>
+
     <Transition
       ><toast-erreur v-if="erreur" :message="messageErreur"
     /></Transition>
@@ -168,7 +171,12 @@ export default {
       admin: false,
       dataNewUser: {},
       userIsSave: false,
-      messageToast: "ajouter a la base de donnée utilisateur",
+      messageToast: "toto et tata a ete corretement enregistré",
+      cssProps: {
+        width: "100%",
+        top: "20%",
+        position: "relative",
+      },
     };
   },
   methods: {
@@ -195,10 +203,7 @@ export default {
               this.erreur = !this.erreur;
             }, 3000);
           } else {
-            this.dataNewUser = {
-              firstName: res.data.firstName,
-              lastName: res.data.lastName,
-            };
+            this.messageToast = `toto et tata a ete corretement enregistré`;
             this.userIsSave = !this.userIsSave;
             setTimeout(() => {
               this.userIsSave = !this.userIsSave;

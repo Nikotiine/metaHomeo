@@ -9,7 +9,7 @@
 <script>
 export default {
   name: "toastValidate",
-  props: ["config", "message", "css"],
+  props: ["message", "css"],
   computed: {
     cssprops() {
       return {

@@ -59,7 +59,6 @@
     <toast-validate
       :message="messageConfirm"
       v-if="productIssave"
-      :config="dataProduct"
       :css="cssProps"
   /></Transition>
 </template>
@@ -77,14 +76,13 @@ export default {
       bigbox: this.big,
       smallbox: this.small,
       cssProps: {
-        width: "80%",
+        width: "100%",
+        position: "absolute",
+        top: "83%",
       },
       productIssave: false,
-      dataProduct: {
-        lastName: "Prix",
-        firstName: "et quantité",
-      },
-      messageConfirm: "modifiés dans la base de données",
+
+      messageConfirm: "Prix et quantites modifiés ",
     };
   },
   methods: {
@@ -100,7 +98,6 @@ export default {
 
           this.productIssave = !this.productIssave;
           setTimeout(() => {
-            this.productIssave = !this.productIssave;
             window.location.reload();
           }, 2000);
         });

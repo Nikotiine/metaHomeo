@@ -48,12 +48,10 @@
         v-if="confirmDel"
         @callBack="callBackToast"
         :message="message"
+        :css="cssProps"
     /></Transition>
     <Transition>
-      <toast-validate
-        v-if="userDelete"
-        :message="isDeleted"
-        :config="deletingUser"
+      <toast-validate v-if="userDelete" :message="isDeleted" :css="cssProps"
     /></Transition>
   </section>
 </template>
@@ -76,6 +74,11 @@ export default {
       confirmDel: false,
       deletingId: null,
       newsletter: null,
+      cssProps: {
+        width: "50%",
+        top: "12%",
+        position: "fixed",
+      },
     };
   },
   methods: {
@@ -100,7 +103,7 @@ export default {
         })
         .then((res) => {
           if (res.data.data === 1) {
-            this.isDeleted = "a ete supprimé de la base de donnée";
+            this.isDeleted = `${this.deletingUser.firstName} ${this.deletingUser.lastName} a eté supprimé de la base de donnée`;
             this.userDelete = !this.userDelete;
             setTimeout(() => {
               this.userDelete = !this.userDelete;

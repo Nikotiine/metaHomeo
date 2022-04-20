@@ -1,13 +1,11 @@
 <template>
-  <form
-    class="box box-shadow m-t-10 max-width-35 mx-auto"
-    v-on:submit.prevent="onSubmit"
-  >
+  <form class="box box-shadow mx-auto" v-on:submit.prevent="onSubmit">
     <div class="field">
-      <label class="label">Nom</label>
-      <label class="label has-text-danger" v-if="nameIsUsed.length === 1"
-        >Produit deja existant</label
-      >
+      <p class="title is-4">Ajout de Produits</p>
+      <p class="subtitle is-4 mt-4">Nom</p>
+      <p class="title is-4 has-text-danger" v-if="nameIsUsed.length === 1">
+        Produit deja existant
+      </p>
       <div class="control has-icons-left has-icons-right">
         <input
           class="input"
@@ -38,7 +36,7 @@
       </div>
     </div>
     <div class="field">
-      <label class="label">Categorie</label>
+      <p class="subtitle is-4">categorie</p>
 
       <div class="select min-width-100">
         <select v-model="categorie" class="min-width-100">
@@ -50,29 +48,20 @@
       </div>
     </div>
 
-    <div class="buttons is-justify-content-flex-end mt-6">
-      <router-link
-        class="button"
-        :to="{
-          name: 'espace-admin',
-          params: { view: 'accueil' },
-        }"
-        >Annuler</router-link
-      ><button
-        class="button is-primary"
+    <div class="buttons is-justify-content-center mt-6">
+      <button
+        class="button is-primary is-outlined"
         @click="send"
         :disabled="nameIsUsed.length === 1 || !fieldIsValid"
+        v-if="!productIssave"
       >
         Enregistrer
       </button>
+      <Transition>
+        <toast-validate v-if="productIssave" :css="cssProps" :message="message"
+      /></Transition>
     </div>
   </form>
-  <Transition>
-    <toast-validate
-      v-if="productIssave"
-      :config="dataProduct"
-      :message="messageConfirm"
-  /></Transition>
 </template>
 
 <script>
@@ -84,11 +73,15 @@ export default {
   data() {
     return {
       name: null,
-
+      cssProps: {
+        width: "100%",
+        top: "50%",
+        position: "relative",
+      },
       categorie: null,
       productIssave: false,
       dataProduct: {},
-      messageConfirm: "est enregistré dans la base de données",
+      message: "",
     };
   },
   methods: {
@@ -100,10 +93,9 @@ export default {
         })
         .then((res) => {
           console.log(res.data.name);
-          this.dataProduct = { lastName: res.data.name };
+          this.message = `${res.data.name} a ete enregistré`;
           this.productIssave = !this.productIssave;
           setTimeout(() => {
-            this.productIssave = !this.productIssave;
             window.location.reload();
           }, 2000);
         });
