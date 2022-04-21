@@ -69,20 +69,35 @@
       <button class="button is-link is-outlined" @click="valideBasket">
         Valider
       </button>
+      <Transition>
+        <toast-validate
+          v-if="orderIsValide"
+          :css="cssProps"
+          :message="message"
+        />
+      </Transition>
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import toastValidate from "../tools/toastValidate.vue";
 //import buttonNeon from "../button.vue";
 export default {
   name: "commandeProduits",
-  components: {},
+  components: { toastValidate },
   data() {
     return {
       shipTo: this.$store.state.userData.userAdress?.adressePro,
       payement: "cheque",
+      cssProps: {
+        width: "50%",
+        top: "13%",
+        position: "fixed",
+      },
+      message: "",
+      orderIsValide: false,
     };
   },
   computed: {
@@ -102,12 +117,24 @@ export default {
     },
     valideBasket: function () {
       console.log(this.productsInBasket);
-      axios.post("user/commande", {
-        products: this.productsInBasket,
-        userId: this.userData.id,
-        payment: this.payement,
-        shipTo: this.shipTo,
-      });
+      axios
+        .post("orders/newOrder", {
+          products: this.productsInBasket,
+          userId: this.userData.id,
+          payment: this.payement,
+          shipTo: this.shipTo,
+          total: this.totalCommande,
+        })
+        .then((res) => {
+          this.message = res.data.data;
+          this.orderIsValide = !this.orderIsValide;
+          setTimeout(() => {
+            this.$router.push({
+              name: "espace-praticien",
+              params: { view: "espace-perso" },
+            });
+          }, 2000);
+        });
     },
   },
   watch: {},
