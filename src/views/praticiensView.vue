@@ -5,13 +5,11 @@
   <historique-commandes v-if="view === 'historique-commandes'" />
   <edit-profil v-if="view === 'edition-profil'" />
   <commande-produits v-if="view === 'commande'" />
-  <commande-valide v-if="view === 'commande-valide'" />
+
   <div></div>
 </template>
 
 <script>
-//import Cookies from "js-cookie";
-import commandeValide from "../components/praticiens/commandeValide.vue";
 import editProfil from "../components/praticiens/editProfil.vue";
 import catalogueProducts from "../components/praticiens/catalogueProducts.vue";
 import historiqueCommandes from "../components/praticiens/historiqueCommandes.vue";
@@ -27,7 +25,6 @@ export default {
     historiqueCommandes,
     editProfil,
     commandeProduits,
-    commandeValide,
   },
   props: ["view"],
   methods: {},
