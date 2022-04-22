@@ -1,7 +1,10 @@
 <template>
   <section class="hero is-fullheight">
     <div class="hero-head">
-      <p class="title m-t-10">Ton dashboard</p>
+      <p class="title m-t-10">Dashboard du MARABOUT-GUERISSEUR</p>
+      <figure class="image is-128x128 mx-auto">
+        <img src="../../assets/rrrr.jpeg" />
+      </figure>
     </div>
     <div class="hero-body is-justify-content-space-around">
       <div>
@@ -18,11 +21,22 @@
         <button-neon :btnName="ajoutPraticien" :width="320" />
       </div>
       <div class="">
-        <p class="subtitle">tu as eu ... de commandes pasées</p>
-        <button class="button is-primary is-light">voir la liste</button>
+        <p class="subtitle">
+          tu as {{ ordersInProgress.length }}
+          <span v-if="ordersInProgress.length > 1">commandes en attente</span
+          ><span v-else>commande en attente</span>
+        </p>
+        <p class="subtitle">
+          tu as {{ ordersShipped.length }}
+          <span v-if="ordersShipped.length > 1"> commandes validées </span
+          ><span v-else>commande validée</span>
+        </p>
+        <button-neon :btnName="listOfOrders" :width="420" />
       </div>
       <div class="">
-        <p class="subtitle">tu as {{ totalProducts }} de produits enregisté</p>
+        <p class="subtitle">
+          tu as {{ totalProducts }} de produits enregistrés
+        </p>
 
         <button-neon :btnName="ajoutProduit" :width="320" />
       </div>
@@ -71,6 +85,21 @@ export default {
           dashHover: 760,
         },
       ],
+      listOfOrders: [
+        {
+          id: 0,
+          name: "Liste des commandes ",
+          router: {
+            name: "espace-admin",
+            params: { view: "toutes-les-commandes" },
+          },
+          width: "420px",
+          strokeDasharray1: 140,
+          strokeDasharray2: 600,
+          strokeDashoffset: -600,
+          dashHover: 960,
+        },
+      ],
     };
   },
   mounted() {
@@ -84,6 +113,21 @@ export default {
     totalProducts() {
       return this.$store.state.totalProduts;
     },
+    ordersInProgress() {
+      const inProgress = this.$store.state.allOrders.filter(
+        (orders) => orders.inProgress === true
+      );
+      return inProgress;
+    },
+    ordersShipped() {
+      const shipped = this.$store.state.allOrders.filter(
+        (orders) => orders.shipped
+      );
+      return shipped;
+    },
+  },
+  created() {
+    this.$store.dispatch("findAllOrders");
   },
 };
 </script>

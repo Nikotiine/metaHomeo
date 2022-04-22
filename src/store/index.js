@@ -13,8 +13,13 @@ export default createStore({
     totalMembre: null,
     totalProduts: null,
     productsName: [],
+    priceAndQuantity: null,
+    allOrders: [],
   },
   getters: {
+    allOrders: (state) => {
+      return state.allOrders;
+    },
     productsCategories: (state) => {
       return state.productsCategories;
     },
@@ -32,6 +37,9 @@ export default createStore({
     },
     productsName: (state) => {
       return state.productsName;
+    },
+    priceAndQuantity: (state) => {
+      return state.priceAndQuantity;
     },
   },
   mutations: {
@@ -64,6 +72,12 @@ export default createStore({
     },
     getProductsName(state, names) {
       state.productsName = names;
+    },
+    setPriceAndQuantity(state, priceAndQuantity) {
+      state.priceAndQuantity = priceAndQuantity;
+    },
+    getAllOrders(state, orders) {
+      state.allOrders = orders;
     },
   },
   actions: {
@@ -108,6 +122,20 @@ export default createStore({
             "getProductsName",
             res.data.filter((x) => x.name)
           );
+        });
+      }
+    },
+    loadPriceAndQuantity({ commit }) {
+      if (!this.state.priceAndQuantity) {
+        axios.get("products/price").then((res) => {
+          commit("setPriceAndQuantity", res.data);
+        });
+      }
+    },
+    findAllOrders({ commit }) {
+      if (this.state.allOrders.length === 0) {
+        axios.get("orders/all").then((res) => {
+          commit("getAllOrders", res.data);
         });
       }
     },

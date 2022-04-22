@@ -124,6 +124,7 @@ export default {
           payment: this.payement,
           shipTo: this.shipTo,
           total: this.totalCommande,
+          inProgress: true,
         })
         .then((res) => {
           this.message = res.data.data;

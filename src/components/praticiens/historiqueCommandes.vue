@@ -27,8 +27,10 @@
           <tr>
             <td>{{ order.id }}</td>
             <td>{{ order.createdAt }}</td>
-            <td>{{}}</td>
-            <td>sataus</td>
+            <td>{{ order.total }}</td>
+            <td>
+              {{ order.inProgress ? "En cours de traitement" : "Expedié" }}
+            </td>
             <td>
               <span class="has-text-info" @click="showOderDetail(order.id)"
                 ><i class="fas fa-eye cursor"></i
@@ -71,8 +73,13 @@ export default {
     axios.get("orders/myOrders").then((res) => {
       this.listOfOrder = res.data;
     });
+    this.$store.dispatch("loadPriceAndQuantity");
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.hero {
+  justify-content: inherit;
+}
+</style>

@@ -5,11 +5,13 @@
     <form-new-product v-if="view === 'new-product'" />
     <all-users-tools v-if="view === 'tous-les-praticiens'" />
     <all-products v-if="view === 'tous-les-produits'" :user="user" />
+    <all-orders v-if="view === 'toutes-les-commandes'" />
   </div>
 </template>
 
 <script>
 import Cookies from "js-cookie";
+import allOrders from "../components/admin/allOrders.vue";
 import allProducts from "../components/admin/allProducts.vue";
 import allUsersTools from "../components/admin/allUsersTools.vue";
 import formNewProduct from "../components/admin/formNewProduct.vue";
@@ -29,6 +31,7 @@ export default {
     formNewProduct,
     allUsersTools,
     allProducts,
+    allOrders,
   },
   created() {
     const admin = Cookies.get("isAdmin");

@@ -8,8 +8,8 @@
           {{ tailleS * prixUnitaire }} €
         </p>
         <p class="title">
-          Taille L = {{ tailleL }} Produits Conditioné =>
-          {{ tailleL * prixUnitaire }} €
+          Taille L = {{ tailleB }} Produits Conditioné =>
+          {{ tailleB * prixUnitaire }} €
         </p>
       </div>
     </div>
@@ -77,7 +77,7 @@
             <td>
               {{
                 product.smallBox * tailleS * prixUnitaire +
-                product.bigBox * prixUnitaire * tailleL
+                product.bigBox * prixUnitaire * tailleB
               }}
             </td>
           </tr>
@@ -125,7 +125,7 @@ export default {
       validePanier: false,
       prixUnitaire: null,
       tailleS: null,
-      tailleL: null,
+      tailleB: null,
       editModal: false,
       products: [],
       activeList: 0,
@@ -147,21 +147,25 @@ export default {
     addSmallBox: function (id, quantity) {
       const prod = this.products.find((product) => product.id === id);
       prod.smallBox += quantity;
+      prod.totalS = prod.smallBox * this.prixUnitaire * this.tailleS;
       this.smallBox += quantity;
     },
     addBigBox: function (id, quantity) {
       const prod = this.products.find((product) => product.id === id);
       prod.bigBox += quantity;
+      prod.totalB = prod.bigBox * this.prixUnitaire * this.tailleB;
       this.bigBox += quantity;
     },
     removeSmallBox: function (id) {
       const prod = this.products.find((product) => product.id === id);
       prod.smallBox -= 1;
+      prod.totalS = prod.smallBox * this.prixUnitaire * this.tailleS;
       this.smallBox -= 1;
     },
     removeBigBox: function (id) {
       const prod = this.products.find((product) => product.id === id);
       prod.bigBox -= 1;
+      prod.totalB = prod.bigBox * this.prixUnitaire * this.tailleB;
       this.bigBox -= 1;
     },
     commander: function () {
@@ -172,12 +176,6 @@ export default {
       this.$store.commit("setCommande", this.selectedProduct);
       this.$store.commit("setTotalCommande", this.totalCommande);
       this.validePanier = !this.validePanier;
-      //   this.$router.push({
-      //     name: "espace-praticien",
-      //     params: {
-      //       view: "commande",
-      //     },
-      //   });
     },
   },
   created() {
@@ -186,6 +184,8 @@ export default {
       this.products = this.products.map((p) => {
         p.smallBox = 0;
         p.bigBox = 0;
+        p.totalS = 0;
+        p.totalB = 0;
         return p;
       });
       this.selectCategory(0);
@@ -194,7 +194,7 @@ export default {
     axios.get("products/price").then((res) => {
       this.prixUnitaire = res.data.prixUnitaire;
       this.tailleS = res.data.quantitySmall;
-      this.tailleL = res.data.quantityBig;
+      this.tailleB = res.data.quantityBig;
     });
   },
   computed: {
@@ -204,7 +204,7 @@ export default {
     totalCommande() {
       return (
         this.smallBox * this.prixUnitaire * this.tailleS +
-        this.bigBox * this.prixUnitaire * this.tailleL
+        this.bigBox * this.prixUnitaire * this.tailleB
       );
     },
   },
