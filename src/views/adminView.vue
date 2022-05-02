@@ -6,6 +6,7 @@
     <all-users-tools v-if="view === 'tous-les-praticiens'" />
     <all-products v-if="view === 'tous-les-produits'" :user="user" />
     <all-orders v-if="view === 'toutes-les-commandes'" />
+    <news-letter v-if="view === 'news-letter'" />
   </div>
 </template>
 
@@ -17,6 +18,7 @@ import allUsersTools from "../components/admin/allUsersTools.vue";
 import formNewProduct from "../components/admin/formNewProduct.vue";
 import formNewUser from "../components/admin/formNewUser.vue";
 import espaceAdmin from "../components/admin/espaceAdmin.vue";
+import newsLetter from "../components/admin/newsletter.vue";
 export default {
   name: "adminView",
   props: ["view"],
@@ -32,6 +34,7 @@ export default {
     allUsersTools,
     allProducts,
     allOrders,
+    newsLetter,
   },
   created() {
     const admin = Cookies.get("isAdmin");

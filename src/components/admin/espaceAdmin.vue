@@ -2,6 +2,7 @@
   <section class="hero is-fullheight">
     <div class="hero-head">
       <p class="title m-t-10">Dashboard du MARABOUT-GUERISSEUR</p>
+      <button-neon :btnName="newsletter" :width="320" />
       <figure class="image is-128x128 mx-auto">
         <img src="../../assets/rrrr.jpeg" />
       </figure>
@@ -98,6 +99,21 @@ export default {
           strokeDasharray2: 600,
           strokeDashoffset: -600,
           dashHover: 960,
+        },
+      ],
+      newsletter: [
+        {
+          id: 0,
+          name: "Bonne parole ",
+          router: {
+            name: "espace-admin",
+            params: { view: "news-letter" },
+          },
+          width: "320px",
+          strokeDasharray1: 140,
+          strokeDasharray2: 540,
+          strokeDashoffset: -474,
+          dashHover: 760,
         },
       ],
     };

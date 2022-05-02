@@ -4,7 +4,7 @@
       <p class="title m-t-10">Historique des commandes</p>
       <p class="title" v-if="orderDetail">
         Detail de la commande n° {{ orderID }}
-        <span class="has-text-info" @click="orderDetail = !orderDetail"
+        <span class="has-text-info cursor" @click="orderDetail = !orderDetail"
           ><i class="fas fa-times-circle"></i
         ></span>
       </p>
@@ -32,7 +32,9 @@
               {{ order.inProgress ? "En cours de traitement" : "Expedié" }}
             </td>
             <td>
-              <span class="has-text-info" @click="showOderDetail(order.id)"
+              <span
+                class="has-text-info cursor"
+                @click="showOderDetail(order.id)"
                 ><i class="fas fa-eye cursor"></i
               ></span>
             </td>
