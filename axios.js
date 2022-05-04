@@ -5,11 +5,12 @@ axios.defaults.baseURL = "http://localhost:3000/";
 axios.interceptors.request.use(
   async (config) => {
     const accessToken = Cookies.get("accessToken");
-    config.headers = {
-      authorization: `Bearer ${accessToken}`,
-      //accept: "application/json",
-      //"Content-Type": "application/x-www-form-urlencoded",
-    };
+    // config.headers = {
+    //   authorization: `Bearer ${accessToken}`,
+    //   accept: "application/json",
+    //   "Content-Type": "application/x-www-form-urlencoded",
+    // };
+    config.headers.authorization = `Bearer ${accessToken}`;
     console.log("request");
     return config;
   },

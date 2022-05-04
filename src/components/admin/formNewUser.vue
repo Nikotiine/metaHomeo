@@ -99,6 +99,36 @@
 
       <find-adresse @getSelected="getAdressePerso" />
     </div>
+    <div
+      class="file is-primary has-name is-flex is-flex-direction-column"
+      :class="{
+        'is-danger': fileOverSize,
+        'is-primary': !fileOverSize,
+      }"
+    >
+      <label class="label">Photo de profil (max 200ko)</label>
+      <label class="file-label">
+        <input
+          class="file-input"
+          type="file"
+          accept="image/jpeg, image/png"
+          name="userAvatar"
+          @change="previewFile"
+        />
+        <span class="file-cta">
+          <span class="file-icon">
+            <i class="fas fa-upload"></i>
+          </span>
+          <span class="file-label">Choisir une photo </span>
+        </span>
+        <span class="file-name"><p>aucun fichier choisi</p></span>
+        <!-- <span class="file-name" v-if="avatars.length === 1"
+          ><p v-for="avatar in avatars" :key="avatar.id">
+            {{ avatar.name }}
+          </p></span
+        > -->
+      </label>
+    </div>
 
     <div class="field mt-5">
       <label class="checkbox">
@@ -156,6 +186,8 @@ export default {
   components: { toastValidate, findAdresse, toastErreur },
   data() {
     return {
+      fileOverSize: false,
+      avatar: null,
       erreur: false,
       messageErreur: "",
       newsletter: true,
@@ -181,6 +213,21 @@ export default {
   },
   methods: {
     send: function () {
+      // let formDatas = new FormData();
+      // formDatas.append("firstName", this.firstName);
+
+      // formDatas.append("lastName", this.lastName);
+      // formDatas.append("adressePerso", this.adressePerso);
+      // formDatas.append("adressePro", this.adressePro);
+      // formDatas.append("geoLocPerso", this.geoLocPerso);
+      // formDatas.append("geoLocPro", this.geoLocPro);
+      // formDatas.append("email", this.email);
+      // formDatas.append("password", this.password);
+      // formDatas.append("admin", this.admin);
+      // formDatas.append("newsletter", this.newsletter);
+      // formDatas.append("publicAuthorisation", this.publicAuthorisation);
+      // formDatas.append("avatar", this.avatar);
+      // console.log(Array.from(formDatas));
       axios
         .post("http://localhost:3000/user/new", {
           firstName: this.firstName,
@@ -203,15 +250,28 @@ export default {
               this.erreur = !this.erreur;
             }, 3000);
           } else {
-            this.messageToast = `toto et tata a ete corretement enregistré`;
+            console.log(res.data);
+            this.messageToast = `${res.data.lastName} ${res.data.firstName} a ete corretement enregistré`;
+            this.sendAvatar(res.data.id);
             this.userIsSave = !this.userIsSave;
             setTimeout(() => {
               this.userIsSave = !this.userIsSave;
-              location.reload();
+              //  location.reload();
             }, 3000);
           }
         });
     },
+    sendAvatar: function (id) {
+      let formData = new FormData();
+      formData.append("avatar", this.avatar);
+      formData.append("userId", id);
+      axios.post("user/new/avatar", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+    },
+
     getAdressePro: function (adresseData) {
       this.adressePro = adresseData.label;
       const lat = adresseData.gps[1];
@@ -223,6 +283,17 @@ export default {
       const lat = adresseData.gps[1];
       const long = adresseData.gps[0];
       this.geoLocPerso = { type: "Point", coordinates: [lat, long] };
+    },
+    previewFile: function (file) {
+      if (file.target.files[0].size < 80000) {
+        this.fileOverSize = false;
+        this.avatar = new Blob(file.target.files, { type: "jpeg/jpg" });
+        console.log(this.avatar);
+        console.log(this.avatars instanceof Blob);
+      } else {
+        this.fileOverSize = true;
+        return;
+      }
     },
   },
   computed: {

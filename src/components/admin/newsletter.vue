@@ -53,7 +53,7 @@ export default {
     return {
       sujet: "",
       message: "",
-      validateMessage: "Newsletter bien envoyé a tes disciples",
+      validateMessage: "Newsletter bien envoyée a tes disciples",
       cssProps: {
         width: "100%",
         top: "20%",

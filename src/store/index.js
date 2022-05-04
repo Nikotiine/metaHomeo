@@ -97,6 +97,7 @@ export default createStore({
     },
     loadUserData({ commit }) {
       axios.get("user/me").then((res) => {
+        console.log(res.data.avatar instanceof Blob);
         commit("setUserData", res.data);
       });
     },

@@ -8,6 +8,9 @@
     <div class="hero-body is-justify-content-space-around">
       <div class="box box-shadow">
         <p class="title">Profil</p>
+
+        <img :src="'data:image/png;base64,' + avatarUrl" alt="" />
+
         <p class="subtitle is-4 mt-2">
           {{ loadUserInfo.lastName }} {{ loadUserInfo.firstName }}
         </p>
@@ -49,6 +52,7 @@ export default {
   components: { buttonNeon },
   data() {
     return {
+      avatarUrl: null,
       catalogue: [
         {
           id: 0,
@@ -102,10 +106,28 @@ export default {
     // this.$store.commit("newUser", user);
     this.$store.commit("isAdmin", admin);
     this.$store.dispatch("loadUserData");
+    this.loadAvatar();
   },
   computed: {
     loadUserInfo() {
       return this.$store.state.userData;
+    },
+  },
+  methods: {
+    loadAvatar() {
+      const avatar = this.$store.state.userData.avatar.avatar;
+
+      this.avatarUrl = window.btoa(
+        String.fromCharCode(...new Uint8Array(avatar.data))
+      );
+
+      //   var binary = "";
+      //   var bytes = new Uint8Array(avatar);
+      //   var len = bytes.byteLength;
+      //   for (var i = 0; i < len; i++) {
+      //     binary += String.fromCharCode(bytes[i]);
+      //   }
+      //   this.toto = window.btoa(binary);
     },
   },
 };
