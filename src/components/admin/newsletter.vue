@@ -17,6 +17,7 @@
           class="textarea"
           placeholder="Chaque bien que tu detiens"
           v-model="message"
+          rows="10"
         ></textarea>
         <div
           class="buttons is-justify-content-flex-end mt-6"

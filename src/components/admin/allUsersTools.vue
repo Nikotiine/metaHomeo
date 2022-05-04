@@ -2,6 +2,15 @@
   <section class="hero is-fullheight">
     <div class="hero-head">
       <p class="title m-t-10">Tous les utilisateurs</p>
+      <router-link
+        class="button is-info is-outlined is-rounded"
+        :to="{
+          name: 'espace-admin',
+          params: { view: 'nouveau-membre' },
+        }"
+      >
+        Ajouter
+      </router-link>
     </div>
     <div class="hero-body is-justify-content-center">
       <table class="table">
@@ -17,6 +26,7 @@
             <th>profil publique</th>
             <th>admin ?</th>
             <th>Nombre de Commndes</th>
+            <th>Details</th>
             <th>Supprimer le compte</th>
           </tr>
         </thead>
@@ -36,12 +46,29 @@
             <td>{{ users.publicAuthorisation ? "oui" : "non" }}</td>
             <td>{{ users.admin ? "oui" : "non" }}</td>
             <td>commandes</td>
+            <td @click="UserProfil(users.id)">
+              <span class="icon has-text-info cursor">
+                <i class="fas fa-eye"></i
+              ></span>
+            </td>
             <td @click="delUser(users.id, users.lastName, users.firstName)">
-              <i class="fas fa-user-minus"></i>
+              <span class="icon has-text-danger cursor"
+                ><i class="fas fa-user-minus"></i
+              ></span>
             </td>
           </tr>
         </tbody>
       </table>
+    </div>
+    <div class="modal is-active" v-if="showUserProfil">
+      <div
+        class="modal-background"
+        @click="showUserProfil = !showUserProfil"
+      ></div>
+      <div class="modal-content">
+        <user-profil :profil="user" />
+      </div>
+      <button class="modal-close is-large" aria-label="close"></button>
     </div>
     <Transition>
       <toast-confirm
@@ -59,12 +86,15 @@
 <script>
 import toastValidate from "../tools/toastValidate.vue";
 import toastConfirm from "../tools/toastConfirm.vue";
+import userProfil from "./userProfil.vue";
 import axios from "axios";
 export default {
   name: "allUsersTools",
-  components: { toastConfirm, toastValidate },
+  components: { toastConfirm, toastValidate, userProfil },
   data() {
     return {
+      showUserProfil: false,
+      user: null,
       isDeleted: "",
       deletingUser: {},
       userDelete: false,
@@ -82,6 +112,18 @@ export default {
     };
   },
   methods: {
+    UserProfil: function (id) {
+      this.user = this.allUsers.filter((user) => user.id === id);
+      this.showUserProfil = !this.showUserProfil;
+    },
+    loadAvatar(id) {
+      axios.get("user/avatar/" + id).then((res) => {
+        const avatar = res.data.avatar.data;
+        this.avatarUrl = window.btoa(
+          String.fromCharCode(...new Uint8Array(avatar))
+        );
+      });
+    },
     callBackToast: function (res) {
       if (!res) {
         this.confirmDel = !this.confirmDel;

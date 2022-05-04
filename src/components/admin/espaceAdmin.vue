@@ -7,10 +7,12 @@
         <img src="../../assets/rrrr.jpeg" />
       </figure>
     </div>
-    <div class="hero-body is-justify-content-space-around">
+    <div
+      class="hero-body is-justify-content-space-around is-align-items-flex-end"
+    >
       <div>
         <p class="subtitle">tu as {{ totalMembre }} membres enregistés</p>
-        <router-link
+        <!-- <router-link
           class="button is-info is-outlined"
           :to="{
             name: 'espace-admin',
@@ -18,7 +20,7 @@
           }"
         >
           Voir les profils
-        </router-link>
+        </router-link> -->
         <button-neon :btnName="ajoutPraticien" :width="320" />
       </div>
       <div class="">
@@ -27,11 +29,11 @@
           <span v-if="ordersInProgress.length > 1">commandes en attente</span
           ><span v-else>commande en attente</span>
         </p>
-        <p class="subtitle">
+        <!-- <p class="subtitle">
           tu as {{ ordersShipped.length }}
           <span v-if="ordersShipped.length > 1"> commandes validées </span
           ><span v-else>commande validée</span>
-        </p>
+        </p> -->
         <button-neon :btnName="listOfOrders" :width="420" />
       </div>
       <div class="">
@@ -59,10 +61,10 @@ export default {
       ajoutPraticien: [
         {
           id: 0,
-          name: "Nouveau membre ",
+          name: "Tes disciples ",
           router: {
             name: "espace-admin",
-            params: { view: "nouveau-membre" },
+            params: { view: "tous-les-praticiens" },
           },
           width: "320px",
           strokeDasharray1: 140,

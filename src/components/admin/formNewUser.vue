@@ -100,7 +100,7 @@
       <find-adresse @getSelected="getAdressePerso" />
     </div>
     <div
-      class="file is-primary has-name is-flex is-flex-direction-column"
+      class="file is-primary has-name is-flex is-flex-direction-column is-align-items-center"
       :class="{
         'is-danger': fileOverSize,
         'is-primary': !fileOverSize,
@@ -121,7 +121,9 @@
           </span>
           <span class="file-label">Choisir une photo </span>
         </span>
-        <span class="file-name"><p>aucun fichier choisi</p></span>
+        <span class="file-name"
+          ><p>{{ fileName ? fileName : "aucun fichier" }}</p></span
+        >
         <!-- <span class="file-name" v-if="avatars.length === 1"
           ><p v-for="avatar in avatars" :key="avatar.id">
             {{ avatar.name }}
@@ -186,6 +188,7 @@ export default {
   components: { toastValidate, findAdresse, toastErreur },
   data() {
     return {
+      fileName: null,
       fileOverSize: false,
       avatar: null,
       erreur: false,
@@ -286,10 +289,10 @@ export default {
     },
     previewFile: function (file) {
       if (file.target.files[0].size < 80000) {
+        this.fileName = file.target.files[0].name;
         this.fileOverSize = false;
         this.avatar = new Blob(file.target.files, { type: "jpeg/jpg" });
         console.log(this.avatar);
-        console.log(this.avatars instanceof Blob);
       } else {
         this.fileOverSize = true;
         return;
