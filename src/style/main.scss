@@ -24,12 +24,12 @@ nav {
     color: #2c3e50;
 
     &.router-link-exact-active {
-      color: rgba(107, 166, 241, 1);
+      color: $primary;
     }
   }
 }
 .box-shadow {
-  box-shadow: 2px 2px 16px 0 rgba(107, 166, 241, 1);
+  box-shadow: 2px 2px 16px 0 $primary;
 }
 .gradientBackGround {
   background: rgb(80 200 239 / 50%);

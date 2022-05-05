@@ -21,7 +21,7 @@
         <p class="subtitle">mail de contact : {{ loadUserInfo.email }}</p>
         <p class="subtitle">
           inscrit a la newsletter:
-          {{ loadUserInfo.newletter?.registered ? "oui" : "non" }}
+          {{ loadUserInfo.newsletter?.registered ? "oui" : "non" }}
         </p>
         <p class="subtitle">
           Diffusion publique:
@@ -35,7 +35,7 @@
           <p class="subtitle">Acces au catalogue des produits</p>
           <button-neon :btnName="catalogue" :width="320" />
         </div>
-        <div class="box box-shadow">
+        <div class="box box-shadow m-t-40">
           <p class="subtitle">Historique des commandes</p>
           <button-neon :btnName="historique" :width="320" />
         </div>

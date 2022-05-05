@@ -1,74 +1,81 @@
 <template>
-  <div class="box box-shadow m-t-10 max-width-50 mx-auto">
-    <div class="">
-      <p class="title">Recapitulatif de la commande</p>
-      <table class="table m-auto">
-        <thead>
-          <tr>
-            <th>Nom du produit</th>
-            <th>Quantité</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="prod in productsInBasket" :key="prod.id">
-            <td>{{ prod.name }}</td>
-            <td>
-              smallbox : {{ prod.smallBox }} <br />
-              bigbox: {{ prod.bigBox }}
-            </td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <th>total de la commande</th>
-          <th></th>
-          <th>{{ totalCommande }} €</th>
-        </tfoot>
-      </table>
-      <div class="control">
-        <label class="label">Mode de reglement </label>
-        <label class="radio">
-          <input type="radio" v-model="payement" value="virement" />
-          Virement banquaire
-        </label>
-        <label class="radio">
-          <input type="radio" v-model="payement" value="cheque" />
-          Cheque
-        </label>
-      </div>
-      <div class="mt-4">
-        <label class="label">Commande expedie a :</label>
-        <p class="subtitle mt-3">
-          {{ userData.firstName }} {{ userData.lastName }}
-        </p>
-        <div>
-          <input
-            type="radio"
-            id="pro"
-            :value="userData.userAdress?.adressePro"
-            v-model="shipTo"
-            :checked="true"
-          />
-          <label for="pro">{{ userData.userAdress?.adressePro }}</label>
-          <br />
-          <input
-            type="radio"
-            id="perso"
-            :value="userData.userAdress?.adressePerso"
-            v-model="shipTo"
-          />
-          <label for="perso"> {{ userData.userAdress?.adressePerso }}</label>
+  <section class="hero is-fullheight">
+    <div class="box box-shadow m-t-10 max-width-50 mx-auto">
+      <div class="">
+        <p class="title">Recapitulatif de la commande</p>
+        <table class="table m-auto">
+          <thead>
+            <tr>
+              <th>Nom du produit</th>
+              <th>Quantité</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="prod in productsInBasket" :key="prod.id">
+              <td>{{ prod.name }}</td>
+              <td>
+                smallbox : {{ prod.smallBox }} <br />
+                bigbox: {{ prod.bigBox }}
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <th>total de la commande</th>
+            <th></th>
+            <th>{{ totalCommande }} €</th>
+          </tfoot>
+        </table>
+        <div class="control">
+          <label class="label">Mode de reglement </label>
+          <label class="radio">
+            <input type="radio" v-model="payement" value="virement" />
+            Virement banquaire
+          </label>
+          <label class="radio">
+            <input type="radio" v-model="payement" value="cheque" />
+            Cheque
+          </label>
+        </div>
+        <div class="mt-4">
+          <label class="label">Commande expedie a :</label>
+          <p class="subtitle mt-3">
+            {{ userData.firstName }} {{ userData.lastName }}
+          </p>
+          <div>
+            <input
+              type="radio"
+              id="pro"
+              :value="userData.userAdress?.adressePro"
+              v-model="shipTo"
+              :checked="true"
+            />
+            <label for="pro">{{ userData.userAdress?.adressePro }}</label>
+            <br />
+            <input
+              type="radio"
+              id="perso"
+              :value="userData.userAdress?.adressePerso"
+              v-model="shipTo"
+              v-if="userData.userAdress?.adressePerso"
+            />
+            <label for="perso"> {{ userData.userAdress?.adressePerso }}</label>
+          </div>
         </div>
       </div>
-    </div>
-    <div
-      class="is-flex mx-auto max-width-50 buttons is-justify-content-space-around mt-6"
-    >
-      <button class="button is-primary is-outlined" @click="cancel">
-        Modifier
-      </button>
-      <button class="button is-link is-outlined" @click="valideBasket">
-        Valider
-      </button>
+      <div
+        class="is-flex mx-auto max-width-50 buttons is-justify-content-space-around mt-6"
+      >
+        <button class="button is-primary is-outlined" @click="cancel">
+          Modifier
+        </button>
+        <button
+          class="button is-link is-outlined"
+          :class="{ 'is-loading': waitForRes }"
+          @click="valideBasket"
+        >
+          Valider
+        </button>
+      </div>
       <Transition>
         <toast-validate
           v-if="orderIsValide"
@@ -77,7 +84,7 @@
         />
       </Transition>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -91,9 +98,10 @@ export default {
     return {
       shipTo: this.$store.state.userData.userAdress?.adressePro,
       payement: "cheque",
+      waitForRes: false,
       cssProps: {
-        width: "50%",
-        top: "13%",
+        width: "36%",
+        top: "9%",
         position: "fixed",
       },
       message: "",
@@ -116,6 +124,7 @@ export default {
       this.$emit("cancel");
     },
     valideBasket: function () {
+      this.waitForRes = !this.waitForRes;
       console.log(this.productsInBasket);
       axios
         .post("orders/newOrder", {

@@ -37,7 +37,6 @@
           <maps-leaflet :heightMaps="75" :widthMaps="50" :markers="markers" />
         </div>
       </div>
-      <div class="hero-foot"><p>mentions legales</p></div>
     </section>
   </div>
 </template>

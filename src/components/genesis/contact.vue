@@ -133,7 +133,14 @@
               <label class="checkbox">
                 <input type="checkbox" v-model="cgu" />
                 Je suis d'accord avec
-                <a href="#">les CGU</a>
+                <router-link
+                  :to="{
+                    name: 'autre',
+                    params: { view: 'cGu' },
+                  }"
+                >
+                  <strong>les CGU</strong>
+                </router-link>
               </label>
             </div>
           </div>

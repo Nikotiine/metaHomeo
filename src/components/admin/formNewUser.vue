@@ -206,7 +206,7 @@ export default {
       admin: false,
       dataNewUser: {},
       userIsSave: false,
-      messageToast: "toto et tata a ete corretement enregistré",
+      messageToast: "",
       cssProps: {
         width: "100%",
         top: "20%",

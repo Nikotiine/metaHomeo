@@ -1,56 +1,60 @@
 <template>
-  <form
-    class="box box-shadow m-t-10 max-width-35 mx-auto"
-    v-on:submit.prevent="onSubmit"
+  <section
+    class="hero is-fullheight is-align-items-center is-justify-content-center"
   >
-    <div class="field">
-      <label class="label">Email</label>
-      <div class="control has-icons-left has-icons-right">
-        <input
-          class="input"
-          type="email"
-          placeholder="e.g. alex@example.com"
-          v-model="email"
-          :class="{ isValidField: validEmail }"
-        /><span
-          class="icon is-small is-left"
-          :class="{ 'has-text-info': validEmail }"
-        >
-          <i class="fas fa-envelope"></i>
-        </span>
-        <span class="icon is-small is-right has-text-success" v-if="validEmail">
-          <i class="fas fa-check"></i>
-        </span>
+    <form class="box box-shadow min-width-35" v-on:submit.prevent="onSubmit">
+      <div class="field">
+        <label class="label">Email</label>
+        <div class="control has-icons-left has-icons-right">
+          <input
+            class="input"
+            type="email"
+            placeholder="e.g. alex@example.com"
+            v-model="email"
+            :class="{ isValidField: validEmail }"
+          /><span
+            class="icon is-small is-left"
+            :class="{ 'has-text-info': validEmail }"
+          >
+            <i class="fas fa-envelope"></i>
+          </span>
+          <span
+            class="icon is-small is-right has-text-success"
+            v-if="validEmail"
+          >
+            <i class="fas fa-check"></i>
+          </span>
+        </div>
       </div>
-    </div>
 
-    <div class="field">
-      <label class="label">Password</label>
-      <div class="control has-icons-left has-icons-right">
-        <input
-          class="input"
-          type="password"
-          placeholder="********"
-          v-model="password"
-        /><span
-          class="icon is-small is-left"
-          :class="{ 'has-text-info': this.password }"
-        >
-          <i class="fas fa-lock"></i>
-        </span>
-        <span
-          class="icon is-small is-right has-text-success"
-          v-if="this.password"
-        >
-          <i class="fas fa-check"></i>
-        </span>
+      <div class="field">
+        <label class="label">Password</label>
+        <div class="control has-icons-left has-icons-right">
+          <input
+            class="input"
+            type="password"
+            placeholder="********"
+            v-model="password"
+          /><span
+            class="icon is-small is-left"
+            :class="{ 'has-text-info': this.password }"
+          >
+            <i class="fas fa-lock"></i>
+          </span>
+          <span
+            class="icon is-small is-right has-text-success"
+            v-if="this.password"
+          >
+            <i class="fas fa-check"></i>
+          </span>
+        </div>
       </div>
-    </div>
-    <div class="buttons">
-      <router-link class="button" to="/">Annuler</router-link
-      ><button class="button is-primary" @click="loggin">Se connecter</button>
-    </div>
-  </form>
+      <div class="buttons">
+        <router-link class="button" to="/">Annuler</router-link
+        ><button class="button is-primary" @click="loggin">Se connecter</button>
+      </div>
+    </form>
+  </section>
 </template>
 
 <script>

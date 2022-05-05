@@ -1,7 +1,7 @@
 <template>
   <form class="box box-shadow m-t-10 mx-auto" v-on:submit.prevent="onSubmit">
     <div class="field">
-      <label class="label">Nouveau Prix</label>
+      <label class="label">Nouveau Prix mettre en reel</label>
 
       <div class="control has-icons-left has-icons-right">
         <input

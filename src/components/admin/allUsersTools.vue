@@ -104,7 +104,7 @@ export default {
       newsletter: null,
       cssProps: {
         width: "50%",
-        top: "12%",
+        top: "50%",
         position: "fixed",
       },
     };

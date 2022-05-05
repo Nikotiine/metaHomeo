@@ -1,166 +1,205 @@
 <template>
-  <form
-    class="box box-shadow m-t-10 max-width-35 mx-auto"
-    v-on:submit.prevent="onSubmit"
-  >
-    <div class="field">
-      <label class="label">Nom</label>
-      <div class="control has-icons-left has-icons-right">
-        <input
-          class="input"
-          type="text"
-          placeholder="Nom"
-          v-model="userData.lastName"
-        /><span
-          class="icon is-small is-left"
-          :class="{ 'has-text-info': this.userData.lastName }"
-        >
-          <i class="fas fa-lock"></i>
-        </span>
-        <span
-          class="icon is-small is-right has-text-success"
-          v-if="this.userData.lastName"
-        >
-          <i class="fas fa-check"></i>
-        </span>
-      </div>
-    </div>
-    <div class="field">
-      <label class="label">Prenom</label>
-      <div class="control has-icons-left has-icons-right">
-        <input
-          class="input"
-          type="text"
-          placeholder="Prenom"
-          v-model="userData.firstName"
-        /><span
-          class="icon is-small is-left"
-          :class="{ 'has-text-info': this.userData.firstName }"
-        >
-          <i class="fas fa-lock"></i>
-        </span>
-        <span
-          class="icon is-small is-right has-text-success"
-          v-if="this.userData.firstName"
-        >
-          <i class="fas fa-check"></i>
-        </span>
-      </div>
-    </div>
-    <div class="field">
-      <label class="label">Email</label>
-      <div class="control has-icons-left has-icons-right">
-        <input
-          class="input"
-          type="email"
-          placeholder="e.g. alex@example.com"
-          v-model="userData.email"
-          :class="{ isValidField: validEmail }"
-        /><span
-          class="icon is-small is-left"
-          :class="{ 'has-text-info': validEmail }"
-        >
-          <i class="fas fa-envelope"></i>
-        </span>
-        <span class="icon is-small is-right has-text-success" v-if="validEmail">
-          <i class="fas fa-check"></i>
-        </span>
-      </div>
-    </div>
-
-    <div class="field">
-      <label class="label">Password</label>
-      <div class="control has-icons-left has-icons-right">
-        <input
-          class="input"
-          type="password"
-          placeholder="********"
-          v-model="newpassword"
-        /><span class="icon is-small is-left">
-          <i class="fas fa-lock"></i>
-        </span>
-        <span class="icon is-small is-right has-text-success">
-          <i class="fas fa-check"></i>
-        </span>
-      </div>
-    </div>
-    <div class="field">
-      <label class="label"
-        >Adresse Pro
-        <span class="ml-5"
-          ><a @click="majPro = !majPro">(Mettre a jour)</a></span
-        >
-      </label>
-      <p class="subtitle" v-if="!majPro">
-        {{ userData.userAdress?.adressePro }}
-      </p>
-      <find-adresse @getSelected="getAdressePro" v-if="majPro" />
-    </div>
-    <div class="field">
-      <label class="label"
-        >Adresse Perso
-        <span class="ml-5"
-          ><a @click="majPerso = !majPerso">(Mettre a jour)</a></span
-        >
-      </label>
-      <p class="subtitle" v-if="!majPerso">
-        {{
-          userData.userAdress?.adressePerso
-            ? userData.userAdress?.adressePerso
-            : userData.userAdress?.adressePro
-        }}
-      </p>
-      <find-adresse @getSelected="getAdressePerso" v-if="majPerso" />
-    </div>
-
-    <div class="field">
-      <div class="control">
-        <label class="checkbox">
-          <input type="checkbox" v-model="registered" />
-          newsletter
-        </label>
-        <label class="checkbox">
+  <section class="hero is-fullheight">
+    <form
+      class="box box-shadow m-t-10 min-width-35 mx-auto"
+      v-on:submit.prevent="onSubmit"
+    >
+      <div class="field">
+        <label class="label">Nom</label>
+        <div class="control has-icons-left has-icons-right">
           <input
-            type="checkbox"
-            class="ml-4"
-            v-model="userData.publicAuthorisation"
+            class="input"
+            type="text"
+            placeholder="Nom"
+            v-model="userData.lastName"
+          /><span
+            class="icon is-small is-left"
+            :class="{ 'has-text-info': this.userData.lastName }"
+          >
+            <i class="fas fa-lock"></i>
+          </span>
+          <span
+            class="icon is-small is-right has-text-success"
+            v-if="this.userData.lastName"
+          >
+            <i class="fas fa-check"></i>
+          </span>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Prenom</label>
+        <div class="control has-icons-left has-icons-right">
+          <input
+            class="input"
+            type="text"
+            placeholder="Prenom"
+            v-model="userData.firstName"
+          /><span
+            class="icon is-small is-left"
+            :class="{ 'has-text-info': this.userData.firstName }"
+          >
+            <i class="fas fa-lock"></i>
+          </span>
+          <span
+            class="icon is-small is-right has-text-success"
+            v-if="this.userData.firstName"
+          >
+            <i class="fas fa-check"></i>
+          </span>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Email</label>
+        <div class="control has-icons-left has-icons-right">
+          <input
+            class="input"
+            type="email"
+            placeholder="e.g. alex@example.com"
+            v-model="userData.email"
+            :class="{ isValidField: validEmail }"
+          /><span
+            class="icon is-small is-left"
+            :class="{ 'has-text-info': validEmail }"
+          >
+            <i class="fas fa-envelope"></i>
+          </span>
+          <span
+            class="icon is-small is-right has-text-success"
+            v-if="validEmail"
+          >
+            <i class="fas fa-check"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Password</label>
+        <div class="control has-icons-left has-icons-right">
+          <input
+            class="input"
+            type="password"
+            placeholder="********"
+            v-model="newpassword"
+          /><span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+          <span class="icon is-small is-right has-text-success">
+            <i class="fas fa-check"></i>
+          </span>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label"
+          >Adresse Pro
+          <span class="ml-5"
+            ><a @click="majPro = !majPro">(Mettre a jour)</a></span
+          >
+        </label>
+        <p class="subtitle" v-if="!majPro">
+          {{ userData.userAdress?.adressePro }}
+        </p>
+        <find-adresse @getSelected="getAdressePro" v-if="majPro" />
+      </div>
+      <div class="field">
+        <label class="label"
+          >Adresse Perso
+          <span class="ml-5"
+            ><a @click="majPerso = !majPerso">(Mettre a jour)</a></span
+          >
+        </label>
+        <p class="subtitle" v-if="!majPerso">
+          {{
+            userData.userAdress?.adressePerso
+              ? userData.userAdress?.adressePerso
+              : userData.userAdress?.adressePro
+          }}
+        </p>
+        <find-adresse @getSelected="getAdressePerso" v-if="majPerso" />
+      </div>
+      <div
+        class="file is-primary has-name is-flex is-flex-direction-column is-align-items-center"
+        :class="{
+          'is-danger': fileOverSize,
+          'is-primary': !fileOverSize,
+        }"
+      >
+        <label class="label">Photo de profil (max 200ko)</label>
+        <label class="file-label">
+          <input
+            class="file-input"
+            type="file"
+            accept="image/jpeg, image/png"
+            name="userAvatar"
+            @change="previewFile"
           />
-          donees publiques
+          <span class="file-cta">
+            <span class="file-icon">
+              <i class="fas fa-upload"></i>
+            </span>
+            <span class="file-label">Choisir une photo </span>
+          </span>
+          <span class="file-name"
+            ><p>{{ fileName ? fileName : "aucun fichier" }}</p></span
+          >
+          <!-- <span class="file-name" v-if="avatars.length === 1"
+          ><p v-for="avatar in avatars" :key="avatar.id">
+            {{ avatar.name }}
+          </p></span
+        > -->
         </label>
       </div>
-    </div>
+      <div class="field mt-4">
+        <div class="control">
+          <label class="checkbox">
+            <input type="checkbox" v-model="registered" />
+            newsletter
+          </label>
+          <label class="checkbox">
+            <input
+              type="checkbox"
+              class="ml-4"
+              v-model="userData.publicAuthorisation"
+            />
+            donees publiques
+          </label>
+        </div>
+      </div>
 
-    <div class="buttons">
-      <router-link
-        class="button"
-        :to="{
-          name: 'espace-praticien',
-          params: { view: 'espace-perso' },
-        }"
-        >Annuler</router-link
-      ><button class="button is-primary" @click="confirm = !confirm">
-        Modifier
-      </button>
-    </div>
-    <Transition>
-      <toast-confirm
-        v-if="confirm"
-        :message="messageConfirm"
-        @callBack="callBackToast"
-        :css="cssConfirm"
-      />
-    </Transition>
-    <Transition>
-      <toast-validate
-        :message="messageValid"
-        v-if="update"
-        :css="cssValidate"
-      />
-    </Transition>
-    <Transition>
-      <toast-erreur :message="messageErreur" v-if="updateFail" :css="cssErreur"
-    /></Transition>
-  </form>
+      <div class="buttons">
+        <router-link
+          class="button"
+          :to="{
+            name: 'espace-praticien',
+            params: { view: 'espace-perso' },
+          }"
+          >Annuler</router-link
+        ><button class="button is-primary" @click="confirm = !confirm">
+          Modifier
+        </button>
+      </div>
+      <Transition>
+        <toast-confirm
+          v-if="confirm"
+          :message="messageConfirm"
+          @callBack="callBackToast"
+          :css="cssConfirm"
+        />
+      </Transition>
+      <Transition>
+        <toast-validate
+          :message="messageValid"
+          v-if="update"
+          :css="cssValidate"
+        />
+      </Transition>
+      <Transition>
+        <toast-erreur
+          :message="messageErreur"
+          v-if="updateFail"
+          :css="cssErreur"
+      /></Transition>
+    </form>
+  </section>
 </template>
 
 <script>
@@ -174,6 +213,8 @@ export default {
   components: { toastConfirm, toastValidate, findAdresse, toastErreur },
   data() {
     return {
+      avatar: null,
+      fileOverSize: false,
       messageConfirm: "Enregister les modifications ?",
       messageValid: "Profil mis a jour",
       messageErreur: "Echec de la mise a jour",
@@ -211,7 +252,17 @@ export default {
       this.userData = this.$store.state.userData;
       this.registered = this.$store.state.userData?.newsletter?.registered;
     },
-
+    previewFile: function (file) {
+      if (file.target.files[0].size < 80000) {
+        this.fileName = file.target.files[0].name;
+        this.fileOverSize = false;
+        this.avatar = new Blob(file.target.files, { type: "jpeg/jpg" });
+        console.log(this.avatar);
+      } else {
+        this.fileOverSize = true;
+        return;
+      }
+    },
     callBackToast: function (res) {
       if (!res) {
         this.confirm = !this.confirm;
@@ -243,7 +294,7 @@ export default {
         .then((res) => {
           if (res.data === "update sucess") {
             this.update = true;
-
+            this.sendAvatar(this.userData.avatar?.avatar?.id);
             setTimeout(() => {
               this.$router.push({
                 name: "espace-praticien",
@@ -269,6 +320,16 @@ export default {
       const lat = adresseData.gps[1];
       const long = adresseData.gps[0];
       this.geoLocPerso = { type: "Point", coordinates: [lat, long] };
+    },
+    sendAvatar: function (id) {
+      let formData = new FormData();
+      formData.append("avatar", this.avatar);
+      //formData.append("userId", id);
+      axios.put("user/avatar" + id, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
     },
   },
   mounted() {},
