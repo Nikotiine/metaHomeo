@@ -6,10 +6,18 @@
     <div class="hero-body is-justify-content-center is-flex-direction-column">
       <div class="tabs is-centered">
         <ul>
-          <li class="button is-outlined" @click="inProgress = true">
+          <li
+            class="button is-outlined"
+            :class="{ 'is-focused is-primary is-light': inProgress }"
+            @click="inProgress = true"
+          >
             En cours
           </li>
-          <li class="button is-outlined" @click="inProgress = false">
+          <li
+            class="button is-outlined"
+            :class="{ 'is-focused is-primary is-light': !inProgress }"
+            @click="inProgress = false"
+          >
             Expediés
           </li>
         </ul>
@@ -18,6 +26,7 @@
         <thead>
           <tr>
             <th>Numero de commande</th>
+            <th>Pour</th>
             <th>adresse</th>
             <th>total</th>
             <th>reglement</th>
@@ -28,6 +37,12 @@
         <tbody v-if="inProgress">
           <tr v-for="order in ordersInProgress" :key="order.id">
             <td>{{ order.id }}</td>
+            <td
+              @click="UserProfil(order.user?.id)"
+              class="cursor has-text-link"
+            >
+              {{ order.user?.lastName }} {{ order.user?.firstName }}
+            </td>
             <td>{{ order.shipTo }}</td>
             <td>{{ order.total }}</td>
             <td>{{ order.payment }}</td>
@@ -41,6 +56,12 @@
         <tbody v-if="!inProgress">
           <tr v-for="order in ordersShipped" :key="order.id">
             <td>{{ order.id }}</td>
+            <td
+              @click="UserProfil(order.user?.id)"
+              class="cursor has-text-link"
+            >
+              {{ order.user?.lastName }} {{ order.user?.firstName }}
+            </td>
             <td>{{ order.shipTo }}</td>
             <td>{{ order.total }}</td>
             <td>{{ order.payment }}</td>
@@ -52,6 +73,16 @@
           </tr>
         </tbody>
       </table>
+    </div>
+    <div class="modal is-active" v-if="showUserProfil">
+      <div
+        class="modal-background"
+        @click="showUserProfil = !showUserProfil"
+      ></div>
+      <div class="modal-content">
+        <user-profil :profil="user" :listOfOrder="listOfOrder" />
+      </div>
+      <button class="modal-close is-large" aria-label="close"></button>
     </div>
     <toast-confirm
       v-if="confirm"
@@ -67,11 +98,16 @@
 import axios from "axios";
 import toastConfirm from "../tools/toastConfirm.vue";
 import toastValidate from "../tools/toastValidate.vue";
+import userProfil from "./userProfil.vue";
 export default {
   name: "allOrders",
-  components: { toastConfirm, toastValidate },
+  components: { toastConfirm, toastValidate, userProfil },
   data() {
     return {
+      showUserProfil: false,
+      allUsers: null,
+      user: null,
+      listOfOrder: null,
       inProgress: true,
       validedate: false,
       isShipped: "",
@@ -99,10 +135,18 @@ export default {
     },
   },
   methods: {
+    UserProfil: function (id) {
+      this.user = this.allUsers.filter((user) => user.id === id);
+      axios.get("orders/myOrders/" + this.user[0].id).then((res) => {
+        this.listOfOrder = res.data;
+      });
+      this.showUserProfil = !this.showUserProfil;
+    },
     shipped: function (id) {
       this.idToShipped = id;
       this.confirm = !this.confirm;
     },
+
     confirmShipping: function (res) {
       if (!res) {
         this.idToShipped = null;
@@ -125,6 +169,10 @@ export default {
   },
   created() {
     this.$store.dispatch("findAllOrders");
+    axios.get("user/all").then((res) => {
+      console.log(res.data);
+      this.allUsers = res.data;
+    });
   },
 };
 </script>

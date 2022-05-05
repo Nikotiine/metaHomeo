@@ -72,10 +72,15 @@ export default {
     },
   },
   created() {
-    axios.get("orders/myOrders").then((res) => {
+    axios.get("orders/myOrders/" + this.getUserId).then((res) => {
       this.listOfOrder = res.data;
     });
     this.$store.dispatch("loadPriceAndQuantity");
+  },
+  computed: {
+    getUserId() {
+      return this.$store.state.userData.id;
+    },
   },
 };
 </script>

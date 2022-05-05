@@ -4,8 +4,18 @@
       <strong>{{ message }}</strong>
     </p>
     <div class="is-flex mt-3 is-justify-content-space-evenly">
-      <button class="button is-small is-rounded" @click="cancel">Non</button>
-      <button class="button is-small is-rounded" @click="confirm">Oui</button>
+      <button
+        class="button is-small is-rounded is-danger is-light"
+        @click="cancel"
+      >
+        Non
+      </button>
+      <button
+        class="button is-small is-rounded is-primary is-light"
+        @click="confirm"
+      >
+        Oui
+      </button>
     </div>
   </div>
 </template>

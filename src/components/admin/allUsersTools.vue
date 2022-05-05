@@ -16,27 +16,24 @@
       <table class="table">
         <thead>
           <tr>
-            <th>Identifiant</th>
             <th>Nom</th>
             <th>Prenom</th>
             <th>Adresse pro</th>
-            <th>Adresse perso</th>
+
             <th>Email de contact</th>
             <th>newletter</th>
             <th>profil publique</th>
             <th>admin ?</th>
-            <th>Nombre de Commndes</th>
+
             <th>Details</th>
             <th>Supprimer le compte</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="users in allUsers" :key="users.id">
-            <td>{{ users.id }}</td>
             <td>{{ users.lastName }}</td>
             <td>{{ users.firstName }}</td>
             <td>{{ users.userAdress?.adressePro }}</td>
-            <td>{{ users.userAdress?.adressePerso }}</td>
 
             <td>
               <a :href="'mailto:' + users.email">{{ users.email }}</a>
@@ -45,7 +42,7 @@
             <td>{{ users.newsletter?.registered ? "oui" : "non" }}</td>
             <td>{{ users.publicAuthorisation ? "oui" : "non" }}</td>
             <td>{{ users.admin ? "oui" : "non" }}</td>
-            <td>commandes</td>
+
             <td @click="UserProfil(users.id)">
               <span class="icon has-text-info cursor">
                 <i class="fas fa-eye"></i
@@ -66,7 +63,7 @@
         @click="showUserProfil = !showUserProfil"
       ></div>
       <div class="modal-content">
-        <user-profil :profil="user" />
+        <user-profil :profil="user" :listOfOrder="listOfOrder" />
       </div>
       <button class="modal-close is-large" aria-label="close"></button>
     </div>
@@ -93,6 +90,7 @@ export default {
   components: { toastConfirm, toastValidate, userProfil },
   data() {
     return {
+      listOfOrder: null,
       showUserProfil: false,
       user: null,
       isDeleted: "",
@@ -114,16 +112,19 @@ export default {
   methods: {
     UserProfil: function (id) {
       this.user = this.allUsers.filter((user) => user.id === id);
+      axios.get("orders/myOrders/" + this.user[0].id).then((res) => {
+        this.listOfOrder = res.data;
+      });
       this.showUserProfil = !this.showUserProfil;
     },
-    loadAvatar(id) {
-      axios.get("user/avatar/" + id).then((res) => {
-        const avatar = res.data.avatar.data;
-        this.avatarUrl = window.btoa(
-          String.fromCharCode(...new Uint8Array(avatar))
-        );
-      });
-    },
+    // loadAvatar(id) {
+    //   axios.get("user/avatar/" + id).then((res) => {
+    //     const avatar = res.data.avatar.data;
+    //     this.avatarUrl = window.btoa(
+    //       String.fromCharCode(...new Uint8Array(avatar))
+    //     );
+    //   });
+    // },
     callBackToast: function (res) {
       if (!res) {
         this.confirmDel = !this.confirmDel;
