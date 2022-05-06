@@ -10,7 +10,7 @@
           class="input"
           type="text"
           placeholder="Nom"
-          v-model="name"
+          v-model="prod.name"
         /><span
           class="icon is-small is-left"
           :class="{
@@ -35,10 +35,42 @@
       </div>
     </div>
     <div class="field">
+      <label class="label">Reference</label>
+
+      <div class="control has-icons-left has-icons-right">
+        <input
+          class="input"
+          type="number"
+          placeholder="Reference"
+          v-model="prod.ref"
+        /><span
+          class="icon is-small is-left"
+          :class="{
+            'has-text-info': refIsUsed.length === 0,
+            'has-text-danger': refIsUsed.length === 1,
+          }"
+        >
+          <i class="fas fa-lock"></i>
+        </span>
+        <span
+          class="icon is-small is-right has-text-success"
+          v-if="refIsUsed.length === 0"
+        >
+          <i class="fas fa-check"></i>
+        </span>
+        <span
+          class="icon is-small is-right has-text-danger"
+          v-if="refIsUsed.length === 1"
+        >
+          <i class="fas fa-times"></i>
+        </span>
+      </div>
+    </div>
+    <div class="field">
       <label class="label">Categorie</label>
 
       <div class="select min-width-100">
-        <select v-model="categorie" class="min-width-100">
+        <select v-model="prod.categoryCode" class="min-width-100">
           <option v-bind:value="null">Sélectionnez la categorie</option>
           <option v-for="cat in categories" :key="cat.id" :value="cat.code">
             {{ cat.name }}
@@ -74,9 +106,10 @@ import toastValidate from "../tools/toastValidate.vue";
 export default {
   name: "editProduct",
   components: { toastValidate },
-  props: ["productId"],
+
   data() {
     return {
+      reference: null,
       name: null,
       cssProps: {
         width: "80%",
@@ -91,9 +124,10 @@ export default {
     send: function () {
       axios
         .put("products/edit", {
-          id: this.productId,
-          name: this.name,
-          code: this.categorie,
+          id: this.prod.id,
+          name: this.prod.name,
+          code: this.prod.categoryCode,
+          ref: this.prod.ref,
         })
         .then((res) => {
           console.log(res);
@@ -107,11 +141,18 @@ export default {
     },
   },
   computed: {
+    prod() {
+      return this.$store.state.prodToEdit;
+    },
     categories() {
       return this.$store.state.productsCategories;
     },
     fieldIsValid() {
-      if (this.name === null || this.categorie === null) {
+      if (
+        this.prod.name === null ||
+        this.prod.categoryCode === null ||
+        this.prod.ref === null
+      ) {
         return false;
       } else return true;
     },
@@ -119,7 +160,15 @@ export default {
     nameIsUsed() {
       const names = this.$store.state.productsName;
       return names.filter((x) => {
-        if (this.name && x.name !== this.name) {
+        if (this.prod.name && x.name !== this.prod.name) {
+          return false;
+        } else return true;
+      });
+    },
+    refIsUsed() {
+      const refs = this.$store.state.productsName;
+      return refs.filter((x) => {
+        if (this.prod.ref && x.ref !== this.prod.ref) {
           return false;
         } else return true;
       });

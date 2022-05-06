@@ -1,5 +1,5 @@
 <template>
-  <section class="hero is-fullheight">
+  <section class="hero is-fullheight" v-if="userData">
     <form
       class="box box-shadow m-t-10 min-width-35 mx-auto"
       v-on:submit.prevent="onSubmit"
@@ -151,7 +151,7 @@
       <div class="field mt-4">
         <div class="control">
           <label class="checkbox">
-            <input type="checkbox" v-model="registered" />
+            <input type="checkbox" v-model="userData.newsletter.registered" />
             newsletter
           </label>
           <label class="checkbox">
@@ -213,6 +213,7 @@ export default {
   components: { toastConfirm, toastValidate, findAdresse, toastErreur },
   data() {
     return {
+      fileName: null,
       avatar: null,
       fileOverSize: false,
       messageConfirm: "Enregister les modifications ?",
@@ -221,7 +222,7 @@ export default {
       update: false,
       confirm: false,
       updateFail: false,
-      userData: null,
+      //  userData: null,
       newpassword: null,
       majPro: false,
       majPerso: false,
@@ -229,7 +230,7 @@ export default {
       geoLocPerso: null,
       adressePro: null,
       geoLocPro: null,
-      registered: false,
+      //registered: false,
       cssConfirm: {
         width: "35%",
         position: "absolute",
@@ -248,10 +249,10 @@ export default {
     };
   },
   methods: {
-    getUserData: function () {
-      this.userData = this.$store.state.userData;
-      this.registered = this.$store.state.userData?.newsletter?.registered;
-    },
+    // getUserData: function () {
+    //   this.userData = this.$store.state.userData;
+    //   this.registered = this.$store.state.userData?.newsletter?.registered;
+    // },
     previewFile: function (file) {
       if (file.target.files[0].size < 80000) {
         this.fileName = file.target.files[0].name;
@@ -272,6 +273,7 @@ export default {
       }
     },
     edit: function () {
+      console.log(this.userData.avatar?.id);
       axios
         .put("user/edit", {
           firstName: this.userData.firstName,
@@ -288,24 +290,31 @@ export default {
             : this.userData.adressePro,
           geoLocPro: this.geoLocPro ? this.geoLocPro : this.userData.geoLocPro,
           password: this.newpassword,
-          newsletter: this.registered,
+          newsletter: this.userData.newsletter.registered,
           publicAuthorisation: this.userData.publicAuthorisation,
         })
         .then((res) => {
-          if (res.data === "update sucess") {
-            this.update = true;
-            this.sendAvatar(this.userData.avatar?.avatar?.id);
-            setTimeout(() => {
-              this.$router.push({
-                name: "espace-praticien",
-                params: { view: "espace-perso" },
-              });
-            }, 2000);
+          if (res.data.data === "update sucess") {
+            if (this.avatar === null) {
+              this.update = true;
+              this.$store.dispatch("loadUserData");
+              setTimeout(() => {
+                this.$router.push({
+                  name: "espace-praticien",
+                  params: { view: "espace-perso" },
+                });
+              }, 2000);
+            } else {
+              this.sendAvatar(this.userData.avatar?.id);
+            }
+
+            //this.sendAvatar(this.userData.avatar?.id);
           } else {
+            this.updateFail = !this.updateFail;
             setTimeout(() => {
               this.updateFail = !this.updateFail;
-              window.location.reload();
-            }, 200);
+              //window.location.reload();
+            }, 1000);
           }
         });
     },
@@ -325,24 +334,46 @@ export default {
       let formData = new FormData();
       formData.append("avatar", this.avatar);
       //formData.append("userId", id);
-      axios.put("user/avatar" + id, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      axios
+        .put("user/edit/avatar/" + id, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((res) => {
+          if (res.data.data === "update sucess") {
+            this.update = true;
+            this.$store.dispatch("loadUserData");
+            setTimeout(() => {
+              this.$router.push({
+                name: "espace-praticien",
+                params: { view: "espace-perso" },
+              });
+            }, 2000);
+          } else {
+            this.updateFail = !this.updateFail;
+            setTimeout(() => {
+              this.updateFail = !this.updateFail;
+              //window.location.reload();
+            }, 1000);
+          }
+        });
     },
   },
-  mounted() {},
+
   computed: {
     validEmail() {
       const re =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(this.userData.email);
     },
+    userData() {
+      return this.$store.state.userData;
+    },
   },
   created() {
     this.$store.dispatch("loadUserData");
-    this.getUserData();
+    // this.getUserData();
   },
 };
 </script>

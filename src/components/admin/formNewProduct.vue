@@ -36,6 +36,39 @@
       </div>
     </div>
     <div class="field">
+      <p class="subtitle is-4 mt-4">Reference</p>
+
+      <div class="control has-icons-left has-icons-right">
+        <input
+          class="input"
+          type="number"
+          placeholder="Reference"
+          v-model="reference"
+        /><span
+          class="icon is-small is-left"
+          :class="{
+            'has-text-info': refIsUsed.length === 0,
+            'has-text-danger': refIsUsed.length === 1,
+          }"
+        >
+          <i class="fas fa-lock"></i>
+        </span>
+        <span
+          class="icon is-small is-right has-text-success"
+          v-if="refIsUsed.length === 0"
+        >
+          <i class="fas fa-check"></i>
+        </span>
+        <span
+          class="icon is-small is-right has-text-danger"
+          v-if="refIsUsed.length === 1"
+        >
+          <i class="fas fa-times"></i>
+        </span>
+      </div>
+    </div>
+
+    <div class="field">
       <p class="subtitle is-4">categorie</p>
 
       <div class="select min-width-100">
@@ -72,6 +105,7 @@ export default {
   components: { toastValidate },
   data() {
     return {
+      reference: null,
       name: null,
       cssProps: {
         width: "100%",
@@ -90,6 +124,7 @@ export default {
         .post("products/new", {
           name: this.name,
           code: this.categorie,
+          ref: this.reference,
         })
         .then((res) => {
           console.log(res.data.name);
@@ -116,6 +151,14 @@ export default {
       const names = this.$store.state.productsName;
       return names.filter((x) => {
         if (this.name && x.name !== this.name) {
+          return false;
+        } else return true;
+      });
+    },
+    refIsUsed() {
+      const refs = this.$store.state.productsName;
+      return refs.filter((x) => {
+        if (this.reference && x.ref !== this.reference) {
           return false;
         } else return true;
       });

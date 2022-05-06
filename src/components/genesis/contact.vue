@@ -157,6 +157,7 @@
             <div class="control">
               <button
                 class="button is-link"
+                :class="{ 'is-loading': waitForRes }"
                 :disabled="!fieldIsValid"
                 @click="send"
               >
@@ -183,6 +184,7 @@ export default {
   components: { toastValidate },
   data() {
     return {
+      waitForRes: false,
       formIsSend: false,
       lastName: null,
       message: "",
@@ -207,6 +209,7 @@ export default {
       });
     },
     send: function () {
+      this.waitForRes = !this.waitForRes;
       const noInterceptorAxios = axios.create();
       noInterceptorAxios
         .post("public/contact", {
@@ -222,6 +225,7 @@ export default {
             this.formIsSend = !this.formIsSend;
             setTimeout(() => {
               this.formIsSend = !this.formIsSend;
+              this.waitForRes = !this.waitForRes;
               this.$router.push({
                 name: "aboutUs",
                 params: { view: "accueil" },

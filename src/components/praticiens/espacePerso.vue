@@ -1,15 +1,16 @@
 <template>
-  <section class="hero is-fullheight">
+  <section class="hero is-fullheight" v-if="!loadUserInfo">
+    <p class="title is-1 m-t-10">loading</p>
+  </section>
+  <section class="hero is-fullheight" v-else>
     <div class="hero-head">
-      <p class="title m-t-10">
-        Bonjour {{ loadUserInfo.firstName }} {{ loadUserInfo.lastName }}
-      </p>
+      <p class="title m-t-10">Bonjour {{ loadUserInfo.firstName }}</p>
     </div>
     <div class="hero-body is-justify-content-space-around">
       <div class="box box-shadow">
         <p class="title">Profil</p>
 
-        <img :src="'data:image/png;base64,' + avatarUrl" alt="" />
+        <img :src="'data:image/png;base64,' + loadAvatar" alt="" />
 
         <p class="subtitle is-4 mt-2">
           {{ loadUserInfo.lastName }} {{ loadUserInfo.firstName }}
@@ -102,33 +103,48 @@ export default {
   },
   created() {
     const admin = Cookies.get("isAdmin");
-    // const user = Cookies.get("userName");
-    // this.$store.commit("newUser", user);
+
     this.$store.commit("isAdmin", admin);
-    this.$store.dispatch("loadUserData");
-    this.loadAvatar();
+    // this.$store.dispatch("loadUserData");
+    console.log("avatar");
+    // this.loadAvatar();
   },
   computed: {
     loadUserInfo() {
       return this.$store.state.userData;
     },
-  },
-  methods: {
     loadAvatar() {
       const avatar = this.$store.state.userData.avatar.avatar;
-
-      this.avatarUrl = window.btoa(
+      const avatarUrl = window.btoa(
         String.fromCharCode(...new Uint8Array(avatar.data))
       );
-
-      //   var binary = "";
-      //   var bytes = new Uint8Array(avatar);
-      //   var len = bytes.byteLength;
-      //   for (var i = 0; i < len; i++) {
-      //     binary += String.fromCharCode(bytes[i]);
-      //   }
-      //   this.toto = window.btoa(binary);
+      return avatarUrl;
     },
+  },
+  beforeCreate() {
+    this.$store.dispatch("loadUserData").then((res) => {
+      console.log(res);
+    });
+  },
+  async mounted() {
+    console.log("mounted");
+    this.$store.dispatch("loadUserData");
+    // this.loadAvatar();
+  },
+  methods: {
+    // loadAvatar() {
+    //   const avatar = this.$store.state.userData.avatar.avatar;
+    //   this.avatarUrl = window.btoa(
+    //     String.fromCharCode(...new Uint8Array(avatar.data))
+    //   );
+    //   //   var binary = "";
+    //   //   var bytes = new Uint8Array(avatar);
+    //   //   var len = bytes.byteLength;
+    //   //   for (var i = 0; i < len; i++) {
+    //   //     binary += String.fromCharCode(bytes[i]);
+    //   //   }
+    //   //   this.toto = window.btoa(binary);
+    // },
   },
 };
 </script>

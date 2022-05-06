@@ -54,11 +54,13 @@
         </thead>
         <tbody>
           <tr v-for="product in filteredProd" :key="product.id">
-            <td>{{ product.id }}</td>
+            <td>{{ product.ref }}</td>
             <td>{{ product.name }}</td>
 
-            <td @click="editProduct(product.id)">
-              <i class="fas fa-wrench"></i>
+            <td @click="editProduct(product)">
+              <span class="icon cursor has-text-info">
+                <i class="fas fa-wrench"></i
+              ></span>
             </td>
           </tr>
         </tbody>
@@ -68,7 +70,7 @@
       <div class="modal-background" @click="editModal = !editModal"></div>
       <div class="modal-content no-overFLow">
         <edit-product
-          :productId="productId"
+          :product="prod"
           @cancel="cancelEditProduct"
           v-if="editProd"
         />
@@ -110,8 +112,8 @@ export default {
     };
   },
   methods: {
-    editProduct: function (productId) {
-      this.productId = productId;
+    editProduct: function (prod) {
+      this.$store.commit("prodToEdit", prod);
       this.editModal = !this.editModal;
       this.editProd = !this.editProd;
     },

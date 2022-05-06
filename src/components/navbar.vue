@@ -173,7 +173,7 @@
                   params: { view: 'espace-perso' },
                 }"
               >
-                <strong>Espace perso : {{ userFirstName }}</strong>
+                <strong>Accueil Espace Perso</strong>
               </router-link>
               <router-link
                 class="button is-rounded"
@@ -209,9 +209,9 @@ export default {
     },
   },
   computed: {
-    userFirstName() {
-      return this.$store.state.userData.firstName;
-    },
+    // userFirstName() {
+    //   return Cookies.get("userName");
+    // },
   },
 };
 </script>

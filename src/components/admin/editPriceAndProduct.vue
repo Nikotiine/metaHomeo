@@ -9,6 +9,7 @@
           type="number"
           placeholder="prix"
           v-model="prix"
+          step="0.01"
         /><span class="icon is-small is-left">
           <i class="fas fa-lock"></i>
         </span>

@@ -1,6 +1,6 @@
 import { createStore } from "vuex";
 import axios from "axios";
-//import Cookies from "js-cookie";
+import Cookies from "js-cookie";
 export default createStore({
   state: {
     user: "visiteur",
@@ -15,6 +15,7 @@ export default createStore({
     productsName: [],
     priceAndQuantity: null,
     allOrders: [],
+    prodToEdit: null,
   },
   getters: {
     allOrders: (state) => {
@@ -43,6 +44,9 @@ export default createStore({
     },
   },
   mutations: {
+    prodToEdit(state, prod) {
+      state.prodToEdit = prod;
+    },
     newUser(state, newStatus) {
       state.user = newStatus;
     },
@@ -97,8 +101,9 @@ export default createStore({
     },
     loadUserData({ commit }) {
       axios.get("user/me").then((res) => {
-        console.log(res.data.avatar instanceof Blob);
+        console.log(res.data);
         commit("setUserData", res.data);
+        Cookies.set("userName", res.data.firstName);
       });
     },
     loadTotalPraticien({ commit }) {
