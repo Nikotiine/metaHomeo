@@ -9,12 +9,10 @@
           <p class="title is-4">Parametres de vente</p>
           <p class="subtitle mt-3">Prix Unitaire: {{ prixUnitaire }} €</p>
           <p class="subtitle">
-            Taille S = {{ tailleS }} Produits conditionnés =>
-            {{ tailleS * prixUnitaire }} €
+            Taille S = {{ tailleS }} Produits conditionnés => {{ prixSmall }} €
           </p>
           <p class="subtitle">
-            Taille L = {{ tailleL }} Produits conditionnés =>
-            {{ tailleL * prixUnitaire }} €
+            Taille L = {{ tailleL }} Produits conditionnés => {{ prixBig }} €
           </p>
           <button
             class="button is-primary is-outlined mt-4"
@@ -24,7 +22,7 @@
           </button>
         </div>
         <div class="min-width-35">
-          <form-new-product />
+          <form-new-product :cat="categories" />
         </div>
       </div>
     </div>
@@ -71,6 +69,7 @@
       <div class="modal-content no-overFLow">
         <edit-product
           :product="prod"
+          :cat="categories"
           @cancel="cancelEditProduct"
           v-if="editProd"
         />
@@ -155,7 +154,16 @@ export default {
   },
   computed: {
     categories() {
-      return this.$store.state.productsCategories;
+      const cat = this.$store.state.productsCategories;
+      return cat.splice(0, 6);
+    },
+    prixSmall() {
+      const prixS = this.prixUnitaire * this.tailleS;
+      return prixS.toFixed(2);
+    },
+    prixBig() {
+      const prixL = this.prixUnitaire * this.tailleL;
+      return prixL.toFixed(2);
     },
   },
   mounted() {},

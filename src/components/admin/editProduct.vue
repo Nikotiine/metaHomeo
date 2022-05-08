@@ -106,7 +106,7 @@ import toastValidate from "../tools/toastValidate.vue";
 export default {
   name: "editProduct",
   components: { toastValidate },
-
+  props: ["cat"],
   data() {
     return {
       reference: null,
@@ -145,7 +145,7 @@ export default {
       return this.$store.state.prodToEdit;
     },
     categories() {
-      return this.$store.state.productsCategories;
+      return this.cat;
     },
     fieldIsValid() {
       if (

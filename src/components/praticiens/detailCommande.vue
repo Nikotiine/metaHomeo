@@ -14,7 +14,7 @@
           <th>Produit</th>
           <th>smallBox</th>
           <th>BigBox</th>
-          <th>Prix par produit</th>
+          <th>Prix par produit (€)</th>
         </tr>
       </thead>
       <tbody>
@@ -30,7 +30,7 @@
           <th>Total</th>
           <th></th>
           <th></th>
-          <th>{{ order.total }}</th>
+          <th>{{ order.total }} €</th>
         </tr>
         <tr>
           <th>status</th>

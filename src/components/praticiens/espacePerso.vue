@@ -16,8 +16,16 @@
           {{ loadUserInfo.lastName }} {{ loadUserInfo.firstName }}
         </p>
         <p class="subtitle">
-          Adresse : <br />
+          Adresse pro: <br />
           {{ loadUserInfo.userAdress?.adressePro }}
+        </p>
+        <p class="subtitle">
+          Adresse perso: <br />
+          {{
+            loadUserInfo.userAdress?.adressePerso
+              ? loadUserInfo.userAdress?.adressePerso
+              : "non renseigner"
+          }}
         </p>
         <p class="subtitle">mail de contact : {{ loadUserInfo.email }}</p>
         <p class="subtitle">
@@ -103,11 +111,8 @@ export default {
   },
   created() {
     const admin = Cookies.get("isAdmin");
-
     this.$store.commit("isAdmin", admin);
-    // this.$store.dispatch("loadUserData");
     console.log("avatar");
-    // this.loadAvatar();
   },
   computed: {
     loadUserInfo() {
@@ -129,29 +134,13 @@ export default {
   async mounted() {
     console.log("mounted");
     this.$store.dispatch("loadUserData");
-    // this.loadAvatar();
   },
-  methods: {
-    // loadAvatar() {
-    //   const avatar = this.$store.state.userData.avatar.avatar;
-    //   this.avatarUrl = window.btoa(
-    //     String.fromCharCode(...new Uint8Array(avatar.data))
-    //   );
-    //   //   var binary = "";
-    //   //   var bytes = new Uint8Array(avatar);
-    //   //   var len = bytes.byteLength;
-    //   //   for (var i = 0; i < len; i++) {
-    //   //     binary += String.fromCharCode(bytes[i]);
-    //   //   }
-    //   //   this.toto = window.btoa(binary);
-    // },
-  },
+  methods: {},
 };
 </script>
 
 <style lang="scss" scoped>
 .box {
   min-width: 35%;
-  // margin: 0 auto;
 }
 </style>

@@ -74,7 +74,7 @@
       <div class="select min-width-100">
         <select v-model="categorie" class="min-width-100">
           <option v-bind:value="null">Sélectionnez la categorie</option>
-          <option v-for="cat in categories" :key="cat.id" :value="cat.code">
+          <option v-for="cat in categories" :key="cat.code" :value="cat.code">
             {{ cat.name }}
           </option>
         </select>
@@ -103,6 +103,7 @@ import toastValidate from "../tools/toastValidate.vue";
 export default {
   name: "formNewProduct",
   components: { toastValidate },
+  props: ["cat"],
   data() {
     return {
       reference: null,
@@ -139,7 +140,7 @@ export default {
 
   computed: {
     categories() {
-      return this.$store.state.productsCategories;
+      return this.cat;
     },
     fieldIsValid() {
       if (this.name === null || this.categorie === null) {

@@ -35,7 +35,6 @@ export default {
             "https://api-adresse.data.gouv.fr/search/?q=" + adresse + "&limit=3"
           )
           .then((res) => {
-            console.log(res.data.features);
             this.resultList = res.data.features.map((r) => {
               return {
                 label: r.properties.label,

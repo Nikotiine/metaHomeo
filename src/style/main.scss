@@ -60,3 +60,15 @@ nav {
   opacity: 0;
 }
 // -------------------------transitions-----------------------------------
+.multiselect__option--highlight {
+  background-color: $primary;
+  &::after {
+    background-color: $primary;
+  }
+}
+.multiselect__tag {
+  background: $primary;
+}
+.multiselect__option--selected {
+  background: $selected;
+}

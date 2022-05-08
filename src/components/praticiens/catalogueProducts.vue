@@ -2,38 +2,57 @@
   <section class="hero is-fullheight" v-if="!validePanier">
     <div class="hero-head">
       <h1 class="title is-1 m-t-8">Catalogue Genesis</h1>
+
       <div class="box box-shadow max-width-50 mx-auto">
         <p class="title">
-          Taille S = {{ tailleS }} Produits Conditioné =>
-          {{ tailleS * prixUnitaire }} €
+          Taille S = {{ tailleS }} Produits Conditioné => {{ prixSmall }} €
         </p>
         <p class="title">
-          Taille L = {{ tailleB }} Produits Conditioné =>
-          {{ tailleB * prixUnitaire }} €
+          Taille L = {{ tailleL }} Produits Conditioné => {{ prixBig }} €
         </p>
       </div>
     </div>
     <div class="hero-body is-justify-content-center is-flex-direction-column">
-      <div class="tabs is-centered">
-        <ul>
-          <li
-            class="button is-outlined is-flex"
-            :class="{
-              'is-focused is-primary is-light': activeList === categorie.code,
-            }"
-            v-for="categorie in categories"
-            :key="categorie.id"
-          >
-            <a @click="selectCategory(categorie.code)">{{ categorie.name }}</a>
-          </li>
-        </ul>
+      <div class="min-width-50">
+        <input
+          type="text"
+          class="input"
+          v-model="searchByName"
+          placeholder="Recherche un produit"
+        />
+      </div>
+      <div class="min-width-50">
+        <VueMultiselect
+          v-model="selectedCategories"
+          :options="categories"
+          placeholder="Filtrez par categorie"
+          track-by="name"
+          label="name"
+          :multiple="true"
+          @select="selectCategory"
+          @remove="removeSelectCategory"
+          :groupSelect="true"
+          :groupLabel="'tout'"
+          class="mt-4"
+        >
+        </VueMultiselect>
       </div>
 
-      <table class="table is-fullwidth is-striped">
+      <table class="table is-fullwidth is-striped mt-5">
         <thead>
           <tr>
-            <th>n°</th>
-            <th>nom</th>
+            <th>
+              n°
+              <div v-if="activeList === 6">
+                <input type="number" name="" id="" />
+              </div>
+            </th>
+            <th>
+              nom
+              <div v-if="activeList === 6">
+                <input type="text" name="" id="" />
+              </div>
+            </th>
 
             <th>Ajouter au panier</th>
             <th>Mis dans le panier</th>
@@ -41,8 +60,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="product in filteredProd" :key="product.id">
-            <td>{{ product.id }}</td>
+          <tr v-for="product in searchProduct" :key="product.id">
+            <td>{{ product.ref }}</td>
             <td>{{ product.name }}</td>
 
             <td>
@@ -75,10 +94,7 @@
               ></span>
             </td>
             <td>
-              {{
-                product.smallBox * tailleS * prixUnitaire +
-                product.bigBox * prixUnitaire * tailleB
-              }}
+              {{ product.totalB + product.totalS }}
             </td>
           </tr>
         </tbody>
@@ -114,58 +130,83 @@
 </template>
 
 <script>
+import VueMultiselect from "vue-multiselect";
 import commandeProduits from "./commande.vue";
+
 import axios from "axios";
 export default {
   name: "catalogueProducts",
   props: [],
-  components: { commandeProduits },
+  components: { commandeProduits, VueMultiselect },
   data() {
     return {
+      selectedCategories: "",
       validePanier: false,
       prixUnitaire: null,
       tailleS: null,
-      tailleB: null,
+      tailleL: null,
       editModal: false,
       products: [],
-      activeList: 0,
+      codeOfSelectedCategory: [],
       filteredProd: [],
       smallBox: 0,
       bigBox: 0,
       selectedProduct: [],
       editProd: false,
       editPrice: false,
+      searchByName: "",
     };
   },
+
   methods: {
     selectCategory: function (code) {
-      this.activeList = code;
+      this.codeOfSelectedCategory.push(code.code);
       this.filteredProd = this.products.filter((item) => {
-        return item.categoryCode === code;
+        return this.codeOfSelectedCategory.includes(item.categoryCode);
       });
     },
+    removeSelectCategory: function (code) {
+      const i = this.codeOfSelectedCategory.findIndex((x) => x === code.code);
+      this.codeOfSelectedCategory.splice(i, 1);
+      this.filteredProd = this.products.filter((item) => {
+        return this.codeOfSelectedCategory.includes(item.categoryCode);
+      });
+      if (this.filteredProd.length === 0) {
+        this.filteredProd = this.products;
+      }
+    },
+    // filteringProduct: function () {
+    //   //console.log(input);
+    //   // this.filteredProd = this.filteredProd.filter((product) =>
+    //   //   product.name.toLowerCase().includes(this.searchProduct.toLowerCase())
+    //   // );
+    // },
     addSmallBox: function (id, quantity) {
       const prod = this.products.find((product) => product.id === id);
       prod.smallBox += quantity;
-      prod.totalS = prod.smallBox * this.prixUnitaire * this.tailleS;
+      const totalS = prod.smallBox * this.prixUnitaire * this.tailleS;
+      prod.totalS = parseFloat(totalS.toFixed(2));
       this.smallBox += quantity;
     },
     addBigBox: function (id, quantity) {
       const prod = this.products.find((product) => product.id === id);
       prod.bigBox += quantity;
-      prod.totalB = prod.bigBox * this.prixUnitaire * this.tailleB;
+      const totalB = prod.bigBox * this.prixUnitaire * this.tailleL;
+      prod.totalB = parseFloat(totalB.toFixed(2));
       this.bigBox += quantity;
     },
     removeSmallBox: function (id) {
       const prod = this.products.find((product) => product.id === id);
       prod.smallBox -= 1;
-      prod.totalS = prod.smallBox * this.prixUnitaire * this.tailleS;
+      const totalS = prod.smallBox * this.prixUnitaire * this.tailleS;
+      prod.totalS = parseFloat(totalS.toFixed(2));
       this.smallBox -= 1;
     },
     removeBigBox: function (id) {
       const prod = this.products.find((product) => product.id === id);
       prod.bigBox -= 1;
-      prod.totalB = prod.bigBox * this.prixUnitaire * this.tailleB;
+      const totalB = prod.bigBox * this.prixUnitaire * this.tailleL;
+      prod.totalB = parseFloat(totalB.toFixed(2));
       this.bigBox -= 1;
     },
     commander: function () {
@@ -188,13 +229,13 @@ export default {
         p.totalB = 0;
         return p;
       });
-      this.selectCategory(0);
+      this.filteredProd = this.products;
     });
     this.$store.dispatch("loadCategory");
     axios.get("products/price").then((res) => {
       this.prixUnitaire = res.data.prixUnitaire;
       this.tailleS = res.data.quantitySmall;
-      this.tailleB = res.data.quantityBig;
+      this.tailleL = res.data.quantityBig;
     });
   },
   computed: {
@@ -202,10 +243,26 @@ export default {
       return this.$store.state.productsCategories;
     },
     totalCommande() {
-      return (
+      const total =
         this.smallBox * this.prixUnitaire * this.tailleS +
-        this.bigBox * this.prixUnitaire * this.tailleB
-      );
+        this.bigBox * this.prixUnitaire * this.tailleL;
+      return parseFloat(total.toFixed(2));
+    },
+    prixSmall() {
+      const prixS = this.prixUnitaire * this.tailleS;
+      return parseFloat(prixS.toFixed(2));
+    },
+    prixBig() {
+      const prixL = this.prixUnitaire * this.tailleL;
+      return parseFloat(prixL.toFixed(2));
+    },
+    searchProduct() {
+      return this.filteredProd.filter((product) => {
+        return product.name
+          .toLowerCase()
+          .includes(this.searchByName.toLowerCase());
+        // product.ref.toString().includes(this.searchByRef.toString());
+      });
     },
   },
   mounted() {},
