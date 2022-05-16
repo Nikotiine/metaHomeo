@@ -4,12 +4,14 @@
       <div class="hero-body">
         <div class="container has-text-centered">
           <!-- <p class="title is-1">Genesis Meta-Homeopathie</p> -->
-          <div class="is-flex mt-6 is-justify-content-space-between">
-            <figure class="image max50">
-              <img src="../../assets/meta.jpeg" />
+          <div
+            class="is-flex mt-6 is-justify-content-space-between is-align-items-center"
+          >
+            <figure class="image max-width-45">
+              <img src="../../assets/logo_meta.png" alt="Logo Genesis" />
             </figure>
 
-            <div class="is-flex is-justify-content-space-between max50">
+            <div class="is-flex is-justify-content-space-between max-width-45">
               <div class="mt-6">
                 <div class="box box-shadow gradientBackGround">
                   <p class="subtitle">
@@ -23,11 +25,11 @@
                     ainsi je vous explique la methode , suivez le guide ...
                   </p>
                 </div>
-                <div class="mt-6">
-                  <button-neon :btnName="bouton" :width="320" />
-                </div>
               </div>
             </div>
+          </div>
+          <div class="mt-6">
+            <button-neon :btnName="bouton" :width="320" />
           </div>
         </div>
       </div>
@@ -35,7 +37,7 @@
         <img
           class="image is-96x96 cursor"
           src="../../assets/images.png"
-          alt=""
+          alt="fleches descendantes"
           @click="scrollDown"
         />
       </div>
@@ -73,11 +75,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.title {
-  margin-top: 7%;
-}
-.max50 {
-  max-width: 45%;
-}
-</style>
+<style lang="scss" scoped></style>

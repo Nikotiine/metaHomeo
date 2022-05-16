@@ -3,14 +3,14 @@
     <section class="hero is-fullheight">
       <div class="hero-head">
         <div class="container has-text-centered">
-          <p class="title">Les formations</p>
+          <p class="title is-1 has-font-gabriola">Les formations</p>
           <p class="subtitle mt-5">
             Presentation de la page principale des formations
           </p>
           <p class="subtitle">
-            Nous vous proposons 2 type de formations , aouverte a tout publqiue
-            desirant se forame a la methode , ou a un publique deja
-            professonelel de la sante
+            Nous vous proposons 2 types de formations , ouverte à tout public
+            desirant se forame a la methode , ou a un public deja professionel
+            de la santé
           </p>
         </div>
       </div>
@@ -21,7 +21,7 @@
         >
           <div class="card-image">
             <figure class="image is-4by3">
-              <img src="../assets/labo.jpeg" alt="Placeholder image" />
+              <img src="../assets/labo.jpeg" alt="salle de formation" />
             </figure>
           </div>
           <div
@@ -44,7 +44,7 @@
         <div class="card box-shadow" :class="{ isLarge: view === 'pro-sante' }">
           <div class="card-image">
             <figure class="image is-4by3">
-              <img src="../assets/labo.jpeg" alt="Placeholder image" />
+              <img src="../assets/formation.jpeg" alt="salle de formation" />
             </figure>
           </div>
           <div

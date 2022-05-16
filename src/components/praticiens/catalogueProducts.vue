@@ -14,14 +14,16 @@
     </div>
     <div class="hero-body is-justify-content-center is-flex-direction-column">
       <div class="min-width-50">
+        <label class="label">Recherche un produit par nom ou reference</label>
         <input
           type="text"
           class="input"
-          v-model="searchByName"
-          placeholder="Recherche un produit"
+          v-model="searchInput"
+          placeholder="Rechercher"
         />
       </div>
       <div class="min-width-50">
+        <label class="label mt-4">Rechercher une ou plusieurs categories</label>
         <VueMultiselect
           v-model="selectedCategories"
           :options="categories"
@@ -154,7 +156,7 @@ export default {
       selectedProduct: [],
       editProd: false,
       editPrice: false,
-      searchByName: "",
+      searchInput: "",
     };
   },
 
@@ -175,12 +177,6 @@ export default {
         this.filteredProd = this.products;
       }
     },
-    // filteringProduct: function () {
-    //   //console.log(input);
-    //   // this.filteredProd = this.filteredProd.filter((product) =>
-    //   //   product.name.toLowerCase().includes(this.searchProduct.toLowerCase())
-    //   // );
-    // },
     addSmallBox: function (id, quantity) {
       const prod = this.products.find((product) => product.id === id);
       prod.smallBox += quantity;
@@ -258,10 +254,10 @@ export default {
     },
     searchProduct() {
       return this.filteredProd.filter((product) => {
-        return product.name
+        let stringToSearch = product.name + product.ref;
+        return stringToSearch
           .toLowerCase()
-          .includes(this.searchByName.toLowerCase());
-        // product.ref.toString().includes(this.searchByRef.toString());
+          .includes(this.searchInput.toLowerCase());
       });
     },
   },

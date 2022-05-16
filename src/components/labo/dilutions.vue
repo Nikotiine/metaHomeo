@@ -19,17 +19,6 @@
           </p>
         </div>
       </div>
-      <div class="hero-foot">
-        <nav class="tabs is-boxed is-fullwidth">
-          <div class="container">
-            <ul>
-              <li>
-                <a>footer ??? </a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </div>
     </section>
   </div>
 </template>
@@ -38,7 +27,11 @@
 export default {
   name: "diluTions",
   methods: {},
-  mounted() {},
+  mounted() {
+    setTimeout(() => {
+      document.getElementById("title").scrollIntoView({ behavior: "smooth" });
+    }, 800);
+  },
 };
 </script>
 

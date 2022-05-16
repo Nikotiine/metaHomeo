@@ -3,7 +3,7 @@
     <section class="hero toto is-fullheight">
       <div class="hero-head" id="aboutUs">
         <div class="">
-          <p class="title is-1">Info et contact</p>
+          <p class="title is-1 m-t-10 has-font-gabriola">Infos et contact</p>
           <p class="subtitle"></p>
         </div>
       </div>
@@ -90,7 +90,7 @@ export default {
       info: [
         {
           id: 0,
-          name: "toutes les info",
+          name: "Toutes les infos",
           router: {
             name: "aboutUs",
             params: { view: "accueil" },
@@ -105,7 +105,7 @@ export default {
       praticiens: [
         {
           id: 0,
-          name: "tous les praticiens",
+          name: "Tous les praticiens",
           router: {
             name: "aboutUs",
             params: { view: "tous-les-praticiens" },
@@ -130,9 +130,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.title {
-  margin-top: 7%;
-}
 .hero-body {
   padding: 0;
 }

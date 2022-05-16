@@ -2,12 +2,14 @@
   <div>
     <section class="hero is-fullheight">
       <div class="hero-head">
-        <p class="title is-1" id="labo">Genesis Le labo</p>
+        <p class="title m-t-8 is-1 has-font-gabriola" id="labo">
+          Genesis Le labo
+        </p>
       </div>
       <div class="hero-body">
         <div class="container has-text-centered">
-          <div class="is-flex mt-6 is-justify-content-space-between">
-            <div class="is-flex is-justify-content-space-between max50">
+          <div class="is-flex mt-4 is-justify-content-space-between">
+            <div class="is-flex is-justify-content-space-between max-width-45">
               <div class="mt-6">
                 <div class="box gradientBackGround box-shadow">
                   <p class="subtitle">
@@ -26,8 +28,8 @@
                 </div>
               </div>
             </div>
-            <figure class="image max50">
-              <img src="../../assets/labo.jpeg" />
+            <figure class="image max-width-45">
+              <img src="../../assets/labo_gen.jpg" alt="photo du labo" />
             </figure>
           </div>
         </div>
@@ -36,7 +38,7 @@
         <img
           class="image is-96x96 cursor"
           src="../../assets/images.png"
-          alt=""
+          alt="fleches descendantes"
           @click="scrollDown"
         />
       </div>
@@ -77,11 +79,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.title {
-  margin-top: 7%;
-}
-.max50 {
-  max-width: 45%;
-}
-</style>
+<style lang="scss" scoped></style>

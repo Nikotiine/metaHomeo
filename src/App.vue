@@ -33,7 +33,9 @@ export default {
       return this.$store.state.admin;
     },
   },
-  mounted() {},
+  mounted() {
+    document.title = "Genesis";
+  },
 };
 </script>
 <style lang="scss"></style>

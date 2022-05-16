@@ -7,4 +7,9 @@ $primary: rgba(107, 166, 241, 1);
 $selected: rgb(136, 230, 246);
 $footer-padding: 1rem 1.5rem 1rem;
 $footer-background-color: rgb(199 211 255 / 25%);
+$size-1: 5rem;
+@font-face {
+  font-family: "gabriola";
+  src: url("../assets/font/gabriola.ttf");
+}
 @import "../../node_modules/bulma/sass/utilities/_all.sass";

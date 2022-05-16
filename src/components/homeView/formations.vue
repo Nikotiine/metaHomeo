@@ -2,15 +2,13 @@
   <div>
     <section class="hero is-fullheight">
       <div class="hero-head" id="formation">
-        <p class="title is-1">Genesis Les formations</p>
-        <div class="is-flex is-justify-content-space-around">
-          <img class="image is-128x128" src="../../assets/ccurve.png" alt="" />
-          <img class="image is-128x128" src="../../assets/bcurve.png" alt="" />
-        </div>
+        <p class="title is-1 has-font-gabriola m-t-10">
+          Genesis Les formations
+        </p>
       </div>
-      <div class="hero-body has-text-centered mb-5">
-        <div class="is-flex mt-6 is-justify-content-space-between mb-5">
-          <div class="max50">
+      <div class="hero-body has-text-centered mb-5 m-t-8">
+        <div class="is-flex mt-6 is-justify-content-space-around mb-5">
+          <div class="max-width-35">
             <div class="box box-shadow gradientBackGround">
               <p class="title">Une formation sans pre-requis</p>
               <p class="subtitle mt-5">
@@ -28,7 +26,7 @@
               <button-neon :btnName="bouton" :width="320" />
             </div>
           </div>
-          <div class="max50">
+          <div class="max-width-35">
             <div class="box box-shadow gradientBackGround">
               <p class="title">Une formation avec pre-requis</p>
               <p class="subtitle mt-5">
@@ -52,7 +50,7 @@
         <img
           class="image is-96x96 cursor"
           src="../../assets/images.png"
-          alt=""
+          alt="fleches descendantes"
           @click="scrollDown"
         />
       </div>
@@ -108,11 +106,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.title {
-  margin-top: 7%;
-}
-.max50 {
-  max-width: 45%;
-}
-</style>
+<style lang="scss" scoped></style>

@@ -1,7 +1,7 @@
 <template>
   <section class="hero is-fullheight">
     <div class="hero-head">
-      <h1 class="title is-1 m-t-8">Catalogue Genesis</h1>
+      <h1 class="title is-2 m-t-8">Catalogue Genesis</h1>
       <div
         class="is-flex is-justify-content-space-around is-align-items-center"
       >
@@ -154,8 +154,7 @@ export default {
   },
   computed: {
     categories() {
-      const cat = this.$store.state.productsCategories;
-      return cat.splice(0, 6);
+      return this.$store.state.productsCategories;
     },
     prixSmall() {
       const prixS = this.prixUnitaire * this.tailleS;

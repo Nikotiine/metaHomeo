@@ -4,7 +4,7 @@
       <section class="hero is-fullheight">
         <div class="hero-head">
           <div class="">
-            <p class="title m-t-10 is-1">Qui sommes nous ?</p>
+            <p class="title m-t-10 is-1 has-font-gabriola">Qui sommes nous ?</p>
             <div
               class="is-flex is-flex-direction-column is-align-items-center is-justify-content-space-evenly mt-6"
             >
@@ -43,30 +43,29 @@
         </div>
         <div class="hero-body">
           <div class="container has-text-centered">
+            <p class="title mt-6">
+              <button-neon :btnName="contact" :width="320" />
+            </p>
+            <Transition>
+              <contact-us v-if="view === 'contactUs'" />
+            </Transition>
+            <p class="title mt-6">
+              <button-neon :btnName="praticiens" :width="420" />
+            </p>
+            <Transition>
+              <all-praticiens v-if="view === 'tous-les-praticiens'" />
+            </Transition>
             <p class="title">Nos Partenaires</p>
-            <div class="is-flex is-justify-content-space-evenly">
+            <div class="is-flex is-justify-content-space-evenly mt-6">
               <figure class="image is-48X48">
                 <img src="../assets/lecairn.jpeg" alt="Placeholder image" />
               </figure>
               <figure class="image is-48X48">
                 <img src="../assets/lansot.jpeg" alt="Placeholder image" />
               </figure>
-              <figure class="image is-48X48">
-                <img src="../assets/logoforma.jpeg" alt="Placeholder image" />
-              </figure>
             </div>
-            <p class="title mt-6">
-              <button-neon :btnName="contact" :width="320" />
-            </p>
-            <p class="title mt-6">
-              <button-neon :btnName="praticiens" :width="420" />
-            </p>
           </div>
         </div>
-        <Transition>
-          <contact-us v-if="view === 'contactUs'" />
-        </Transition>
-        <all-praticiens v-if="view === 'tous-les-praticiens'" />
       </section>
     </div>
   </div>

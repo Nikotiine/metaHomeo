@@ -1,23 +1,27 @@
 <template>
   <div>
     <section class="hero is-fullheight">
-      <div class="hero-head">
-        <div class="container has-text-centered">
-          <p class="title">Le labo</p>
-          <p class="subtitle mt-5">
-            Presentation de la page principale du labo
-          </p>
-          <p class="subtitle">
-            Sur chaque vignette vous pourrez decrouvrir en detail les techniquye
-            utilisées
-          </p>
+      <div class="hero-head m-t-8">
+        <div
+          class="container has-text-centered is-flex is-align-items-center is-justify-content-space-around"
+        >
+          <div>
+            <p class="title is-1 has-font-gabriola">Le Labo</p>
+            <p class="subtitle mt-1">
+              Presentation de la page principale du labo
+            </p>
+            <p class="subtitle">
+              Sur chaque vignette vous pourrez decrouvrir en detail les
+              techniquye utilisées
+            </p>
+          </div>
         </div>
       </div>
       <div class="hero-body is-justify-content-space-around">
         <div class="card box-shadow" :class="{ isLarge: view === 'technique' }">
           <div class="card-image">
             <figure class="image is-4by3">
-              <img src="../assets/labo.jpeg" alt="Placeholder image" />
+              <img src="../assets/labo_gen.jpg" alt="photo du labo" />
             </figure>
           </div>
           <div
@@ -40,7 +44,7 @@
         <div class="card box-shadow" :class="{ isLarge: view === 'dilutions' }">
           <div class="card-image">
             <figure class="image is-4by3">
-              <img src="../assets/labo.jpeg" alt="Placeholder image" />
+              <img src="../assets/logo_dilution.jpg" alt="photo fioles" />
             </figure>
           </div>
           <div
@@ -63,7 +67,7 @@
         <div class="card box-shadow" :class="{ isLarge: view === 'quesaco' }">
           <div class="card-image">
             <figure class="image is-4by3">
-              <img src="../assets/labo.jpeg" alt="Placeholder image" />
+              <img src="../assets/quesaco.jpg" alt="logo genesis" />
             </figure>
           </div>
           <div class="card-content" :class="{ isSelected: view === 'quesaco' }">
@@ -159,9 +163,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.title {
-  margin-top: 10%;
-}
 .card {
   min-width: 25%;
 }
@@ -171,5 +172,20 @@ export default {
 }
 .isSelected {
   background-color: rgb(55 210 244 / 50%);
+}
+// .is-fullheight {
+//   background-image: url("/Users/niko/naturo/front/src/assets/testlabo.jpg");
+//   background-size: cover;
+//   background-repeat: no-repeat;
+//   background-position: center;
+// }
+.max50 {
+  max-width: 45%;
+}
+.has-background-labo {
+  // background-image: url("/Users/niko/naturo/front/src/assets/backquesaca.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 </style>

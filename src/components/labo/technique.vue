@@ -19,17 +19,6 @@
           </p>
         </div>
       </div>
-      <div class="hero-foot">
-        <nav class="tabs is-boxed is-fullwidth">
-          <div class="container">
-            <ul>
-              <li @click="scrollToTop">
-                <a>footer? </a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </div>
     </section>
   </div>
 </template>
@@ -46,10 +35,9 @@ export default {
     // },
   },
   mounted() {
-    // setTimeout(
-    //   this.scrollInto(),
-    //   20000
-    // );
+    setTimeout(() => {
+      document.getElementById("title").scrollIntoView({ behavior: "smooth" });
+    }, 800);
   },
 };
 </script>
