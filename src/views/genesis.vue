@@ -11,34 +11,37 @@
               <figure class="image">
                 <img src="../assets/staff.png" />
               </figure>
-              <p class="subtitle mt-5">
-                Niko , osteo depuis 1000 ans et marbout guerisseur qui ramene ta
-                femme plus vite que la redoute
+              <p class="title mt-5">
+                Quelque mot pour te presenter + une photo sympa de toi
               </p>
             </div>
           </div>
         </div>
-        <div class="hero-body mt-6">
+        <div class="hero-body mt-6 findUs">
           <div
             class="container has-text-centered is-flex is-justify-content-center"
           >
             <div
-              class="is-flex-direction-column is-flex is-align-items-flex-start box box-shadow check"
+              class="is-flex-direction-column is-flex is-align-items-flex-start check"
             >
               <p class="title mb-6">Ou trouver ...</p>
 
               <label
-                class="checkbox m-2"
+                class="checkbox m-2 hidden"
                 v-for="checkboxe in markers"
                 :key="checkboxe.id"
               >
-                <input type="checkbox" v-model="checkboxe.check" />
+                <input
+                  type="checkbox"
+                  class="hidden"
+                  v-model="checkboxe.check"
+                />
                 {{ checkboxe.name }}
               </label>
             </div>
           </div>
-          <div class="maps">
-            <maps-leaflet :heightMaps="50" :widthMaps="45" :markers="markers" />
+          <div class="">
+            <maps-leaflet class="maps" :markers="markers" />
           </div>
         </div>
         <div class="hero-body">
@@ -120,7 +123,7 @@ export default {
           adresse: "51 Av. Léopold Fabre Lans en vercors",
           telephone: "0681389671",
           geoloc: latLng(45.127699, 5.589008),
-          check: false,
+          check: true,
         },
         {
           id: 1,
@@ -128,25 +131,25 @@ export default {
           adresse: "180 Rue des Écoles, 38250 Lans-en-Vercors",
           telephone: "0681389671",
           geoloc: latLng(45.128078, 5.589974),
-          check: false,
+          check: true,
         },
         {
           id: 2,
           name: "Office du tourisme",
           geoloc: latLng(45.129298, 5.584312),
-          check: false,
+          check: true,
         },
         {
           id: 3,
           name: "Hotel Val Fleuri",
           geoloc: latLng(45.129312, 5.58436),
-          check: false,
+          check: true,
         },
         {
           id: 4,
           name: "Hotel du col de l arc",
           geoloc: latLng(45.129412, 5.58446),
-          check: false,
+          check: true,
         },
       ],
     };
@@ -176,8 +179,42 @@ export default {
 .check {
   padding: 5rem;
 }
-
+.maps {
+  height: 75vh;
+  width: 50vw;
+}
 label {
   font-size: 1.5em;
+}
+@media screen and (max-width: 1024px) {
+  .check {
+    padding: 1rem 5rem 0 0;
+  }
+  label {
+    font-size: 1em;
+  }
+  .maps {
+    width: 45vw;
+  }
+  .hero-body {
+    padding: 0;
+  }
+}
+@media screen and (max-width: 768px) {
+  .findUs {
+    display: block !important;
+  }
+  .maps {
+    margin: auto;
+  }
+  .hidden {
+    display: none;
+  }
+  .check {
+    padding: 0;
+    & p {
+      font-size: 1.5rem;
+    }
+  }
 }
 </style>

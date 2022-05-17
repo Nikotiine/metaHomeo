@@ -275,4 +275,9 @@ export default {
 
   flex-direction: column;
 }
+@media screen and (max-width: 1024px) {
+  .box {
+    width: 80%;
+  }
+}
 </style>

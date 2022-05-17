@@ -10,7 +10,9 @@
         <div class="is-flex mt-6 is-justify-content-space-around mb-5">
           <div class="max-width-35">
             <div class="box box-shadow gradientBackGround">
-              <p class="title">Une formation sans pre-requis</p>
+              <p class="title">
+                du texte pour presenter ta fomation sans pre requis
+              </p>
               <p class="subtitle mt-5">
                 descrpition de la formation Lorem ipsum dolor sit amet
                 consectetur adipisicing elit. Totam cupiditate laboriosam at eum
@@ -28,7 +30,9 @@
           </div>
           <div class="max-width-35">
             <div class="box box-shadow gradientBackGround">
-              <p class="title">Une formation avec pre-requis</p>
+              <p class="title">
+                du texte pour presenter ta fomation avec pre requis
+              </p>
               <p class="subtitle mt-5">
                 descrpition de la formation Lorem ipsum dolor sit amet
                 consectetur adipisicing elit. Totam cupiditate laboriosam at eum
@@ -46,7 +50,7 @@
           </div>
         </div>
       </div>
-      <div class="is-flex is-justify-content-center mb-6 mt-6">
+      <div class="is-flex is-justify-content-center mb-6 mt-6 downArrow">
         <img
           class="image is-96x96 cursor"
           src="../../assets/images.png"
@@ -106,4 +110,22 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@media screen and (max-width: 768px) {
+  .is-flex {
+    flex-direction: column;
+  }
+  .max-width-35 {
+    max-width: 100%;
+    margin-top: 3%;
+  }
+  .downArrow {
+    margin: 0 auto;
+  }
+}
+@media screen and (max-width: 768px) {
+  .is-1 {
+    font-size: 3rem !important;
+  }
+}
+</style>

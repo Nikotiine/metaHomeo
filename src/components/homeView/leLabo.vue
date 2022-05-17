@@ -2,7 +2,7 @@
   <div>
     <section class="hero is-fullheight">
       <div class="hero-head">
-        <p class="title m-t-8 is-1 has-font-gabriola" id="labo">
+        <p class="title m-t-10 is-1 has-font-gabriola" id="labo">
           Genesis Le labo
         </p>
       </div>
@@ -12,24 +12,17 @@
             <div class="is-flex is-justify-content-space-between max-width-45">
               <div class="mt-6">
                 <div class="box gradientBackGround box-shadow">
-                  <p class="subtitle">
-                    descrpition du labo Meta-Homeopathie Lorem ipsum dolor sit
-                    amet consectetur adipisicing elit. Totam cupiditate
-                    laboriosam at eum accusantium quia nobis architecto aperiam
-                    dolorum reiciendis porro et tempora voluptates, labore,
-                    atque ad libero ut consectetur.
-                  </p>
-                  <p class="subtitle">
-                    ainsi je vous explique la methode , suivez le guide ...
-                  </p>
+                  <p class="title is-2">Ici du texte pour presenter ton site</p>
+                  <p class="subtitle">La c'est le resume du labo ...</p>
+                  <p class="subtitle">donc reusme du labo :p</p>
                 </div>
                 <div class="mt-6">
                   <button-neon :btnName="bouton" :width="320" />
                 </div>
               </div>
             </div>
-            <figure class="image max-width-45">
-              <img src="../../assets/labo_gen.jpg" alt="photo du labo" />
+            <figure class="image max-width-50">
+              <img src="../../assets/img/labo_gen.jpg" alt="photo du labo" />
             </figure>
           </div>
         </div>
@@ -79,4 +72,24 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@media screen and (max-width: 1024px) {
+  .is-flex {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+  .max-width-45 {
+    max-width: 100%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .max-width-50 {
+    max-width: 80%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .is-1 {
+    font-size: 3rem !important;
+  }
+}
+</style>

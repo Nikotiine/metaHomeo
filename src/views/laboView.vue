@@ -7,12 +7,10 @@
         >
           <div>
             <p class="title is-1 has-font-gabriola">Le Labo</p>
-            <p class="subtitle mt-1">
-              Presentation de la page principale du labo
-            </p>
-            <p class="subtitle">
-              Sur chaque vignette vous pourrez decrouvrir en detail les
-              techniquye utilisées
+            <p class="title mt-1">Du texte pour la presention du labo</p>
+            <p class="title">
+              Et aussi du texte pour chaque onglet .. technique dilutiuon
+              quesaco
             </p>
           </div>
         </div>
@@ -21,7 +19,7 @@
         <div class="card box-shadow" :class="{ isLarge: view === 'technique' }">
           <div class="card-image">
             <figure class="image is-4by3">
-              <img src="../assets/labo_gen.jpg" alt="photo du labo" />
+              <img src="../assets/img/labo_gen.jpg" alt="photo du labo" />
             </figure>
           </div>
           <div
@@ -44,7 +42,7 @@
         <div class="card box-shadow" :class="{ isLarge: view === 'dilutions' }">
           <div class="card-image">
             <figure class="image is-4by3">
-              <img src="../assets/logo_dilution.jpg" alt="photo fioles" />
+              <img src="../assets/img/logo_dilution.jpg" alt="photo fioles" />
             </figure>
           </div>
           <div
@@ -67,7 +65,7 @@
         <div class="card box-shadow" :class="{ isLarge: view === 'quesaco' }">
           <div class="card-image">
             <figure class="image is-4by3">
-              <img src="../assets/quesaco.jpg" alt="logo genesis" />
+              <img src="../assets/img/quesaco.jpg" alt="logo genesis" />
             </figure>
           </div>
           <div class="card-content" :class="{ isSelected: view === 'quesaco' }">
@@ -173,19 +171,16 @@ export default {
 .isSelected {
   background-color: rgb(55 210 244 / 50%);
 }
-// .is-fullheight {
-//   background-image: url("/Users/niko/naturo/front/src/assets/testlabo.jpg");
-//   background-size: cover;
-//   background-repeat: no-repeat;
-//   background-position: center;
-// }
-.max50 {
-  max-width: 45%;
-}
-.has-background-labo {
-  // background-image: url("/Users/niko/naturo/front/src/assets/backquesaca.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+@media screen and (max-width: 1024px) {
+  .card {
+    margin-top: 3%;
+  }
+  .hero-body {
+    flex-wrap: wrap;
+  }
+  .isLarge {
+    min-width: 50%;
+    transition: 800ms ease;
+  }
 }
 </style>

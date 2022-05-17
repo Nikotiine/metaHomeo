@@ -1,5 +1,5 @@
 <template>
-  <div :style="{ height: heightMaps + 'vh', width: widthMaps + 'vw' }">
+  <div class="map1s">
     <l-map v-model="zoom" v-model:zoom="zoom" :center="cabinet">
       <l-tile-layer :url="url"></l-tile-layer>
       <l-control-layers />
@@ -64,4 +64,19 @@ export default {
   methods: {},
 };
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.map1s {
+  height: 75vh;
+  width: 50vw;
+}
+@media screen and (max-width: 1024px) {
+  .map1s {
+    width: 65vw !important;
+  }
+}
+@media screen and (max-width: 768px) {
+  .map1s {
+    width: 90vw !important;
+  }
+}
+</style>

@@ -17,6 +17,7 @@
         </div>
         <div class="container blockInfo">
           <button-neon :btnName="info" :width="320" />
+          <p class="title">et la si tu veux modidifer le texte</p>
           <p class="subtitle box box-shadow gradientBackGround">
             Toutes les info que vous avez besoin sont ici <br />
             afficher directement la carte pour nous trouver <br />
@@ -34,7 +35,7 @@
       <div class="modal is-active" v-if="openModal">
         <div class="modal-background" @click="openModal = !openModal"></div>
         <div class="modal-content">
-          <maps-leaflet :heightMaps="75" :widthMaps="50" :markers="markers" />
+          <maps-leaflet class="maps" :markers="markers" />
         </div>
       </div>
     </section>
@@ -138,5 +139,27 @@ export default {
   flex-direction: column;
   justify-content: space-around;
   height: 80vh;
+}
+.maps {
+  height: 75vh;
+  width: 50vw;
+}
+@media screen and (max-width: 1024px) {
+  .hero-body {
+    flex-direction: column;
+  }
+  .modal-content {
+    width: 65vw;
+  }
+}
+@media screen and (max-width: 768px) {
+  .modal-content {
+    width: 90vw;
+  }
+}
+@media screen and (max-width: 768px) {
+  .is-1 {
+    font-size: 3rem !important;
+  }
 }
 </style>

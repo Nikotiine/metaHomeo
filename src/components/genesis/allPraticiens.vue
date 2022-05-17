@@ -6,7 +6,7 @@
       </p>
     </div>
     <div class="hero-body is-justify-content-space-around">
-      <div class="is-flex is-flex-direction-column">
+      <div class="is-flex is-flex-direction-column overflow">
         <p class="title">liste des particiens</p>
 
         <label
@@ -73,4 +73,18 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.overflow {
+  max-height: 50vh;
+}
+@media screen and (max-width: 1024px) {
+  .hero-body {
+    padding: 0;
+    flex-direction: column;
+  }
+  .overflow {
+    margin-top: 4%;
+    max-height: 25vh;
+  }
+}
+</style>

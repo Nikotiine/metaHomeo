@@ -3,37 +3,32 @@
     <section class="hero is-fullheight">
       <div class="hero-body">
         <div class="container has-text-centered">
-          <!-- <p class="title is-1">Genesis Meta-Homeopathie</p> -->
           <div
             class="is-flex mt-6 is-justify-content-space-between is-align-items-center"
           >
-            <figure class="image max-width-45">
-              <img src="../../assets/logo_meta.png" alt="Logo Genesis" />
+            <figure class="image max-width-50">
+              <img src="../../assets/img/logo_meta.png" alt="Logo Genesis" />
             </figure>
 
             <div class="is-flex is-justify-content-space-between max-width-45">
               <div class="mt-6">
                 <div class="box box-shadow gradientBackGround">
+                  <p class="title is-2">Ici du texte pour presenter ton site</p>
                   <p class="subtitle">
-                    Depuis 10 ans j'utilise la methode Meta-Homeopathie Lorem
-                    ipsum dolor sit amet consectetur adipisicing elit. Totam
-                    cupiditate laboriosam at eum accusantium quia nobis
-                    architecto aperiam dolorum reiciendis porro et tempora
-                    voluptates, labore, atque ad libero ut consectetur.
-                  </p>
-                  <p class="subtitle">
-                    ainsi je vous explique la methode , suivez le guide ...
+                    c'est la page d'acceuil de Genesis , le liens du dessous t
+                    envoie sur la methode ainsi je vous explique la methode ,
+                    suivez le guide ...
                   </p>
                 </div>
               </div>
             </div>
           </div>
-          <div class="mt-6">
+          <div class="m-t-8">
             <button-neon :btnName="bouton" :width="320" />
           </div>
         </div>
       </div>
-      <div class="is-flex is-justify-content-center mb-6">
+      <div class="is-flex is-justify-content-center mb-6 downArrow">
         <img
           class="image is-96x96 cursor"
           src="../../assets/images.png"
@@ -75,4 +70,32 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@media screen and (max-width: 1024px) {
+  .is-flex {
+    flex-direction: column;
+  }
+  .max-width-45 {
+    max-width: 100%;
+  }
+  .downArrow {
+    margin: 0 auto;
+  }
+}
+@media screen and (max-width: 768px) {
+  .max-width-50 {
+    max-width: 80%;
+  }
+  .mt-6 {
+    margin-top: 0 !important;
+  }
+}
+@media screen and (max-width: 480px) {
+  .max-width-45 {
+    max-width: 100%;
+  }
+  .hero-body {
+    padding: 0;
+  }
+}
+</style>

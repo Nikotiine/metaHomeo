@@ -6,6 +6,9 @@
       aria-label="main navigation"
     >
       <div class="navbar-brand" :class="{ 'is-active': showNav }">
+        <a class="navbar-item hidden">
+          <img src="../assets/img/logo_meta31.jpg" />
+        </a>
         <a
           role="button"
           class="navbar-burger"
@@ -21,8 +24,13 @@
 
       <div class="navbar-menu" :class="{ 'is-active': showNav }">
         <div class="navbar-start">
-          <router-link to="/" class="navbar-item">Accueil</router-link>
-          <router-link to="/metahomeopathie" class="navbar-item"
+          <router-link to="/" class="navbar-item" @click="closeNav"
+            >Accueil</router-link
+          >
+          <router-link
+            to="/metahomeopathie"
+            class="navbar-item"
+            @click="closeNav"
             >MetaHomeopathie: La methode</router-link
           >
 
@@ -33,6 +41,7 @@
                 params: { view: 'accueil' },
               }"
               class="navbar-item"
+              @click="closeNav"
               >Le labo</router-link
             >
 
@@ -43,6 +52,7 @@
                   params: { view: 'technique' },
                 }"
                 class="navbar-item"
+                @click="closeNav"
                 >Sauvegarde de la technique</router-link
               >
 
@@ -52,6 +62,7 @@
                   params: { view: 'dilutions' },
                 }"
                 class="navbar-item"
+                @click="closeNav"
                 >Recherche et création de dilutions</router-link
               >
 
@@ -61,6 +72,7 @@
                   params: { view: 'quesaco' },
                 }"
                 class="navbar-item"
+                @click="closeNav"
                 >Un laboratoire associatif à but non lucratif : quesaco
                 ?</router-link
               >
@@ -73,6 +85,7 @@
                 params: { view: 'accueil' },
               }"
               class="navbar-item"
+              @click="closeNav"
               >Les formations</router-link
             >
 
@@ -83,6 +96,7 @@
                   params: { view: 'ouverte-a-tous' },
                 }"
                 class="navbar-item"
+                @click="closeNav"
                 >Formation sans pre-requis
               </router-link>
 
@@ -92,6 +106,7 @@
                   params: { view: 'pro-sante' },
                 }"
                 class="navbar-item"
+                @click="closeNav"
                 >Fromations pour les professionels de la santé
               </router-link>
             </div>
@@ -104,6 +119,7 @@
                 params: { view: 'accueil' },
               }"
               class="navbar-item"
+              @click="closeNav"
             >
               Qui sommes nous ?</router-link
             >
@@ -118,6 +134,7 @@
                   params: { view: 'contactUs' },
                 }"
                 class="navbar-item"
+                @click="closeNav"
               >
                 Nous contacter</router-link
               >
@@ -127,6 +144,7 @@
                   params: { view: 'tous-les-praticiens' },
                 }"
                 class="navbar-item"
+                @click="closeNav"
               >
                 trouver un praticien</router-link
               >
@@ -207,6 +225,9 @@ export default {
       this.$store.commit("newUser", "visiteur");
       this.$store.commit("isAdmin", null);
     },
+    closeNav: function () {
+      this.showNav = !this.showNav;
+    },
   },
   computed: {
     // userFirstName() {
@@ -216,4 +237,13 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.hidden {
+  display: none;
+}
+@media screen and (max-width: 1024px) {
+  .hidden {
+    display: block;
+  }
+}
+</style>
