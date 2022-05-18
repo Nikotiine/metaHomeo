@@ -1,7 +1,7 @@
 <template>
   <section class="hero is-fullheight" v-if="!validePanier">
-    <div class="hero-head">
-      <h1 class="title is-1 m-t-8">Catalogue Genesis</h1>
+    <div class="hero-head m-t-10">
+      <h1 class="has-font-gabriola">Catalogue Genesis</h1>
 
       <div class="box box-shadow max-width-50 mx-auto">
         <p class="title">
@@ -76,7 +76,7 @@
 
               <button
                 @click="addBigBox(product.id, 1)"
-                class="ml-3 button is-link is-outlined"
+                class="m-l-3 button is-link is-outlined"
               >
                 <i class="fas fa-flask"></i> Taille L
               </button>
@@ -272,5 +272,10 @@ export default {
 }
 td {
   vertical-align: middle;
+}
+@media screen and(max-width: 1024px) {
+  .m-l-3 {
+    margin-left: 0;
+  }
 }
 </style>

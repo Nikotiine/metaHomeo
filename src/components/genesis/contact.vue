@@ -277,7 +277,12 @@ export default {
 }
 @media screen and (max-width: 1024px) {
   .box {
-    width: 80%;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 480px) {
+  .blockRadio {
+    margin-left: 25%;
   }
 }
 </style>

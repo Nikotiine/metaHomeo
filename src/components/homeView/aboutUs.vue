@@ -3,7 +3,7 @@
     <section class="hero toto is-fullheight">
       <div class="hero-head" id="aboutUs">
         <div class="">
-          <p class="title is-1 m-t-10 has-font-gabriola">Infos et contact</p>
+          <p class="m-t-10 has-font-gabriola">Infos et contact</p>
           <p class="subtitle"></p>
         </div>
       </div>
@@ -17,15 +17,15 @@
         </div>
         <div class="container blockInfo">
           <button-neon :btnName="info" :width="320" />
-          <p class="title">et la si tu veux modidifer le texte</p>
-          <p class="subtitle box box-shadow gradientBackGround">
+
+          <p class="subtitle has-text-primary">
             Toutes les info que vous avez besoin sont ici <br />
             afficher directement la carte pour nous trouver <br />
             nous envoyer une demande de contact <br />
             enfin trouvez les {{ totalPraticien }} praticiens qui ont suivi ma
             methode
           </p>
-          <button-neon :btnName="praticiens" :width="420" />
+          <button-neon :btnName="praticiens" :width="320" />
         </div>
         <div class="container">
           <button-neon :btnName="contact" :width="320" />
@@ -106,16 +106,16 @@ export default {
       praticiens: [
         {
           id: 0,
-          name: "Tous les praticiens",
+          name: "Les praticiens",
           router: {
             name: "aboutUs",
             params: { view: "tous-les-praticiens" },
           },
-          width: "420px",
+          width: "320px",
           strokeDasharray1: 140,
-          strokeDasharray2: 600,
-          strokeDashoffset: -600,
-          dashHover: 960,
+          strokeDasharray2: 540,
+          strokeDashoffset: -474,
+          dashHover: 760,
         },
       ],
     };
@@ -156,10 +156,10 @@ export default {
   .modal-content {
     width: 90vw;
   }
-}
-@media screen and (max-width: 768px) {
   .is-1 {
     font-size: 3rem !important;
   }
+}
+@media screen and (max-width: 480px) {
 }
 </style>

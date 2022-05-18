@@ -3,18 +3,18 @@
     <section class="hero is-fullheight">
       <div class="hero-body">
         <div class="container has-text-centered">
-          <div
-            class="is-flex mt-6 is-justify-content-space-between is-align-items-center"
-          >
-            <figure class="image max-width-50">
+          <div class="container-meta">
+            <figure class="image width-45">
               <img src="../../assets/img/logo_meta.png" alt="Logo Genesis" />
             </figure>
 
-            <div class="is-flex is-justify-content-space-between max-width-45">
+            <div class="is-flex is-justify-content-space-between width-45">
               <div class="mt-6">
-                <div class="box box-shadow gradientBackGround">
-                  <p class="title is-2">Ici du texte pour presenter ton site</p>
-                  <p class="subtitle">
+                <div class="">
+                  <p class="title is-2 has-text-primary">
+                    Ici du texte pour presenter ton site
+                  </p>
+                  <p class="subtitle has-text-primary">
                     c'est la page d'acceuil de Genesis , le liens du dessous t
                     envoie sur la methode ainsi je vous explique la methode ,
                     suivez le guide ...
@@ -71,12 +71,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.container-meta {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8%;
+}
+
 @media screen and (max-width: 1024px) {
-  .is-flex {
+  .container-meta {
     flex-direction: column;
+    margin-top: 5%;
   }
-  .max-width-45 {
-    max-width: 100%;
+  .width-45 {
+    width: 60%;
   }
   .downArrow {
     margin: 0 auto;
@@ -91,8 +100,12 @@ export default {
   }
 }
 @media screen and (max-width: 480px) {
-  .max-width-45 {
-    max-width: 100%;
+  .width-45 {
+    width: 100%;
+  }
+  .container-meta {
+    margin-top: 8%;
+    width: 100%;
   }
   .hero-body {
     padding: 0;

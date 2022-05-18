@@ -1,9 +1,9 @@
 <template>
   <div>
     <section class="hero is-fullheight">
-      <div class="hero-head">
+      <div class="hero-head m-t-10">
         <div class="container has-text-centered">
-          <p class="title is-1 has-font-gabriola">Les formations</p>
+          <p class="has-font-gabriola">Les formations</p>
           <p class="subtitle mt-5">
             Presentation de la page principale des formations
           </p>
@@ -25,7 +25,7 @@
             :class="{ isSelected: view === 'ouverte-a-tous' }"
           >
             <div class="content">
-              <p class="subtitle" v-if="view === 'ouverte-a-tous'">
+              <p class="has-font-gabriola-sub" v-if="view === 'ouverte-a-tous'">
                 Formation sans pre-requis de diplome
               </p>
               <button-neon
@@ -51,12 +51,15 @@
             :class="{ isSelected: view === 'salle-de-formation' }"
           >
             <div class="content">
-              <p class="subtitle" v-if="view === 'salle-de-formation'">
+              <p
+                class="has-font-gabriola-sub"
+                v-if="view === 'salle-de-formation'"
+              >
                 Presentation du cairn
               </p>
               <button-neon
                 :btnName="leCairn"
-                :width="420"
+                :width="320"
                 @click="scrollInView"
                 v-else
               />
@@ -77,7 +80,7 @@
             :class="{ isSelected: view === 'pro-sante' }"
           >
             <div class="content">
-              <p class="subtitle" v-if="view === 'pro-sante'">
+              <p class="has-font-gabriola-sub" v-if="view === 'pro-sante'">
                 Formation Pour les professionels de sante
               </p>
               <button-neon
@@ -143,16 +146,16 @@ export default {
       leCairn: [
         {
           id: 0,
-          name: "Lieu de formation",
+          name: "Le Cairn",
           router: {
             name: "formations",
             params: { view: "salle-de-formation" },
           },
-          width: "420px",
+          width: "320px",
           strokeDasharray1: 140,
-          strokeDasharray2: 600,
-          strokeDashoffset: -600,
-          dashHover: 960,
+          strokeDasharray2: 540,
+          strokeDashoffset: -474,
+          dashHover: 760,
         },
       ],
     };
@@ -168,18 +171,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.title {
-  margin-top: 10%;
-}
 .card {
-  min-width: 25%;
+  min-width: 30%;
+  margin-left: 2%;
+  margin-right: 2%;
 }
 .isLarge {
   min-width: 35%;
   transition: 800ms ease;
 }
+
+.card-content {
+  padding: 0;
+}
 .isSelected {
-  background-color: aqua;
+  padding: 2.5rem;
 }
 @media screen and (max-width: 1024px) {
   .card {
@@ -191,6 +197,9 @@ export default {
   .isLarge {
     min-width: 50%;
     transition: 800ms ease;
+  }
+  .m-t-10 {
+    margin-top: 20%;
   }
 }
 </style>

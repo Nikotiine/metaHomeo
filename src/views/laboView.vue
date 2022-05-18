@@ -1,12 +1,10 @@
 <template>
   <div>
     <section class="hero is-fullheight">
-      <div class="hero-head m-t-8">
-        <div
-          class="container has-text-centered is-flex is-align-items-center is-justify-content-space-around"
-        >
+      <div class="hero-head m-t-10">
+        <div class="container-labo">
           <div>
-            <p class="title is-1 has-font-gabriola">Le Labo</p>
+            <p class="has-font-gabriola">Le Labo</p>
             <p class="title mt-1">Du texte pour la presention du labo</p>
             <p class="title">
               Et aussi du texte pour chaque onglet .. technique dilutiuon
@@ -27,8 +25,8 @@
             :class="{ isSelected: view === 'technique' }"
           >
             <div class="content">
-              <p class="subtitle" v-if="view === 'technique'">
-                Sauvegarde de la technique
+              <p class="has-font-gabriola-sub" v-if="view === 'technique'">
+                La technique
               </p>
               <button-neon
                 :btnName="technique"
@@ -50,8 +48,8 @@
             :class="{ isSelected: view === 'dilutions' }"
           >
             <div class="content">
-              <p class="subtitle" v-if="view === 'dilutions'">
-                Recherche et creations
+              <p class="has-font-gabriola-sub" v-if="view === 'dilutions'">
+                Les dilutions
               </p>
               <button-neon
                 :btnName="dilutions"
@@ -70,8 +68,8 @@
           </div>
           <div class="card-content" :class="{ isSelected: view === 'quesaco' }">
             <div class="content">
-              <p class="subtitle" v-if="view === 'quesaco'">
-                Qu'est qu'un labo associatif
+              <p class="has-font-gabriola-sub" v-if="view === 'quesaco'">
+                Quesaco ?
               </p>
               <button-neon
                 :btnName="quesaco"
@@ -161,15 +159,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.container-labo {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  justify-content: space-around;
+}
 .card {
-  min-width: 25%;
+  min-width: 30%;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+.card-content {
+  padding: 0;
 }
 .isLarge {
   min-width: 35%;
   transition: 800ms ease;
 }
 .isSelected {
-  background-color: rgb(55 210 244 / 50%);
+  padding: 2.5rem;
 }
 @media screen and (max-width: 1024px) {
   .card {
@@ -181,6 +191,14 @@ export default {
   .isLarge {
     min-width: 50%;
     transition: 800ms ease;
+  }
+}
+@media screen and (max-width: 480px) {
+  .m-t-10 {
+    margin-top: 22%;
+  }
+  .isLarge {
+    min-width: 100%;
   }
 }
 </style>

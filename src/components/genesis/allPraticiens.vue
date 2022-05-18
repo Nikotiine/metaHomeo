@@ -2,13 +2,15 @@
   <section class="hero is-fullheight">
     <div class="hero-head">
       <p class="title m-t-10" id="title">
-        Retrouver ici la liste de tous nos praticiens
+        Retrouver ici la liste de tous nos praticiens<span
+          @click="close"
+          class="has-text-info ml-4"
+          ><i class="fas fa-times-circle"></i
+        ></span>
       </p>
     </div>
     <div class="hero-body is-justify-content-space-around">
       <div class="is-flex is-flex-direction-column overflow">
-        <p class="title">liste des particiens</p>
-
         <label
           class="checkbox m-2"
           v-for="praticien in allPraticiens"
@@ -22,8 +24,8 @@
           {{ praticien.firstName }} {{ praticien.lastName }}
         </label>
       </div>
-      <div class="maps">
-        <mapsLeaflet :heightMaps="50" :widthMaps="45" :markers="markers" />
+      <div class="">
+        <mapsLeaflet class="maps" :markers="markers" />
       </div>
     </div>
   </section>
@@ -61,6 +63,13 @@ export default {
         this.markers.splice(i, 1);
       }
     },
+    close: function () {
+      scrollTo(0, 0);
+      this.$router.push({
+        name: "aboutUs",
+        params: { view: "accueil" },
+      });
+    },
   },
   mounted() {
     setTimeout(() => {
@@ -85,6 +94,11 @@ export default {
   .overflow {
     margin-top: 4%;
     max-height: 25vh;
+  }
+}
+@media screen and (max-width: 480px) {
+  .maps {
+    height: 40vh;
   }
 }
 </style>

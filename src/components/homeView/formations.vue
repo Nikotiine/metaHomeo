@@ -2,25 +2,23 @@
   <div>
     <section class="hero is-fullheight">
       <div class="hero-head" id="formation">
-        <p class="title is-1 has-font-gabriola m-t-10">
-          Genesis Les formations
-        </p>
+        <p class="has-font-gabriola m-t-10">Les formations</p>
       </div>
       <div class="hero-body has-text-centered mb-5 m-t-8">
         <div class="is-flex mt-6 is-justify-content-space-around mb-5">
           <div class="max-width-35">
-            <div class="box box-shadow gradientBackGround">
-              <p class="title">
+            <div class="">
+              <p class="title has-text-primary">
                 du texte pour presenter ta fomation sans pre requis
               </p>
-              <p class="subtitle mt-5">
+              <p class="subtitle mt-5 has-text-primary">
                 descrpition de la formation Lorem ipsum dolor sit amet
                 consectetur adipisicing elit. Totam cupiditate laboriosam at eum
                 accusantium quia nobis architecto aperiam dolorum reiciendis
                 porro et tempora voluptates, labore, atque ad libero ut
                 consectetur.
               </p>
-              <p class="subtitle">
+              <p class="subtitle has-text-primary">
                 ainsi je vous explique la methode , suivez le guide ...
               </p>
             </div>
@@ -29,18 +27,18 @@
             </div>
           </div>
           <div class="max-width-35">
-            <div class="box box-shadow gradientBackGround">
-              <p class="title">
+            <div class="">
+              <p class="title has-text-primary">
                 du texte pour presenter ta fomation avec pre requis
               </p>
-              <p class="subtitle mt-5">
+              <p class="subtitle mt-5 has-text-primary">
                 descrpition de la formation Lorem ipsum dolor sit amet
                 consectetur adipisicing elit. Totam cupiditate laboriosam at eum
                 accusantium quia nobis architecto aperiam dolorum reiciendis
                 porro et tempora voluptates, labore, atque ad libero ut
                 consectetur.
               </p>
-              <p class="subtitle">
+              <p class="subtitle has-text-primary">
                 ainsi je vous explique la methode , suivez le guide ...
               </p>
             </div>

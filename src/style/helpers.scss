@@ -7,6 +7,9 @@
 .m-t-40 {
   margin-top: 40%;
 }
+.m-l-3 {
+  margin-left: 0.75rem;
+}
 .cursor {
   cursor: pointer;
 }
@@ -43,10 +46,23 @@
 .has-font-gabriola {
   font-family: "gabriola";
   font-size: 4rem;
+  color: #363636;
+  font-weight: 600;
+  line-height: 1.125;
+}
+.has-font-gabriola-sub {
+  font-family: "gabriola";
+  font-size: 2.5rem;
+  color: #363636;
+  font-weight: 600;
+  line-height: 1.125;
 }
 .is-4rem {
   font-size: 4rem;
 }
 .overflow {
   overflow: auto;
+}
+.width-45 {
+  width: 45%;
 }

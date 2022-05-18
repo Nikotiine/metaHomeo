@@ -2,28 +2,28 @@
   <div>
     <section class="hero is-fullheight">
       <div class="hero-head">
-        <p class="title m-t-10 is-1 has-font-gabriola" id="labo">
-          Genesis Le labo
-        </p>
+        <p class="m-t-10 has-font-gabriola" id="labo">Le laboratoire</p>
       </div>
       <div class="hero-body">
         <div class="container has-text-centered">
-          <div class="is-flex mt-4 is-justify-content-space-between">
-            <div class="is-flex is-justify-content-space-between max-width-45">
-              <div class="mt-6">
-                <div class="box gradientBackGround box-shadow">
-                  <p class="title is-2">Ici du texte pour presenter ton site</p>
-                  <p class="subtitle">La c'est le resume du labo ...</p>
-                  <p class="subtitle">donc reusme du labo :p</p>
-                </div>
-                <div class="mt-6">
-                  <button-neon :btnName="bouton" :width="320" />
-                </div>
+          <div class="container-labo">
+            <div class="container-labo width-45">
+              <div class="">
+                <p class="title is-2 has-text-primary">
+                  Ici du texte pour presenter ton site
+                </p>
+                <p class="subtitle has-text-primary">
+                  La c'est le resume du labo ...
+                </p>
+                <p class="subtitle has-text-primary">donc reusme du labo :p</p>
               </div>
             </div>
-            <figure class="image max-width-50">
+            <figure class="image width-45">
               <img src="../../assets/img/labo_gen.jpg" alt="photo du labo" />
             </figure>
+          </div>
+          <div class="m-t-8">
+            <button-neon :btnName="bouton" :width="320" />
           </div>
         </div>
       </div>
@@ -73,23 +73,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.container-labo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
 @media screen and (max-width: 1024px) {
-  .is-flex {
+  .container-labo {
     flex-direction: column-reverse;
     align-items: center;
   }
-  .max-width-45 {
-    max-width: 100%;
+  .width-45 {
+    width: 60%;
   }
 }
 @media screen and (max-width: 768px) {
-  .max-width-50 {
-    max-width: 80%;
+  .width-45 {
+    width: 100%;
   }
 }
-@media screen and (max-width: 768px) {
-  .is-1 {
-    font-size: 3rem !important;
+@media screen and (max-width: 480) {
+  .hero-body {
+    padding: 0;
   }
 }
 </style>

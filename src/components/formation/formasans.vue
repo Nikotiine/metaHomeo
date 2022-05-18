@@ -45,7 +45,11 @@ export default {
       window.scrollTo(0, 0);
     },
   },
-  mounted() {},
+  mounted() {
+    setTimeout(() => {
+      document.getElementById("title").scrollIntoView({ behavior: "smooth" });
+    }, 800);
+  },
 };
 </script>
 

@@ -109,6 +109,15 @@
                 @click="closeNav"
                 >Fromations pour les professionels de la santé
               </router-link>
+              <router-link
+                :to="{
+                  name: 'formations',
+                  params: { view: 'salle-de-formation' },
+                }"
+                class="navbar-item"
+                @click="closeNav"
+                >Le cairn : Salle de seminaire
+              </router-link>
             </div>
           </div>
 
@@ -157,6 +166,7 @@
             <div class="buttons" v-if="status === 'visiteur' && admin === null">
               <router-link
                 class="button is-info is-outlined"
+                @click="closeNav"
                 :to="{
                   name: 'espace-praticien',
                   params: { view: 'loggin' },
@@ -168,6 +178,7 @@
             <div class="buttons" v-else-if="admin === 'true'">
               <router-link
                 class="button is-rounded is-info is-outlined"
+                @click="closeNav"
                 :to="{
                   name: 'espace-admin',
                   params: { view: 'accueil' },
@@ -186,6 +197,7 @@
             <div class="buttons" v-if="admin === 'false'">
               <router-link
                 class="button is-rounded is-info is-outlined"
+                @click="closeNav"
                 :to="{
                   name: 'espace-praticien',
                   params: { view: 'espace-perso' },
@@ -224,6 +236,7 @@ export default {
       Cookies.remove("isAdmin");
       this.$store.commit("newUser", "visiteur");
       this.$store.commit("isAdmin", null);
+      this.closeNav();
     },
     closeNav: function () {
       this.showNav = !this.showNav;
