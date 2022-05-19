@@ -1,91 +1,83 @@
 <template>
-  <div>
-    <section class="hero is-fullheight">
-      <div class="hero-head m-t-10">
-        <div class="container-labo">
-          <div>
-            <p class="has-font-gabriola">Le Labo</p>
-            <p class="title mt-1">Du texte pour la presention du labo</p>
-            <p class="title">
-              Et aussi du texte pour chaque onglet .. technique dilutiuon
-              quesaco
+  <section class="hero is-fullheight">
+    <div class="hero-head m-t-10">
+      <div class="container-head">
+        <h1 class="has-font-gabriola">Le laboratoire</h1>
+        <h3 class="has-text-secondary is-title m-t-3r">
+          Presentation de la page principale du laboratoire
+        </h3>
+        <p class="has-text-secondary">
+          Pareil du texte pour chaque rubrique ...
+        </p>
+      </div>
+    </div>
+
+    <div class="labo-body">
+      <div class="card box-shadow" :class="{ isLarge: view === 'technique' }">
+        <div class="card-image">
+          <figure class="image is-4by3">
+            <img src="../assets/img/labo_gen.jpg" alt="photo du labo" />
+          </figure>
+        </div>
+        <div class="card-content" :class="{ isSelected: view === 'technique' }">
+          <div class="content">
+            <p class="has-font-gabriola-sub" v-if="view === 'technique'">
+              La technique
             </p>
+            <button-neon
+              :btnName="technique"
+              :width="320"
+              v-else
+              @click="scrollInView"
+            />
           </div>
         </div>
       </div>
-      <div class="hero-body is-justify-content-space-around">
-        <div class="card box-shadow" :class="{ isLarge: view === 'technique' }">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="../assets/img/labo_gen.jpg" alt="photo du labo" />
-            </figure>
-          </div>
-          <div
-            class="card-content"
-            :class="{ isSelected: view === 'technique' }"
-          >
-            <div class="content">
-              <p class="has-font-gabriola-sub" v-if="view === 'technique'">
-                La technique
-              </p>
-              <button-neon
-                :btnName="technique"
-                :width="320"
-                v-else
-                @click="scrollInView"
-              />
-            </div>
-          </div>
+      <div class="card box-shadow" :class="{ isLarge: view === 'dilutions' }">
+        <div class="card-image">
+          <figure class="image is-4by3">
+            <img src="../assets/img/logo_dilution.jpg" alt="photo fioles" />
+          </figure>
         </div>
-        <div class="card box-shadow" :class="{ isLarge: view === 'dilutions' }">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="../assets/img/logo_dilution.jpg" alt="photo fioles" />
-            </figure>
-          </div>
-          <div
-            class="card-content"
-            :class="{ isSelected: view === 'dilutions' }"
-          >
-            <div class="content">
-              <p class="has-font-gabriola-sub" v-if="view === 'dilutions'">
-                Les dilutions
-              </p>
-              <button-neon
-                :btnName="dilutions"
-                :width="320"
-                v-else
-                @click="scrollInView"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="card box-shadow" :class="{ isLarge: view === 'quesaco' }">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="../assets/img/quesaco.jpg" alt="logo genesis" />
-            </figure>
-          </div>
-          <div class="card-content" :class="{ isSelected: view === 'quesaco' }">
-            <div class="content">
-              <p class="has-font-gabriola-sub" v-if="view === 'quesaco'">
-                Quesaco ?
-              </p>
-              <button-neon
-                :btnName="quesaco"
-                :width="320"
-                v-else
-                @click="scrollInView"
-              />
-            </div>
+        <div class="card-content" :class="{ isSelected: view === 'dilutions' }">
+          <div class="content">
+            <p class="has-font-gabriola-sub" v-if="view === 'dilutions'">
+              Les dilutions
+            </p>
+            <button-neon
+              :btnName="dilutions"
+              :width="320"
+              v-else
+              @click="scrollInView"
+            />
           </div>
         </div>
       </div>
-      <Transition> <tech-nique v-if="view === 'technique'" /></Transition>
-      <Transition><dilu-tions v-if="view === 'dilutions'" /></Transition>
-      <Transition> <quesa-co v-if="view === 'quesaco'" /></Transition>
-    </section>
-  </div>
+      <div class="card box-shadow" :class="{ isLarge: view === 'quesaco' }">
+        <div class="card-image">
+          <figure class="image is-4by3">
+            <img src="../assets/img/quesaco.jpg" alt="logo genesis" />
+          </figure>
+        </div>
+        <div class="card-content" :class="{ isSelected: view === 'quesaco' }">
+          <div class="content">
+            <p class="has-font-gabriola-sub" v-if="view === 'quesaco'">
+              Quesaco ?
+            </p>
+            <button-neon
+              :btnName="quesaco"
+              :width="320"
+              v-else
+              @click="scrollInView"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <Transition> <tech-nique v-if="view === 'technique'" /></Transition>
+    <Transition><dilu-tions v-if="view === 'dilutions'" /></Transition>
+    <Transition> <quesa-co v-if="view === 'quesaco'" /></Transition>
+  </section>
 </template>
 
 <script>
@@ -159,13 +151,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container-labo {
-  display: flex;
-  flex-direction: row;
-  text-align: center;
-  align-items: center;
-  justify-content: space-around;
-}
 .card {
   min-width: 30%;
   margin-left: 2%;

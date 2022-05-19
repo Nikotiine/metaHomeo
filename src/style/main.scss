@@ -76,3 +76,77 @@ nav {
 ///navbar
 @media screen and (max-width: 480px) {
 }
+//----------------- Home View Css -----------------------------------
+
+.down-arrow {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.container-text {
+  display: flex;
+  justify-content: space-between;
+  width: 45%;
+  flex-direction: column;
+}
+.home-body {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  flex-direction: row;
+  padding: 3rem 1.5rem;
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+// *************************responsive**********************
+@media screen and (max-width: 1024px) {
+  .down-arrow {
+    margin: 0 auto;
+  }
+  .container-text {
+    width: 70%;
+    margin: 2rem auto;
+  }
+}
+@media screen and (max-width: 480px) {
+  .container-text {
+    width: 100%;
+  }
+  .home-body {
+    padding: 3rem 0.4rem;
+  }
+  .has-font-gabriola {
+    font-size: 2.5rem;
+  }
+  .is-title {
+    font-size: 1.5rem;
+  }
+}
+// *************************End responsive**********************
+//----------------- END Home View Css -----------------------------------
+//----------------- Labo && formation View Css -----------------------------------
+.labo-body {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  flex-direction: row;
+  padding: 3rem 1.5rem;
+  flex-grow: 1;
+  flex-shrink: 0;
+  justify-content: space-around;
+}
+.container-head {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+}
+// *************************responsive**********************
+@media screen and (max-width: 1024px) {
+  .labo-body {
+    flex-wrap: wrap;
+  }
+}

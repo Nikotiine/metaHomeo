@@ -1,42 +1,34 @@
 <template>
-  <div>
-    <section class="hero is-fullheight">
-      <div class="hero-head">
-        <p class="m-t-10 has-font-gabriola" id="labo">Le laboratoire</p>
-      </div>
-      <div class="hero-body">
-        <div class="container has-text-centered">
-          <div class="container-labo">
-            <div class="container-labo width-45">
-              <div class="">
-                <p class="title is-2 has-text-primary">
-                  Ici du texte pour presenter ton site
-                </p>
-                <p class="subtitle has-text-primary">
-                  La c'est le resume du labo ...
-                </p>
-                <p class="subtitle has-text-primary">donc reusme du labo :p</p>
-              </div>
-            </div>
-            <figure class="image width-45">
-              <img src="../../assets/img/labo_gen.jpg" alt="photo du labo" />
-            </figure>
+  <section class="hero is-fullheight">
+    <div class="home-body">
+      <div class="container">
+        <div class="container-labo">
+          <div class="container-text m-t-3r">
+            <h2 class="has-font-gabriola" id="labo">Le laboratoire</h2>
+            <p class="has-text-secondary m-t-3r">
+              c'est la page d'acceuil de Genesis , le liens du dessous t envoie
+              sur la methode ainsi je vous explique la methode , suivez le guide
+              ...
+            </p>
           </div>
-          <div class="m-t-8">
-            <button-neon :btnName="bouton" :width="320" />
-          </div>
+          <figure class="image width-45">
+            <img src="../../assets/img/labo_gen.jpg" alt="photo du labo" />
+          </figure>
+        </div>
+        <div class="m-t-8">
+          <button-neon :btnName="bouton" :width="320" />
         </div>
       </div>
-      <div class="is-flex is-justify-content-center">
-        <img
-          class="image is-96x96 cursor"
-          src="../../assets/images.png"
-          alt="fleches descendantes"
-          @click="scrollDown"
-        />
-      </div>
-    </section>
-  </div>
+    </div>
+    <div class="down-arrow">
+      <img
+        class="image is-96x96 cursor"
+        src="../../assets/images.png"
+        alt="fleches descendantes"
+        @click="scrollDown"
+      />
+    </div>
+  </section>
 </template>
 
 <script>
@@ -91,11 +83,6 @@ export default {
 @media screen and (max-width: 768px) {
   .width-45 {
     width: 100%;
-  }
-}
-@media screen and (max-width: 480) {
-  .hero-body {
-    padding: 0;
   }
 }
 </style>

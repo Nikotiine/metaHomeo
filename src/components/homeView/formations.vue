@@ -4,51 +4,41 @@
       <div class="hero-head" id="formation">
         <p class="has-font-gabriola m-t-10">Les formations</p>
       </div>
-      <div class="hero-body has-text-centered mb-5 m-t-8">
-        <div class="is-flex mt-6 is-justify-content-space-around mb-5">
-          <div class="max-width-35">
-            <div class="">
-              <p class="title has-text-primary">
-                du texte pour presenter ta fomation sans pre requis
-              </p>
-              <p class="subtitle mt-5 has-text-primary">
-                descrpition de la formation Lorem ipsum dolor sit amet
-                consectetur adipisicing elit. Totam cupiditate laboriosam at eum
-                accusantium quia nobis architecto aperiam dolorum reiciendis
-                porro et tempora voluptates, labore, atque ad libero ut
-                consectetur.
-              </p>
-              <p class="subtitle has-text-primary">
-                ainsi je vous explique la methode , suivez le guide ...
-              </p>
-            </div>
+      <div class="home-body mb-5 m-t-8">
+        <div class="container-formation">
+          <div class="container-text">
+            <h3 class="has-text-secondary is-title">
+              Fomation sans pre requis
+            </h3>
+            <p class="has-text-secondary m-t-3r">
+              descrpition de la formation Lorem ipsum dolor sit amet consectetur
+              adipisicing elit. Totam cupiditate laboriosam at eum accusantium
+              quia nobis architecto aperiam dolorum reiciendis porro et tempora
+              voluptates, labore, atque ad libero ut consectetur.
+            </p>
+
             <div class="mt-6 mb-3">
               <button-neon :btnName="bouton" :width="320" />
             </div>
           </div>
-          <div class="max-width-35">
-            <div class="">
-              <p class="title has-text-primary">
-                du texte pour presenter ta fomation avec pre requis
-              </p>
-              <p class="subtitle mt-5 has-text-primary">
-                descrpition de la formation Lorem ipsum dolor sit amet
-                consectetur adipisicing elit. Totam cupiditate laboriosam at eum
-                accusantium quia nobis architecto aperiam dolorum reiciendis
-                porro et tempora voluptates, labore, atque ad libero ut
-                consectetur.
-              </p>
-              <p class="subtitle has-text-primary">
-                ainsi je vous explique la methode , suivez le guide ...
-              </p>
-            </div>
+          <div class="container-text">
+            <h3 class="has-text-secondary is-title">
+              Fomation avec pre requis
+            </h3>
+            <p class="has-text-secondary m-t-3r">
+              descrpition de la formation Lorem ipsum dolor sit amet consectetur
+              adipisicing elit. Totam cupiditate laboriosam at eum accusantium
+              quia nobis architecto aperiam dolorum reiciendis porro et tempora
+              voluptates, labore, atque ad libero ut consectetur.
+            </p>
+
             <div class="mt-6 mb-3">
               <button-neon :btnName="bouton2" :width="320" />
             </div>
           </div>
         </div>
       </div>
-      <div class="is-flex is-justify-content-center mb-6 mt-6 downArrow">
+      <div class="down-arrow">
         <img
           class="image is-96x96 cursor"
           src="../../assets/images.png"
@@ -109,21 +99,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.container-formation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
 @media screen and (max-width: 768px) {
-  .is-flex {
+  .container-formation {
     flex-direction: column;
+    align-items: center;
   }
   .max-width-35 {
     max-width: 100%;
     margin-top: 3%;
-  }
-  .downArrow {
-    margin: 0 auto;
-  }
-}
-@media screen and (max-width: 768px) {
-  .is-1 {
-    font-size: 3rem !important;
   }
 }
 </style>

@@ -9,6 +9,12 @@
     <div class="hero-body is-flex is-justify-content-center">
       <div class="">
         <p class="subtitle">ici les Mentions Legales</p>
+        <p>
+          <a target="_blank" href="https://icons8.com/icon/43254/entraînement"
+            >Entraînement</a
+          >
+          icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+        </p>
       </div>
     </div>
   </section>

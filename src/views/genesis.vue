@@ -2,17 +2,19 @@
   <div>
     <div>
       <section class="hero is-fullheight">
-        <div class="hero-head">
-          <div class="">
-            <p class="m-t-10 has-font-gabriola">Qui sommes nous ?</p>
-            <div class="container-staff">
-              <figure class="image">
-                <img src="../assets/staff.png" />
-              </figure>
-              <p class="title mt-5 mb-5">
-                Quelque mot pour te presenter + une photo sympa de toi
-              </p>
-            </div>
+        <div class="hero-head m-t-10">
+          <div class="container-head">
+            <h1 class="has-font-gabriola">Qui sommes nous ?</h1>
+            <figure class="image is-48X48">
+              <img src="../assets/staff.png" alt="Placeholder image" />
+            </figure>
+
+            <h3 class="has-text-secondary is-title m-t-3r">
+              Presentation de la page principale des formations
+            </h3>
+            <p class="has-text-secondary">
+              Pareil du texte pour chaque formation ...
+            </p>
           </div>
         </div>
         <div class="hero-body mt-6 findUs">
@@ -20,7 +22,7 @@
             class="container has-text-centered is-flex is-justify-content-center"
           >
             <div class="container-find">
-              <p class="has-font-gabriola mb-6">Ou trouver ...</p>
+              <p class="has-font-gabriola-sub mb-6">Ou trouver ...</p>
 
               <label
                 class="checkbox m-2"
@@ -28,6 +30,7 @@
                 :key="checkboxe.id"
               >
                 <input type="checkbox" class="" v-model="checkboxe.check" />
+
                 {{ checkboxe.name }}
               </label>
             </div>
@@ -50,7 +53,7 @@
             <Transition>
               <all-praticiens v-if="view === 'tous-les-praticiens'" />
             </Transition>
-            <p class="title">Nos Partenaires</p>
+            <p class="has-font-gabriola-sub">Nos Partenaires</p>
             <div class="container-partenaire">
               <figure class="image is-48X48">
                 <img src="../assets/lecairn.jpeg" alt="Placeholder image" />
@@ -116,6 +119,8 @@ export default {
           telephone: "0681389671",
           geoloc: latLng(45.127699, 5.589008),
           check: true,
+          icon: require("../assets/iconeMaps/cabmed.png"),
+          iconSize: [32, 32],
         },
         {
           id: 1,
@@ -124,24 +129,32 @@ export default {
           telephone: "0681389671",
           geoloc: latLng(45.128078, 5.589974),
           check: true,
+          icon: require("../assets/iconeMaps/salle.png"),
+          iconSize: [32, 32],
         },
         {
           id: 2,
           name: "Office du tourisme",
           geoloc: latLng(45.129298, 5.584312),
           check: true,
+          icon: require("../assets/iconeMaps/info.png"),
+          iconSize: [32, 32],
         },
         {
           id: 3,
           name: "Hotel Val Fleuri",
           geoloc: latLng(45.129312, 5.58436),
           check: true,
+          icon: require("../assets/iconeMaps/hotel1.png"),
+          iconSize: [32, 32],
         },
         {
           id: 4,
           name: "Hotel du col de l arc",
           geoloc: latLng(45.129412, 5.58446),
           check: true,
+          icon: require("../assets/iconeMaps/hotel2.png"),
+          iconSize: [32, 32],
         },
       ],
     };
@@ -165,15 +178,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.blue {
+  color: blue;
+}
 .close-view {
   position: absolute;
 }
-.container-staff {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-top: 8%;
+.has-font-gabriola-sub {
+  padding: 3rem 0 1rem 0;
 }
 .container-partenaire {
   display: flex;
@@ -191,7 +203,7 @@ export default {
   align-items: flex-start;
 }
 .maps {
-  height: 75vh;
+  height: 50vh;
   width: 50vw;
 }
 label {

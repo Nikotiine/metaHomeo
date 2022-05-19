@@ -1,45 +1,41 @@
 <template>
-  <div>
-    <section class="hero toto is-fullheight">
-      <div class="hero-head" id="aboutUs">
-        <div class="">
-          <p class="m-t-10 has-font-gabriola">Infos et contact</p>
-          <p class="subtitle"></p>
-        </div>
+  <section class="hero is-fullheight">
+    <div class="hero-head" id="aboutUs">
+      <p class="m-t-10 has-font-gabriola">Infos et contact</p>
+      <p class="subtitle"></p>
+    </div>
+    <div class="home-body">
+      <div class="container">
+        <button-neon
+          :btnName="maps"
+          :width="320"
+          @click="openModal = !openModal"
+        />
       </div>
-      <div class="hero-body">
-        <div class="container">
-          <button-neon
-            :btnName="maps"
-            :width="320"
-            @click="openModal = !openModal"
-          />
-        </div>
-        <div class="container blockInfo">
-          <button-neon :btnName="info" :width="320" />
+      <div class="blockInfo">
+        <button-neon :btnName="info" :width="320" />
 
-          <p class="subtitle has-text-primary">
-            Toutes les info que vous avez besoin sont ici <br />
-            afficher directement la carte pour nous trouver <br />
-            nous envoyer une demande de contact <br />
-            enfin trouvez les {{ totalPraticien }} praticiens qui ont suivi ma
-            methode
-          </p>
-          <button-neon :btnName="praticiens" :width="320" />
-        </div>
-        <div class="container">
-          <button-neon :btnName="contact" :width="320" />
-        </div>
+        <p class="has-text-secondary">
+          Toutes les info que vous avez besoin sont ici <br />
+          afficher directement la carte pour nous trouver <br />
+          nous envoyer une demande de contact <br />
+          enfin trouvez les {{ totalPraticien }} praticiens qui ont suivi ma
+          methode
+        </p>
+        <button-neon :btnName="praticiens" :width="320" />
       </div>
+      <div class="container">
+        <button-neon :btnName="contact" :width="320" />
+      </div>
+    </div>
 
-      <div class="modal is-active" v-if="openModal">
-        <div class="modal-background" @click="openModal = !openModal"></div>
-        <div class="modal-content">
-          <maps-leaflet class="maps" :markers="markers" />
-        </div>
+    <div class="modal is-active" v-if="openModal">
+      <div class="modal-background" @click="openModal = !openModal"></div>
+      <div class="modal-content">
+        <maps-leaflet class="maps" :markers="markers" />
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -131,9 +127,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.hero-body {
-  padding: 0;
-}
 .blockInfo {
   display: flex;
   flex-direction: column;
@@ -145,7 +138,7 @@ export default {
   width: 50vw;
 }
 @media screen and (max-width: 1024px) {
-  .hero-body {
+  .home-body {
     flex-direction: column;
   }
   .modal-content {
@@ -156,10 +149,5 @@ export default {
   .modal-content {
     width: 90vw;
   }
-  .is-1 {
-    font-size: 3rem !important;
-  }
-}
-@media screen and (max-width: 480px) {
 }
 </style>
