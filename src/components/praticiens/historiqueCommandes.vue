@@ -89,4 +89,15 @@ export default {
 .hero {
   justify-content: inherit;
 }
+@media screen and(max-width: 480px) {
+  table {
+    font-size: 0.7rem;
+  }
+  .m-t-10 {
+    margin-top: 20%;
+  }
+  .title {
+    font-size: 1.5rem;
+  }
+}
 </style>

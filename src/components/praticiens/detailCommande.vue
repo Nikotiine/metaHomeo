@@ -61,4 +61,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@media screen and(max-width:480px) {
+  table {
+    font-size: 0.8rem !important;
+  }
+}
+</style>

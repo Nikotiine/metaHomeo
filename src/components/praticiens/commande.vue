@@ -1,67 +1,68 @@
 <template>
   <section class="hero is-fullheight">
     <div class="box box-shadow m-t-10 max-width-50 mx-auto">
-      <div class="">
-        <p class="title">Recapitulatif de la commande</p>
-        <table class="table m-auto">
-          <thead>
-            <tr>
-              <th>Nom du produit</th>
-              <th>Quantité</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="prod in productsInBasket" :key="prod.id">
-              <td>{{ prod.name }}</td>
-              <td>
-                smallbox : {{ prod.smallBox }} <br />
-                bigbox: {{ prod.bigBox }}
-              </td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <th>total de la commande</th>
+      <p class="title">Recapitulatif de la commande</p>
+      <table class="table m-auto">
+        <thead>
+          <tr>
+            <th>Nom du produit</th>
+            <th colspan="2">Quantité</th>
             <th></th>
-            <th>{{ totalCommande }} €</th>
-          </tfoot>
-        </table>
-        <div class="control">
-          <label class="label">Mode de reglement </label>
-          <label class="radio">
-            <input type="radio" v-model="payement" value="virement" />
-            Virement banquaire
-          </label>
-          <label class="radio">
-            <input type="radio" v-model="payement" value="cheque" />
-            Cheque
-          </label>
-        </div>
-        <div class="mt-4">
-          <label class="label">Commande expedie a :</label>
-          <p class="subtitle mt-3">
-            {{ userData.firstName }} {{ userData.lastName }}
-          </p>
-          <div>
-            <input
-              type="radio"
-              id="pro"
-              :value="userData.userAdress?.adressePro"
-              v-model="shipTo"
-              :checked="true"
-            />
-            <label for="pro">{{ userData.userAdress?.adressePro }}</label>
-            <br />
-            <input
-              type="radio"
-              id="perso"
-              :value="userData.userAdress?.adressePerso"
-              v-model="shipTo"
-              v-if="userData.userAdress?.adressePerso"
-            />
-            <label for="perso"> {{ userData.userAdress?.adressePerso }}</label>
-          </div>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="prod in productsInBasket" :key="prod.id">
+            <td>{{ prod.name }}</td>
+            <td colspan="2">
+              smallbox : {{ prod.smallBox }} <br />
+              bigbox: {{ prod.bigBox }}
+            </td>
+            <td></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <th>total de la commande</th>
+          <th></th>
+          <th>{{ totalCommande }} €</th>
+        </tfoot>
+      </table>
+      <div class="control">
+        <label class="label">Mode de reglement </label>
+        <label class="radio">
+          <input type="radio" v-model="payement" value="virement" />
+          Virement banquaire
+        </label>
+        <label class="radio">
+          <input type="radio" v-model="payement" value="cheque" />
+          Cheque
+        </label>
+      </div>
+      <div class="mt-4">
+        <label class="label">Commande expedie a :</label>
+        <p class="subtitle mt-3">
+          {{ userData.firstName }} {{ userData.lastName }}
+        </p>
+        <div>
+          <input
+            type="radio"
+            id="pro"
+            :value="userData.userAdress?.adressePro"
+            v-model="shipTo"
+            :checked="true"
+          />
+          <label for="pro">{{ userData.userAdress?.adressePro }}</label>
+          <br />
+          <input
+            type="radio"
+            id="perso"
+            :value="userData.userAdress?.adressePerso"
+            v-model="shipTo"
+            v-if="userData.userAdress?.adressePerso"
+          />
+          <label for="perso"> {{ userData.userAdress?.adressePerso }}</label>
         </div>
       </div>
+
       <div
         class="is-flex mx-auto max-width-50 buttons is-justify-content-space-around mt-6"
       >
@@ -154,4 +155,18 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@media screen and(max-width: 1024px) {
+  .max-width-50 {
+    max-width: 100%;
+  }
+  .mx-auto {
+    margin: auto 0 !important;
+  }
+}
+@media screen and(max-width: 480px) {
+  .mx-auto {
+    margin: 15% auto 5% auto !important;
+  }
+}
+</style>

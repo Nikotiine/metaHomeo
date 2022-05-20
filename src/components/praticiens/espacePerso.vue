@@ -182,4 +182,9 @@ export default {
     justify-content: center;
   }
 }
+@media screen and(max-width: 1024px) {
+  .m-t-10 {
+    margin-top: 22%;
+  }
+}
 </style>

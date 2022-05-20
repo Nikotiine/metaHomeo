@@ -134,9 +134,6 @@
             >
 
             <div class="navbar-dropdown">
-              <a class="navbar-item"> Ou nous trouver </a>
-              <a class="navbar-item"> Nos partenaires </a>
-
               <router-link
                 :to="{
                   name: 'aboutUs',

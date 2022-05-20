@@ -58,7 +58,7 @@
 
             <th>Ajouter au panier</th>
             <th>Mis dans le panier</th>
-            <th>Total en €</th>
+            <th class="hidden">Total en €</th>
           </tr>
         </thead>
         <tbody>
@@ -95,14 +95,14 @@
                 ><i class="fas fa-times"></i
               ></span>
             </td>
-            <td>
+            <td class="hidden">
               {{ product.totalB + product.totalS }}
             </td>
           </tr>
         </tbody>
         <tfoot>
           <tr>
-            <th></th>
+            <th class="hidden"></th>
             <th></th>
 
             <th>total de produit</th>
@@ -110,7 +110,7 @@
             <th></th>
           </tr>
           <tr>
-            <th></th>
+            <th class="hidden"></th>
             <th></th>
 
             <th>total de la commande</th>
@@ -276,6 +276,35 @@ td {
 @media screen and(max-width: 1024px) {
   .m-l-3 {
     margin-left: 0;
+  }
+}
+@media screen and(max-width: 480px) {
+  .max-width-50 {
+    max-width: 100%;
+  }
+  .m-t-10 {
+    margin-top: 22%;
+  }
+  .box > p.title {
+    font-size: 1rem;
+  }
+  .hidden {
+    display: none;
+  }
+  .hero-body {
+    padding: 0;
+  }
+  .table {
+    font-size: 0.6rem;
+    & td {
+      padding: 0;
+    }
+  }
+  td > button {
+    font-size: 0.6rem;
+  }
+  .min-width-50 {
+    margin-top: 1.2rem;
   }
 }
 </style>

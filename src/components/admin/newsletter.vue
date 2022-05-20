@@ -86,4 +86,21 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@media screen and (max-width: 1024px) {
+  .min-width-60 {
+    min-width: 80%;
+  }
+}
+@media screen and (max-width: 480px) {
+  .min-width-60 {
+    min-width: 100%;
+  }
+  .m-t-10 {
+    margin-top: 20%;
+  }
+  .hero-body {
+    padding: 1rem 0 0 0;
+  }
+}
+</style>

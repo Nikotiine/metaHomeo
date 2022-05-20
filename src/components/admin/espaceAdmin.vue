@@ -7,20 +7,10 @@
         <img src="../../assets/rrrr.jpeg" />
       </figure>
     </div>
-    <div
-      class="hero-body is-justify-content-space-around is-align-items-flex-end"
-    >
+    <div class="body-dashboard">
       <div>
         <p class="subtitle">tu as {{ totalMembre }} membres enregistés</p>
-        <!-- <router-link
-          class="button is-info is-outlined"
-          :to="{
-            name: 'espace-admin',
-            params: { view: 'tous-les-praticiens' },
-          }"
-        >
-          Voir les profils
-        </router-link> -->
+
         <button-neon :btnName="ajoutPraticien" :width="320" />
       </div>
       <div class="">
@@ -34,12 +24,10 @@
           <span v-if="ordersShipped.length > 1"> commandes validées </span
           ><span v-else>commande validée</span>
         </p> -->
-        <button-neon :btnName="listOfOrders" :width="420" />
+        <button-neon :btnName="listOfOrders" :width="320" />
       </div>
       <div class="">
-        <p class="subtitle">
-          tu as {{ totalProducts }} de produits enregistrés
-        </p>
+        <p class="subtitle">tu as {{ totalProducts }} produits enregistrés</p>
 
         <button-neon :btnName="ajoutProduit" :width="320" />
       </div>
@@ -91,16 +79,16 @@ export default {
       listOfOrders: [
         {
           id: 0,
-          name: "Liste des commandes ",
+          name: "Les commandes ",
           router: {
             name: "espace-admin",
             params: { view: "toutes-les-commandes" },
           },
-          width: "420px",
+          width: "320px",
           strokeDasharray1: 140,
-          strokeDasharray2: 600,
-          strokeDashoffset: -600,
-          dashHover: 960,
+          strokeDasharray2: 540,
+          strokeDashoffset: -474,
+          dashHover: 760,
         },
       ],
       newsletter: [

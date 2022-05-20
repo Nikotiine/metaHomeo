@@ -150,3 +150,30 @@ nav {
     flex-wrap: wrap;
   }
 }
+// *************************End responsive**********************
+//----------------- END Labo && formation Css -----------------------------------
+
+//----------------------Espace Admin---------------------------------
+.body-dashboard {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-end;
+  padding: 2rem 2rem;
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+// *************************responsive**********************
+@media screen and (max-width: 1024px) {
+  .body-dashboard {
+    flex-direction: column;
+    & div {
+      margin: auto;
+    }
+  }
+}
+@media screen and (max-width: 480px) {
+  .body-dashboard {
+    padding: 1rem 0 0 0;
+  }
+}
